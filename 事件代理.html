@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>0</li>
+			<li>1</li>
+			<li>2</li>
+
+		</ul>
+		<button>添加li元素</button>
+		<script>
+			var ul = document.querySelectorAll('ul')[0]
+			var addButton = document.querySelectorAll('button')[0]
+			var addIndex = 3
+
+			addButton.addEventListener('click', function() {
+				var addli = document.createElement('li')
+				addli.innerHTML = `这是添加的元素${addIndex}`
+				ul.append(addli)
+				addIndex++
+			})
+
+			ul.addEventListener('click', function(ev) {
+				let e = ev || window.event;
+				let target = e.target || e.srcElement;
+				if (target.nodeName.toLocaleLowerCase() === 'li') {
+					alert(target.innerHTML);
+				}
+			})
+		</script>
+	</body>
+</html>

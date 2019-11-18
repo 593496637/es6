@@ -11,14 +11,24 @@
 			<li>2</li>
 		</ul>
 		<script>
-			var node = document.querySelectorAll('ul li')
-			for (var i = 0; i < node.length; i++) {
-				(function(i) {
-					node[i].addEventListener('click', function() {
-						alert('click' + i)
-					})
-				})(i)
-			}
+			var node = document.querySelectorAll('ul li');
+			// 方法一
+			// 此时就行成了一个闭包，每循环一次，都进行一次传参，此时的每个i都是一个自执行函数体内自己的作用域
+			// for (var i = 0; i < node.length; i++) {
+			// 	(function(i) {
+			// 		node[i].addEventListener('click', function() {
+			// 			alert('click' + i)
+			// 		})
+			// 	})(i)
+			// }
+
+			// 方法二
+			// 这里用forEach也行成了一个所谓的闭包，forEach里的执行函数也行成了一个闭包，每个执行体里
+			Array.from(node).forEach((nodeItem, index) => {
+				nodeItem.addEventListener('click', () => {
+					console.log(index)
+				})
+			});
 		</script>
 	</body>
 </html>
