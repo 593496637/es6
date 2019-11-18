@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var person = {},
+				lastName = "last name";
+			person["first name"] = "Nicholas";
+			person[lastName] = "Zakas";
+			console.log(person["first name"]); // "Nicholas"
+			console.log(person["last name"]);//Zakas
+			console.log(person[lastName]);//Zakas
+			
+			
+			
+			// Object.is
+			console.log(+0==-0);
+			console.log(+0===-0);
+			console.log(Object.is(+0,-0));
+			
+			console.log(NaN==NaN);
+			console.log(NaN===NaN);
+			console.log(Object.is(NaN,NaN));
+			
+			console.log(5==5);
+			console.log(5=='5');
+			console.log(5===5);
+			console.log(5==='5');
+			console.log(Object.is(5,5));
+			console.log(Object.is(5,'5'));
+			
+			
+			function object(){
+				
+			}
+			console.log(object.prototype)
+			
+			let obj={
+				a:1,
+				0:1,
+				c:3,
+				3:3,
+				b:2,
+				2:2
+			}
+			
+			console.log(Object.getOwnPropertyNames(obj).join(''))
+			
+		</script>
+	</body>
+</html>

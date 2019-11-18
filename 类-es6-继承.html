@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class Rectangle{
+				constructor(length,width) {
+				    this.length=length;
+					this.width=width;
+				}
+				
+				getArea(){
+					return this.length*this.width;
+				}
+			}
+			
+			class Square extends Rectangle{
+				constructor(length){
+					super(length,length);
+				}
+				
+				// 重写getArea方法
+				getArea(){
+					return super.getArea();
+				}
+			}
+			
+			let square=new Square(3);
+			let area=square.getArea();
+			console.log(area);//9
+			
+			console.log(square instanceof Square);//true
+			console.log(square instanceof Rectangle);//true
+		</script>
+	</body>
+</html>

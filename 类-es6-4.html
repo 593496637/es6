@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			
+			// ---------------------------------------es5
+			function PersonType(name){
+				this.name=name;
+			}
+			
+			// 静态方法
+			PersonType.create=function(name){
+				return new PersonType(name);
+			}
+			
+			// 实例方法
+			PersonType.prototype.sayName=function(){
+				console.log(this.name);
+			}
+			
+			let person =new PersonType.create('花卉');
+			person.sayName();
+			
+			// ---------------------------------------es6
+			class PersonType_es6{
+				// 等价于PersonType 构造器
+				constructor(name){
+					this.name=name;
+				}
+				// 等价于PersonType.prototype.sayName
+				sayName(){
+					console.log(this.name);
+				}
+				
+				static create(name){
+					return new PersonType_es6(name);
+				}
+			}
+			
+			let es6=PersonType_es6.create("爽肤水");
+			es6.sayName();
+			
+		</script>
+	</body>
+</html>

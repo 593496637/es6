@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			let PersonClass=class{
+				constructor(name){
+					this.name=name;
+				}
+				
+				sayName(){
+					console.log(this.name);
+				}
+			}
+			
+			let person=new PersonClass('沙发');
+			person.sayName();
+			
+			console.log(person instanceof PersonClass);
+			console.log(person instanceof Object);
+			
+			console.log(typeof PersonClass);
+			console.log(typeof PersonClass.prototype.sayName);
+			
+			// 函数是一等公民(作为参数传给函数、能作为函数返回值、能用来给变量赋值)
+			function createObject(classDef){
+				return new classDef();
+			};
+			
+			let obj=createObject(class {
+				sayHi(){
+					console.log("hello");
+				}
+			});
+			obj.sayHi();
+			
+			// 立即调用类构造器   创建单例
+			
+			let dog =new class name {
+				constructor(name) {
+					this.name=name;
+				}
+				sayName(){
+					console.log(this.name);
+				}
+				
+			}('狗狗');
+			dog.sayName();
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let person ={
+				getGreeting(){
+					return 'hello'
+				}
+			}
+			let friend={
+				getGreeting(){
+					return super.getGreeting()+" hi";
+				}
+			}
+			Object.setPrototypeOf(friend,person);
+			console.log(Object.getPrototypeOf(friend)===person)
+			
+			// 原型为friend
+			let relative=Object.create(friend);
+			console.log(Object.getPrototypeOf(relative)===friend);
+		</script>
+	</body>
+</html>

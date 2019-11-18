@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// set 用于判断该值是否存在
+			let set = Object.create(null);
+			set.foo = true;
+			if (set.foo) {
+				// other
+			}
+
+			// map 用于提取数值
+			// 本例将字符串值 "foo" 赋值到数值类型的键 5 上，而数值类型的键会在内部被转换为字符
+			// 串，因此 map["5"] 与 map[5] 实际上引用了同一个属性
+			let map = Object.create(null);
+			map[5] = 'foo';
+			let value = map['5'];
+			console.log(value);
+
+
+			// 问题
+
+			let map2 = Object.create(null),
+				key1 = {},
+				key2 = {};
+
+			map2[key1]='猫';
+			
+			// 此处map[key1] 与 map[key2] 引用了同一个值
+			// 由于对象的属性只能是字符串， key1
+			// 与 key2 对象就必须被转换为字符串来使用，它们会被转换为同一个字符串，也就是对象默
+			// 认的字符串表示 "[object Object]" ，从而指向了同一个属性
+			console.log(map2[key1]);
+			console.log(map2[key2]);
+			console.log(map2)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let set=new Set([1,2,3,4]),
+				array=[...set];
+			console.log(array);
+			
+			
+			let map=new Map([['name','好孩子'],['age',22]]),
+				maparr=[...map];
+			console.log(maparr);
+			
+			
+			// -----
+			let smallNumbers=[1,2,3],
+				bigNumbers=[100,101,102],
+				allNumbers=[0,...smallNumbers,...bigNumbers];
+			console.log(allNumbers);
+			
+			let str='2131',
+				arrstr=[...str];
+		</script>
+	</body>
+</html>

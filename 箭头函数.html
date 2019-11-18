@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// 花括号被用于表示函数的主体，它在你至今看到的例子中都工作正常。但若要箭头函数向外
+			//返回一个对象字面量，就必须将该字面量包裹在圆括号内
+			let getTempItem = id => ({
+				id: id,
+				name: 'Temp'
+			});
+			console.log(getTempItem(12));
+
+
+			// IIFE 立即执行函数表达式
+			let person = (name => {
+				return {
+					getName() {
+						return name;
+					}
+				}
+			})('Nicholas');
+			console.log(person.getName());
+
+
+			// 被优化的阶乘函数
+			function factorial(n, p = 1) {
+				if (n <= 1) {
+					return 1 * p;
+				} else {
+					let result = n * p;
+					// 被优化
+					return factorial(n - 1, result);
+				}
+			}
+
+			let result = factorial(5);
+			console.log(result)
+		</script>
+	</body>
+</html>

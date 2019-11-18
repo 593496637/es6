@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class PersonClass{
+				// 等价于PersonType 构造器
+				constructor(name) {
+				    this.name=name;
+				}
+				
+				// 等价于PersonType.prototype.sayName
+				sayName(){
+					console.log(this.name);
+				}
+			}
+			
+			let person = new PersonClass('雄风');
+			person.sayName();
+			
+			console.log(person instanceof PersonClass);
+			console.log(person instanceof Object);
+			
+			console.log(typeof PersonClass);
+			console.log(typeof PersonClass.prototype.sayName);
+			
+			// -------------------------------------- es5实现es6的class
+			let PersonType2=(function(){
+				"user strict";
+				const PersonType2=function(name){
+					
+					// 确定函数使用了new
+					if(typeof new.target==="undefined"){
+						throw new Error('Constructor must be called with new.');
+					}
+					
+					this.name=name;
+				}
+				
+				Object.defineProperty(PersonType2.prototype,'sayName',{
+					value:function(){
+						
+						//确认函数被调用时没有使用new
+						if(typeof new.target!=='undefined'){
+							throw new Error('Method cannot be called with new.');
+						}
+						
+						console.log(this.name);
+					},
+					enumerable:false,
+					writable:true,
+					configurable:true
+				});
+				
+				return PersonType2;
+			}());
+			
+			let per=new PersonType2('娃娃');
+			per.sayName();
+		</script>
+	</body>
+</html>

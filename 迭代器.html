@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let colors=['red','green','blue'];
+			let tracking=new Set([123,456,789]);
+			let data=new Map();
+			
+			data.set('title','understanding');
+			data.set('format','pring');
+			
+			// entries
+			console.log(`------entries------`);
+			for (let entry of colors.entries()) {
+				console.log(entry);
+			}
+			for (let entry of tracking.entries()) {
+				console.log(entry);
+			}
+			for (let entry of data.entries()) {
+				console.log(entry);
+			}
+			
+			// values
+			console.log(`------values------`);
+			for (let entry of colors.values()) {
+				console.log(entry);
+			}
+			for (let entry of tracking.values()) {
+				console.log(entry);
+			}
+			for (let entry of data.values()) {
+				console.log(entry);
+			}
+			
+			// keys
+			console.log(`------keys------`);
+			for (let entry of colors.keys()) {
+				console.log(entry);
+			}
+			for (let entry of tracking.keys()) {
+				console.log(entry);
+			}
+			for (let entry of data.keys()) {
+				console.log(entry);
+			}
+			
+			// 原始
+			console.log(`------原始------`);
+			for (let entry of colors) {
+				console.log(entry);
+			}
+			for (let entry of tracking) {
+				console.log(entry);
+			}
+			for (let entry of data) {
+				console.log(entry);
+			}
+			
+			
+			// 结构 与 for...of 循环
+			let data2=new Map();
+			data2.set('title','理解es6');
+			data2.set('format','格式化');
+			
+			// 与使用data.entries() 相同
+			for (let [key,value] of data2) {
+				console.log(key+"==="+value);
+			}
+		</script>
+	</body>
+</html>

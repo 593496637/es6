@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/*
+			
+			function pick(object) {
+				let result = Object.create(null);
+				// 从第二个参数开始处理  arguments 方式
+				for (let i = 1, len = arguments.length; i < len; i++) {
+					result[arguments[i]]=object[arguments[i]];
+				}
+				return result;
+			}
+
+			let book = {
+				title: '标题',
+				author: 'Nicolas',
+				year: 2018
+			}
+			let bookData = pick(book, 'author', 'year');
+			console.log(bookData.author);
+			console.log(bookData.year);
+			
+			*/
+		   
+		   function pick(object,...keys){
+				let result=Object.create(null);
+				for(let i=0,len=keys.length;i<len;i++){
+					result[keys[i]]=object[keys[i]];
+				}
+				return result;
+		   }
+		   
+		   let book = {
+		   	title: '标题',
+		   	author: 'Nicolas',
+		   	year: 2018
+		   }
+		   let bookData = pick(book, 'author', 'year');
+		   console.log(bookData.author);
+		   console.log(bookData.year);
+		   
+		   
+		   // 函数的name 属性
+		   let fun=function fun(){
+			   
+		   }
+		   
+		   let person={
+			   get first(){
+				   return 'Nicholas';
+			   },
+			   
+			   sayName(){
+				   console.log(this.name)
+			   }
+		   }
+		   console.log(fun.name);
+		   console.log(person.sayName.name);
+		   let descriptor=Object.getOwnPropertyDescriptor(person,'first');
+		   console.log(descriptor)
+		   
+		   
+		   // name----2
+		   let doSomeThing=function(){
+			   // any
+		   }
+		   
+		   console.log(doSomeThing.bind().name);//bound doSomeThing
+		   console.log(new Function().name);//anonymous
+		   
+		   
+		   // new  在 ES5 中判断是否使用了 new 去调用函数（即作为构造器） ，最流行的方式是使用instanceof
+		   function Animal(name){
+			   if(this instanceof Animal){
+				   this.name=name;
+			   }else{
+				   console.log("必须new")
+				   throw new Error("You must use new with Animal");
+			   }
+		   }
+		   
+		   let dog=new Animal('dog');//奏效
+		   /*
+			此处对 this 值进行了检查，来判断其是否为构造器的一个实例：若是，正常继续执行；否
+			则抛出错误。这么做能奏效是因为 [[Construct]] 方法创建了 Person 的一个新实例并将其
+			赋值给 this 。可惜该方法并不绝对可靠，因为有时未使用 new 但 this 仍然可能是Person 的实例
+			*/
+		   let cat =Animal.call(dog,'cat');//奏效
+		   //let notDog=Animal('dog');//抛出异常
+		   
+		   
+		</script>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let items=Array.of(1,2,3);
+			console.log(items);
+			
+			// Array.of  方法
+			function createArray(arrayCreator,...value){
+				return arrayCreator(...value);
+			}
+			let ite=createArray(Array.of,1,2,4);
+			console.log(ite);
+			
+			
+			// Array.from 方法
+			
+			// 将类数组转换为数组 -es5 方法1
+			function makeArray(arrayLike){
+				let result=[];
+				for(let i =0,len=arrayLike.length;i<len;i++){
+					result.push(arrayLike[i]);
+				}
+				return result;
+			}
+			
+			function doSomething(){
+				let args=makeArray(arguments);
+				// 使用args
+			}
+			
+			// 将类数组转换为数组 -es5 方法2
+			function makeArray2(arrayLike){
+				return Array.prototype.slice.call(arrayLike);
+			}
+			function doSomething2(){
+				let args=makeArray2(arguments);
+			}
+			
+			// 将类数组转换为数组 -es6
+			function makeArray3(arrayLike){
+				let args=Array.from(arrayLike);
+			}
+			function doSomething3(){
+				let args=makeArray3(arguments);
+			}
+			
+			
+			
+		</script>
+	</body>
+</html>

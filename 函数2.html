@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// new.target 判断该对象是否是被new出来的
+			function Animal(name) {
+				if (typeof new.target!=='undefined') {
+					this.name = name;
+				} else {
+					console.log("必须new")
+					throw new Error("You must use new with Animal");
+				}
+			}
+
+			let dog = new Animal('dog'); //奏效
+			let cat = Animal.call(dog, 'cat'); //抛出异常
+			// let notDog=Animal('dog');//抛出异常
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

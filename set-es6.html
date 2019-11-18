@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// Set------------------
+			let set=new Set();
+			
+			// add
+			set.add(5);
+			set.add('5');
+			
+			// has
+			console.log(set.has(5));
+			console.log(set.has('5'));
+			console.log(set.has(6));
+			
+			console.log(set.size);
+			
+			// detele
+			set.delete(5);
+			console.log(set);
+			
+			// cleart
+			set.clear();
+			console.log(set);
+			
+			// 为Set设置默认值
+			let set2=new Set([1,2,3,4]);
+			console.log(set2);
+			
+			// Set的foreach
+			// value 与  key 是相同的值
+			set2.forEach((value,key,set)=>{
+				console.log(value+'==='+key);
+				console.log(set===set2);
+			});
+			
+			// 使用this
+			let set3=new Set([1,2,3]);
+			let processor={
+				output(value){
+					console.log(value);
+				},
+				process(dataSet){
+					dataSet.forEach(function(value){
+						this.output(value);
+					},this);
+				}
+			}
+			
+			processor.process(set3);
+			
+			
+			// 也可以使用箭头函数 替代 传入this的方式
+			let set4=new Set([11,22,33]);
+			let processor2={
+				output(value){
+					console.log(value);
+				},
+				process(dataSet){
+					dataSet.forEach(value=>this.output(value));
+				}
+			}
+			processor2.process(set4);
+			
+			
+			let old_set=new Set([1,2,3,4]),
+				arr=[...old_set];
+			console.log(old_set);
+			console.log(arr);
+			
+			
+			// es6 数组去重
+			function eliminateDuplicates(items){
+				return [...new Set(items)];
+			}
+			let numbers=[1,2,3,4,5,5,5,5,6,6,6],
+				noDuplicates=eliminateDuplicates(numbers);
+			console.log(noDuplicates);
+			
+			
+		</script>
+	</body>
+</html>

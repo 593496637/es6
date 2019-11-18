@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			let person ={
+				getGreeting(){
+					return 'hello'
+				}
+			}
+			let dog={
+				getGreeting(){
+					return 'woof';
+				}
+			}
+			
+			let friend ={
+				getGreeting(){
+					// return Object.getPrototypeOf(this).getGreeting.call(this)+" hi";
+					return super.getGreeting()+" hi";
+				}
+			}
+			
+			Object.setPrototypeOf(friend,person);
+			console.log(friend.getGreeting());
+		</script>
+	</body>
+</html>

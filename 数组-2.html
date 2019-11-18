@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			// Array.from 第二个参数
+			function translate(){
+				return Array.from(arguments,(value)=>value+1);
+			}
+			let numbers=translate(1,2,3);
+			console.log(numbers);
+			
+			
+			// Array.from 第三个参数---未写
+			
+			
+			//find() 方法会返回匹配的值，而 findIndex() 方法则会返回匹配位置的索引
+			let numbers2=[25, 30, 35, 40, 45];
+			console.log(numbers2.find((n)=>n>33));
+			console.log(numbers2.findIndex((n)=>n>33));
+			
+			// fill
+			// fill() 方法能使用特定值填充数组中的一个或多个元素。当只使用一个参数的时候，该方法会用该参数的值填充整个数组
+			let numbers3=[1,2,3,4];
+			console.log(numbers3.fill(5));
+			
+			// 若你不想改
+			//变数组中的所有元素，而只想改变其中一部分，那么可以使用可选的起始位置参数与结束位
+			//置参数（不包括结束位置的那个元素）
+			let numbers4=[1,2,3,4];
+			console.log(numbers4.fill(6,2));
+			
+			let numbers5=[1,2,3,4];
+			console.log(numbers5.fill(6,2,3));
+			
+		</script>
+	</body>
+</html>
