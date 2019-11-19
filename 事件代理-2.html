@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li id="1">
+				<span>span元素</span>
+			</li>
+			<li id="2">
+				<div>
+					<span>div包着一个span元素</span>
+				</div>
+			</li>
+			<li id="3">
+				<div>div元素</div>
+			</li>
+			爽肤水李会计
+		</ul>
+		<script type="text/javascript">
+			// 每个li里面有着其它子节点，比如说ul->li->div-span，那我们点击任何一个都会触发冒泡事件
+			let ul = document.querySelectorAll('ul')[0];
+			ul.addEventListener('click', function(ev) {
+				let e = ev || window.event;
+				let target = e.target || e.srcElement;
+				while (target.nodeName.toLocaleLowerCase() !== 'ul') {
+					if (target.nodeName.toLocaleLowerCase() === 'li') {
+						console.log(target.id)
+						break;
+					}
+					target = target.parentNode;
+				}
+			})
+		</script>
+	</body>
+</html>
