@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			.ul{
+				display: flex;
+			}
+			.li{
+				list-style: none;
+				flex: 1;
+			}
+			.li>ul{
+				display: none;
+			}
+			.li>ul li{
+				padding: 5px;
+				background: #efefef;
+				list-style: none;
+				border-bottom: 1px solid red;
+			}
+			div{
+				padding: 5px 0;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="ul">
+			<li class="li">
+				<div id="">
+					是否
+				</div>
+				<ul>
+					<li>士大夫看见是德国</li>
+					<li>1313</li>
+					<li>41</li>
+					<li>141</li>
+				</ul>
+			</li>
+			<li class="li">
+				<div id="">
+					是否
+				</div>
+				<ul>
+					<li>12</li>
+					<li>1313</li>
+					<li>41</li>
+					<li>141</li>
+				</ul>
+			</li>
+			<li class="li">
+				<div id="">
+					是否
+				</div>
+				<ul>
+					<li>12</li>
+					<li>1313</li>
+					<li>41</li>
+					<li>141</li>
+				</ul>
+			</li>
+		</ul>
+		<script type="text/javascript">
+			let ul =document.querySelector('ul');
+			let li =ul.children;
+			for (let i = 0; i < li.length; i++) {
+				li[i].onmouseover=function(){
+					this.children[1].style.display="block";
+				}
+				li[i].onmouseleave=function(){
+					this.children[1].style.display="none";
+				}
+			}
+		</script>
+	</body>
+</html>
