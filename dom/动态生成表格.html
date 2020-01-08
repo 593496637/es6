@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<table border="" cellspacing="" cellpadding="">
+			<thead>
+				<tr>
+					<td>名字</td>
+					<td>年龄</td>
+					<td>身高</td>
+					<td>操作</td>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+		<script type="text/javascript">
+			let datas = [{
+					name: '水电费1',
+					age: 122,
+					height: 1751
+				},
+				{
+					name: '水电费2',
+					age: 152,
+					height: 1754
+				},
+				{
+					name: '水电费3',
+					age: 612,
+					height: 1753
+				},
+				{
+					name: '水电费4',
+					age: 112,
+					height: 1751
+				}
+			]
+
+			let tbody = document.querySelector('tbody');
+			for (let i = 0; i < datas.length; i++) {
+				// 创建行
+				let tr = document.createElement('tr');
+				tbody.appendChild(tr)
+				for (let key in datas[i]) {
+					let td = document.createElement('td');
+					// 创建单元格
+					td.innerHTML = datas[i][key];
+					tr.appendChild(td)
+				}
+				let td = document.createElement('td');
+				td.innerHTML = '<a href="javascript:;">删除</a>'
+				tr.appendChild(td)
+			}
+			// 删除行
+			let as=document.querySelectorAll('a');
+			for (let i = 0; i < as.length; i++) {
+				as[i].onclick=function(){
+					tbody.removeChild(this.parentNode.parentNode)
+				}
+			}
+		</script>
+	</body>
+</html>

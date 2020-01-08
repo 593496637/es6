@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<script type="text/javascript">
+			var ul=document.querySelector('ul');
+			// var lili=ul.children[0].cloneNode();//浅拷贝
+			var lili=ul.children[0].cloneNode(true);//深拷贝
+			ul.appendChild(lili);
+		</script>
+	</body>
+</html>

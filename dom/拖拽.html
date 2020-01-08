@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				padding: 0;
+				margin: 0;
+			}
+
+			#box {
+				width: 200px;
+				height: 200px;
+				background: firebrick;
+				position: relative;
+			}
+			#box:hover{
+				cursor: move;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+
+		</div>
+		<script type="text/javascript">
+			var box = document.querySelector('#box');
+			box.addEventListener('mousedown', function(e) {
+				// box的位置
+				let offsetLeft = this.offsetLeft;
+				let offsetTop = this.offsetTop;
+				// 鼠标的位置
+				let pageX = e.pageX;
+				let pageY = e.pageY;
+				// 鼠标位置减去盒子的位置等于鼠标在盒子中的位置
+				let x = pageX - offsetLeft;
+				let y = pageY - offsetTop;
+				document.addEventListener('mousemove', move, false)
+
+				function move(e) {
+					box.style.left = e.pageX - x + "px";
+					box.style.top = e.pageY - y + "px";
+					box.innerHTML = "x坐标：" + box.style.left + " " + "y坐标：" + box.style.top;
+				}
+				// 鼠标弹起，移除鼠标移动
+				document.addEventListener("mouseup", function() {
+					document.removeEventListener('mousemove', move)
+				})
+			}, false)
+		</script>
+	</body>
+</html>

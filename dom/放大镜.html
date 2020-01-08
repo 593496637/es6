@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				padding: 0;
+				margin: 0;
+			}
+
+			#box {
+				width: 200px;
+				height: 200px;
+				background: firebrick;
+				margin: 20px;
+				position: relative;
+				border: 1px solid #efefef;
+			}
+
+			#box:hover {
+				cursor: move;
+			}
+
+			#box .small-img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.small {
+				width: 100px;
+				height: 100px;
+				background: yellowgreen;
+				opacity: .5;
+				display: none;
+				position: absolute;
+			}
+
+			.big {
+				width: 300px;
+				height: 300px;
+				position: absolute;
+				left: 220px;
+				top: 0px;
+				background: #9ACD32;
+				display: none;
+				overflow: hidden;
+				border: 1px solid #efefef;
+			}
+
+			.big .big-img {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<img src="img/small.jpg" class="small-img">
+			<div class="small">
+
+			</div>
+			<div class="big">
+				<img src="img/big.jpg" class="big-img">
+			</div>
+		</div>
+		<script type="text/javascript">
+			window.addEventListener('load', function() {
+				var box = document.querySelector('#box');
+				var small = document.querySelector('.small');
+				var big = document.querySelector('.big');
+				// 小盒子距离左边距离
+				var boxLeft = box.offsetLeft;
+				// 小盒子距离上边位置
+				var boxTop = box.offsetTop;
+				// 小盒子的宽高
+				var boxWidth = box.offsetWidth;
+				// 鼠标移入显示
+				box.addEventListener('mouseenter', function(e) {
+					small.style.display = "block";
+					big.style.display = "block";
+				}, false)
+				// 鼠标移除隐藏
+				box.addEventListener('mouseleave', function(e) {
+					small.style.display = "none";
+					big.style.display = "none";
+				}, false)
+
+				// 鼠标在盒子内移动
+				box.addEventListener('mousemove', function(e) {
+					// 1.鼠标在盒子中的坐标
+					var x = e.pageX - boxLeft;
+					var y = e.pageY - boxTop;
+
+					// 小图片的宽高
+					var smallWidth = small.offsetWidth;
+					// 小盒子距离左边的位置
+					var smallX = small.offsetLeft;
+					var smallY = small.offsetTop;
+					// 遮挡层最大移动距离
+					var maxMove = boxWidth - smallWidth;
+					// 小盒子的移动距离
+					smallX = x - smallWidth / 2;
+					smallY = y - smallWidth / 2;
+					// 边界处理
+					// 小盒子距离左边最小距离
+					if (smallX <= 0) {
+						smallX = 0;
+					}
+					// 小盒子距离右边最小距离
+					if (smallX >= maxMove) {
+						smallX = maxMove;
+					}
+
+					// 小盒子距离上边最小距离
+					if (smallY <= 0) {
+						smallY = 0;
+					}
+					// 小盒子距离下边最小距离
+					if (smallY >= maxMove) {
+						smallY = maxMove;
+					}
+					// 赋值
+					small.style.left = smallX + "px";
+					small.style.top = smallY + "px";
+
+					// 遮挡层移动距离/遮挡层最大移动距离=大图片移动距离/大图片最大移动距离
+					// 大图片移动距离=遮挡层移动距离*大图片最大移动距离/遮挡层最大移动距离
+					// 求大图片移动距离
+					// 大图
+					var bigImg = document.querySelector('.big-img');
+					// 大图的最大移动距离
+					var bigMax = bigImg.offsetWidth - big.offsetWidth;
+					// 大图片的移动距离
+					var bigX = smallX * bigMax / maxMove;
+					var bigY = smallY * bigMax / maxMove;
+					bigImg.style.left = -bigX + "px";
+					bigImg.style.top = -bigY + "px";
+				})
+			})
+		</script>
+	</body>
+</html>
