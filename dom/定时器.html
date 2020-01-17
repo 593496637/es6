@@ -27,32 +27,51 @@
 		<div class="box1">
 
 		</div>
-		<div class="box2">
+		<!-- <div class="box2">
 
-		</div>
-		<button type="button" class="btn">开始</button>
+		</div> -->
+		<button type="button" class="btn0">开始位置</button>
+		<button type="button" class="btn300">300</button>
+		<button type="button" class="btn500">500</button>
 		<script>
 			var box1 = document.querySelector('.box1');
-			var box2 = document.querySelector('.box2');
+			// var box2 = document.querySelector('.box2');
 
-			var btn = document.querySelector('.btn')
+			var btn300 = document.querySelector('.btn300')
+			var btn500 = document.querySelector('.btn500')
+			var btn0 = document.querySelector('.btn0')
 
-			function animate(obj, target) {
+			function animate(obj, target, callback) {
 				clearInterval(obj.timer);
 				obj.timer = setInterval(function() {
 					// 步长写到定时器里
 					var step = (target - obj.offsetLeft) / 10;
-					if (obj.offsetLeft >= target) {
-						obj.style.left = target + "px";
+					// 当步长大于0时向上取整，小于0时向下取整。避免移动位置不准的问题
+					step = step > 0 ? Math.ceil(step) : Math.floor(step);
+					console.log(step);
+					if (obj.offsetLeft === target) {
 						clearInterval(obj.timer);
+						callback && callback();
 					}
 					// 缓动动画，步长公式（目标值-现在的位置）/10
 					obj.style.left = obj.offsetLeft + step + "px";
 				}, 15)
 			}
-			btn.addEventListener('click', function() {
-				animate(box1, 300);
-				animate(box2, 200);
+
+			btn0.addEventListener('click', function() {
+				animate(box1, 0, () => {
+					box1.style.backgroundColor = "#9AC";
+				});
+			})
+			btn300.addEventListener('click', function() {
+				animate(box1, 300, () => {
+					box1.style.backgroundColor = "#B22222";
+				});
+			})
+			btn500.addEventListener('click', function() {
+				animate(box1, 500, () => {
+					box1.style.backgroundColor = "red";
+				});
 			})
 		</script>
 	</body>
