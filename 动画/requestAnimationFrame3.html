@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#SomeElementYouWantToAnimate {
+				margin: 100px;
+				width: 100px;
+				height: 100px;
+				background-color: #9ACD32;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame -->
+		<div id="SomeElementYouWantToAnimate">
+			加速
+		</div>
+		<button type="button" id="stop">减速</button>
+		<script type="text/javascript">
+			var deg = 0;
+			var id;
+			var div = document.getElementById("SomeElementYouWantToAnimate");
+			div.addEventListener('click', function() {
+				var self = this;
+				requestAnimationFrame(function change() {
+					console.log(deg);
+					self.style.transform = 'rotate(' + (deg++) + 'deg)';
+					id = requestAnimationFrame(change);
+					// console.log(id);
+				});
+			});
+			document.getElementById('stop').onclick = function() {
+				console.log('----', id);
+				cancelAnimationFrame(id);
+			};
+		</script>
+	</body>
+</html>
