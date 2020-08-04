@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function createPerson(name, age, job) {
+				var o = new Object();
+				o.name = name;
+				o.age = age;
+				o.job = job;
+				o.sayName = function() {
+					alert(this.name);
+				}
+				return o;
+			}
+			var person1 = createPerson('小明', 12, '画家');
+			var person2 = createPerson('小米', 22, '科技');
+			person1.sayName();
+		</script>
+	</body>
+</html>
