@@ -6,6 +6,26 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+			function Person(name, age, job) {
+				this.name = name;
+				this.age = age;
+				this.job = job;
+				this.sayName = function() {
+					console.log(this.name);
+				}
+			}
+			let person1 = new Person('小明🌶', 32, '公务员');
+			let person2 = new Person('熊爱红👨🏫', 23, '教师');
+
+			// constructor 够赞函数属性
+			console.log(person1.constructor == Person);
+			console.log(person2.constructor == Person);
+
+			// 判断类型  两个对象都继承自Object
+			console.log(person1 instanceof Person);
+			console.log(person1 instanceof Object);
+			console.log(person2 instanceof Person);
+			console.log(person2 instanceof Object);
 			
 		</script>
 	</body>

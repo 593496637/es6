@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 实例属性屏蔽原型属性，查到实例上有此属性则不必再搜索原型属性了
+			function Person() {}
+			Person.prototype.name = "螺蛳粉"
+			let person1 = new Person();
+			let person2 = new Person();
+
+			person1.name = "飞机"
+			console.log(person1.name);
+			console.log(person2.name);
+
+			// 可使用delete删除实例属性
+			delete person1.name;
+			console.log(person1.name);
+
+			// hasOwnProperty() 检测一个属性时存在于实例中，还是存在于原型中
+			console.log(person1.hasOwnProperty("name"));
+
+			person1.age = 222
+			console.log(person1.hasOwnProperty("age"));
+		</script>
+	</body>
+</html>

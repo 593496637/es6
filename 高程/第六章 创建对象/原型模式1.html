@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			Object.prototype.a = 22;
+			let Person = function() {}
+			Person.prototype.name = "艾凡赫"
+			// prototype就是通过调用构造函数而创建的那个对象实例的原型对象
+			// 使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法
+
+			/**
+			 * 创建一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，
+			 * 这个属性指向函数的原型对象。默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，
+			 * 这个属性包含一个指向prototype属性所在函数的指针。
+			 * Person.prototype.constructor指向Person
+			 */
+			console.log(Person.prototype.constructor === Person);
+			/**
+			 * 当调用构造函数创建一个新实例后，该实例的内部将包含一个指向（内部属性/__proto__），
+			 * 指向构造函数的原型对象
+			 */
+			let person1 = new Person();
+			console.log(person1.__proto__ === Person.prototype);
+
+			// isPrototypeOf 确定实例原型对象的关系
+			console.log(Person.prototype.isPrototypeOf(person1));
+
+			// es5新增 Object.getPrototypeOf() 返回[[prototype]]的值
+			console.log(Object.getPrototypeOf(person1) === Person.prototype);
+			console.log(Object.getPrototypeOf(person1).name);
+			
+			// 原型最初只包含constructor属性，而该属性也是共享的，因此可以通过对象实例访问
+			console.log(person1.constructor === Person);
+		</script>
+	</body>
+</html>
