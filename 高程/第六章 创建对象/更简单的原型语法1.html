@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Person() {}
+			Person.prototype = {
+				name: "施工技术",
+				age: 21,
+				sayName() {
+					console.log(this.name);
+				}
+			}
+
+			let person = new Person();
+			
+			// 这里重新了prototype对象，属性也就变成了新对象的constructor属性（指向Object构造函数），不再指向Person函数
+			// 尽管instanceof操作符还能返回正确的结果，但是constructor已经无法确定对象类型了
+			// 可以特意将它设置回适当的值 --- 请移步下一个文件
+			console.log(person instanceof Person);
+			console.log(person instanceof Object);
+			console.log(person.constructor === Person);
+			console.log(person.constructor === Object);
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Person() {}
+			Person.prototype = {
+				// constructor: Person,
+				name: "施工技术",
+				age: 21,
+				sayName() {
+					console.log(this.name);
+				}
+			}
+			// 显示的将constructor属性添加到prototype对象中
+			// 这种方式会导致它的[[Enumerable]]被设置位true
+			// 用Object.defineProperty()试试
+			
+			Object.defineProperty(Person.prototype, 'constructor', {
+				enumerable: false,
+				value: Person
+			})
+
+			let person = new Person();
+			// 手动设置constructor后显示正确
+			console.log(person instanceof Person);
+			console.log(person instanceof Object);
+			console.log(person.constructor === Person);
+			console.log(person.constructor === Object);
+			console.log(Object.keys(Person.prototype));
+		</script>
+	</body>
+</html>
