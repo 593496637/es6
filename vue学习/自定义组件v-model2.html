@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<my-checkbox v-model="checkResult" :value="val"></my-checkbox>
+			{{checkResult}}
+		</div>
+		<script type="text/javascript">
+			Vue.component('my-checkbox', {
+				data: function() {
+					return {
+
+					}
+				},
+				props: {
+					check: Boolean,
+					value: String
+				},
+				model: {
+					prop: 'check',
+					event: 'h'
+				},
+				template: `<div><input type="checkbox" :checked="check" @change="ha"/>{{value}}</div>`,
+				methods: {
+					ha(e) {
+						this.$emit('h', e.target.checked);
+					}
+				}
+			})
+			var app = new Vue({
+				el: '#app',
+				data: {
+					checkResult: false,
+					val: '酸辣粉'
+				}
+			})
+		</script>
+	</body>
+</html>

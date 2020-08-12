@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<custom-input v-model="searchText"></custom-input>
+			{{ searchText }}
+		</div>
+		<script type="text/javascript">
+			Vue.component('custom-input', {
+				data: function() {
+					return {}
+				},
+				props: ['value'],
+				template: `<input :value="value" placeholder="输入" @input="$emit('input', $event.target.value)" />`
+			})
+			var app = new Vue({
+				el: '#app',
+				data: {
+					searchText: '奥菲斯'
+				}
+			})
+		</script>
+	</body>
+</html>
