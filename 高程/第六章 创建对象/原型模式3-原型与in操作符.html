@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 同时使用in操作符合hasOwnProperty()方法，就可以确定该属性到底是存在于对象中，还是存在于原型中
+			// 是否是原型中的方法
+			function hasPrototypeProperty(object, name) {
+				return !object.hasOwnProperty(name) && (name in object);
+			}
+
+			function Person() {}
+			Person.prototype.name = "小妹的"
+			Person.prototype.age = 21;
+
+			let person1 = new Person();
+			person1.name = "奥利给";
+
+			console.log(hasPrototypeProperty(person1, "name"));
+			console.log(hasPrototypeProperty(person1, "age"));
+
+			// for in
+			for (let item in person1) {
+				console.log(item);
+			}
+
+			// Object.keys  返回一个包含所有可枚举属性的字符串数组
+			let keys = Object.keys(Person.prototype);
+			console.log(keys);
+
+			let keysPerson1 = Object.keys(person1);
+			console.log(keysPerson1);
+
+			// Object.getOwnPropertyNames()  获取所有实例属性，无论是否可枚举
+			let allKeys = Object.getOwnPropertyNames(Person.prototype);
+			console.log(allKeys);
+		</script>
+	</body>
+</html>
