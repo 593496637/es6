@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{ message }}
+			<base-input v-model="result" @focus.native="focus" @blur.native="blur"></base-input>
+			{{result}}
+		</div>
+		<script type="text/javascript">
+			Vue.component('base-input', {
+				template: `<input type='text' @input='$emit("input",$event.target.value)'>`,
+				props: ['value']
+			})
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!',
+					result: ''
+				},
+				methods: {
+					focus(res) {
+						console.log("获取焦点");
+					},
+					blur(res) {
+						console.log("失去焦点");
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

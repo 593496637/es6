@@ -11,6 +11,8 @@
 			{{username}}
 		</div>
 		<script type="text/javascript">
+			// 如果你不希望组件的根元素继承 attribute，你可以在组件的选项中设置 inheritAttrs: false
+			// 有了 inheritAttrs: false 和 $attrs，你就可以手动决定这些 attribute 会被赋予哪个元素
 			Vue.component('base-input', {
 				props: ['label', 'value'],
 				template: `<label>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			.input {
+				border: 1px solid red;
+			}
+		</style>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<base-input class="input" placeholder='释放了' :label='label' v-model="result" @focus='focus'></base-input>
+			{{result}}
+		</div>
+
+		<script type="text/javascript">
+			// 当input元素非最外层元素是，若使用.native 监听则没什么用
+			// 这时可以使用$listeners
+
+			Vue.component('base-input', {
+				template: `<label>
+				{{label}}
+					<input type='text' v-bind='$attrs' :value='value' v-on='inputListeners'>
+				</label>`,
+				props: ['value', 'label'],
+				inheritAttrs:false,
+				computed: {
+					inputListeners() {
+						let vm = this;
+						return Object.assign({},
+							this.$listeners, {
+								input: function() {
+									vm.$emit('input', event.target.value);
+								}
+							}
+						)
+					}
+				},
+			})
+			var app = new Vue({
+				el: '#app',
+				data: {
+					label: '姓名',
+					result: ''
+				},
+				methods: {
+					focus(e) {
+						console.log('获取焦点');
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
