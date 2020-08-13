@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<base-input :label="label" v-model="username" required placeholder="Enter your username"></base-input>
+			{{username}}
+		</div>
+		<script type="text/javascript">
+			Vue.component('base-input', {
+				props: ['label', 'value'],
+				template: `<label>
+					{{label}}
+					<input :value="value" v-bind="$attrs" @input="$emit('input',$event.target.value)">
+				</label>`,
+				inheritAttrs:false
+			})
+			var app = new Vue({
+				el: '#app',
+				data: {
+					label: '姓名',
+					username: '新爱丽舍',
+				}
+			})
+		</script>
+	</body>
+</html>

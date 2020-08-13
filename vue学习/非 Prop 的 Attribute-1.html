@@ -3,17 +3,24 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
+		<style type="text/css">
+			.input{
+				border:1px solid red;
+			}
+		</style>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<div id="app">
-		  {{ message }}
+		  <i-input type="text" class="input"></i-input>
 		</div>
 		<script type="text/javascript">
+			Vue.component('i-input',{
+				template:`<input type="date"/>`
+			})
 			var app = new Vue({
 			  el: '#app',
 			  data: {
-			    message: 'Hello Vue!'
 			  }
 			})
 		</script>
