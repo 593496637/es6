@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 作用域插槽的内部工作原理是将你的插槽内容包括在一个传入单个参数的函数里 -->
+			<!-- 这意味着 v-slot 的值实际上可以是任何能够作为函数定义中的参数的 JavaScript 表达式 -->
+			<!-- 你也可以使用 ES2015 解构来传入具体的插槽 prop -->
+			<!-- user 重命名为 person -->
+			<current-user>
+				<template v-slot:default="{user:person}">{{person.firstName}}</template>
+				<!-- 你甚至可以定义后备内容，用于插槽 prop 是 undefined 的情形 -->
+				<template v-slot:other="{user={firstName:'world'}}">{{user.firstName}}</template>
+			</current-user>
+		</div>
+		<script type="text/javascript">
+			Vue.component('current-user', {
+				data() {
+					return {
+						user: {
+							firstName: 'tony',
+							lastName: 'tang'
+						}
+					}
+				},
+				template: `
+					<span>
+						<slot :user="user">{{user.lastName}}</slot>
+						<slot :user="user" name="other">{{user.lastName}}</slot>
+					</span>
+				`
+			})
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!'
+				}
+			})
+		</script>
+	</body>
+</html>
