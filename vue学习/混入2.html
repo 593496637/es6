@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+
+		</div>
+		<script type="text/javascript">
+			// 当组件和混入对象含有同名选项时，这些选项将以恰当的方式进行“合并”。
+			// 比如，数据对象在内部会进行递归合并，并在发生冲突时以组件数据优先。
+			
+			// 同名钩子函数将合并为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用。
+			
+			// 定义一个混入对象
+			let myMixin = {
+				data(){
+					return {
+						message:'hello',
+						foo:'abc'
+					}
+				},
+				created(){
+					console.log('混入对象的钩子被调用');
+				}
+			}
+			// 定义一个使用混入对象等组件
+			let Component = Vue.extend({
+				mixins: [myMixin],
+				myOptions:'222',
+				data(){
+					return {
+						message:'goodbye',
+						bar:'bar'
+					}
+				},
+				created() {
+					console.log(this.$data);
+					console.log('组件钩子对象被调用');
+					console.log(this.$options.data());
+					console.log(this.$data);
+				}
+			})
+
+			let component = new Component();
+
+			var app = new Vue({
+				el: '#app',
+				data: {},
+				created() {
+					console.log(this.$options);
+				}
+			})
+		</script>
+	</body>
+</html>
