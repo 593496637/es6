@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-focus>
+		</div>
+		<script type="text/javascript">
+			// 全局定义指令
+			// Vue.directive('focus', {
+			// 	inserted: (el) => {
+			// 		el.focus();
+			// 	}
+			// })
+			var app = new Vue({
+				el: '#app',
+				data: {
+
+				},
+				// 局部定义
+				directives: {
+					focus: {
+						inserted: (el) => {
+							el.focus();
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
