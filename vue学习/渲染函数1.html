@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<child level="1">
+				<a href="">暗示分离进口水果</a>
+			</child>
+			<child level="2">暗示分离进口水果</child>
+			<child level="3">暗示分离进口水果</child>
+		</div>
+		<script type="text/javascript">
+			Vue.component('child',{
+				props:['level'],
+				render(h) {
+					console.log(this.$slots);
+					return h('h'+this.level,this.$slots.default)
+				}
+			})
+			var app = new Vue({
+			  el: '#app',
+			  data: {
+			  },
+			})
+		</script>
+	</body>
+</html>
