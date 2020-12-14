@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function *fun(){
+				console.log('生成器函数只会在初次调用next()方法后开始执行');
+				return 'bar'
+			}
+			let f=fun();
+			console.log(f.next());
+			// 生成器对象实现了Iterable接口，它们默认的迭代器是自引用的
+			console.log(f===f[Symbol.iterator]());
+			
+			
+			// yeild 中断执行
+			function* generatorFn(){
+				yield 'foo';
+				yield 'bar';
+				return 'baz';
+			}
+			let generatorObject=generatorFn()
+			console.log(generatorObject.next());
+			console.log(generatorObject.next());
+			console.log(generatorObject.next());
+		</script>
+	</body>
+</html>

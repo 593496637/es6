@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// Object.is() ， 可以替换 === 操作
+			// 检查两个值
+			let a = 0;
+			let b = -0;
+			console.log(Object.is(a, b));
+
+			// 检查值超过两个  使用递归  
+			// 比较精妙，难理解点
+			function check(x, ...rest) {
+				console.log(x);
+				return Object.is(x, rest[0]) && (rest.length < 2 || check(...rest))
+			}
+		
+			console.log(check(1,1,2,3));
+		</script>
+	</body>
+</html>

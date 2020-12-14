@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 扩展操作符潜复制
+			let arr1 = [1, 2, 3]
+			let arr2 = [...arr1]
+			console.log(arr1 === arr2);
+
+			// 对于期待可迭代对象的构造函数，只要传入一个可迭代对象就可以实现复制
+			let map1 = new Map([
+				[1, 2],
+				[3, 4]
+			]);
+			let map2 = new Map(map1);
+			console.log(map1);
+			console.log(map2);
+			console.log(map1 === map2);
+
+			// 潜复制意味着只会复制对象引用
+			let arr3 = [{}]
+			let arr4 = [...arr3]
+			arr3[0].foo = 'bar';
+			console.log(arr4[0]);
+
+
+			// 把数组复制到映射
+			let map3 = new Map(arr1.map(x => [x, 'val' + x]));
+			console.log(map3);
+
+			// 把数组复制到集合
+			let set = new Set(arr1);
+			console.log(set);
+
+			// 把集合复制回数组
+			let arr5 = [...set];
+			console.log(arr5)
+		</script>
+	</body>
+</html>

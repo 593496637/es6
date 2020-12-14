@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let a = 3;
+			let b = 4;
+
+			function zipTag(strings, ...expressions) {
+				return strings[0] + expressions.map((e, i) => `${e}${strings[i+1]}`).join('')
+			}
+			let taggedResult = zipTag `${a}+${b}=${a+b}`
+			console.log(taggedResult);
+		</script>
+	</body>
+</html>

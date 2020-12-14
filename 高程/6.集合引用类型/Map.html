@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 使用嵌套数组初始化映射
+			const m1 = new Map([
+				['k1', 'val1'],
+				['k2', 'val2'],
+				['k3', 'val3']
+			]).set('k4', 'val4')
+
+			// size
+			console.log(m1.size);
+
+			// set()方法返回映射实例，可以把多个操作连缀起来，高阔初始化声明
+			m1.set('k5', 'val5').set('k6', 'val6')
+			console.log(m1);
+
+			// get()
+			console.log(m1.get('k2'));
+
+			// delete()
+			m1.delete('k3')
+			console.log(m1);
+
+			// clear()
+			// m1.clear()
+			// console.log(m1);
+
+			// entries() 迭代器方法
+			// console.log(m1.entries===m1[Symbol.iterator]);
+
+			console.log(m1.entries());
+			for (let pair of m1.entries()) {
+				console.log('entries', pair);
+			}
+
+			console.log('-----')
+			// iterator对象的next() 方法遍历
+			const keys = m1.keys()
+			console.log(keys);
+			for (let i = 0; i < m1.size; i++) {
+				console.log(keys.next().value);
+			}
+
+			// 因为entries() 是默认迭代器，所以可以直接对映射实例使用扩展操作，把映射转换为数组
+			console.log([...m1]);
+
+
+			// 使用回调方式。forEach() 方法
+			m1.forEach((val, key) => console.log(val, key))
+		</script>
+	</body>
+</html>

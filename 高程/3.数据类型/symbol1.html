@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// Symbol
+			let genericSymbol = Symbol();
+			console.log(genericSymbol);
+
+			let fooSymbol = Symbol('foo')
+			console.log(fooSymbol);
+
+			console.log(genericSymbol == fooSymbol);
+
+			// Symbol.for() 创建全局符号
+			let symbolA = Symbol.for('foo')
+			let symbolB = Symbol.for('foo')
+			console.log(symbolA === symbolB)
+
+			// Symbol.keyFor()  查询全局注册表
+			let s = Symbol.for('foo')
+			let search = Symbol.keyFor(s)
+			console.log(search);
+
+			// 符号类型作为属性
+			let foo = Symbol('s1');
+			let bar = Symbol('s2')
+			let o = {
+				[foo]: 'foo',
+				[bar]: 'bar',
+				'baz': 'baz',
+				'qux': 'qux'
+			}
+			console.log(Object.getOwnPropertySymbols(o));
+			console.log(Object.getOwnPropertyNames(o));
+			console.log(Object.getOwnPropertyDescriptor(o, 'baz'));
+			console.log(Object.getOwnPropertyDescriptors(o));
+			console.log(Reflect.ownKeys(o));
+			console.log(Object.keys(o));
+			
+			let barSymbol=Object.getOwnPropertySymbols(o).find((symbol)=>{
+				return symbol.toString().match(/s1/)
+			})
+			console.log(barSymbol);//Symbol(s1)
+			console.log(-0 + -0);
+		</script>
+	</body>
+</html>

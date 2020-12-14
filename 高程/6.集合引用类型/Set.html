@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 加强的Map  集合
+			// 使用数组初始化集合
+			const m = new Set(['val1', 'val2', 'val3']);
+
+			// size
+			console.log(m.size);
+
+			// add()。 add返回集合的实例
+			m.add('val4').add('val5')
+
+			// has()
+			console.log(m.has('val4'));
+
+			// delete()
+			m.delete('val3')
+			console.log(m);
+
+			// clear()
+			// m.clear()
+			// console.log(m);
+			
+			// -----------------------
+			// 使用自定义迭代器初始化集合
+			const s = new Set({
+				[Symbol.iterator]: function*() {
+					yield 's1';
+					yield 's2';
+					yield 's3';
+				}
+			})
+			console.log(s);
+			// -----------------------
+			
+			// 顺序与迭代
+			// 可以通过values()方法及其别名方法keys() 
+			//（或者Symbol.iterator属性，它引用values()） 取得这个迭代器
+			
+			console.log(s.values===s[Symbol.iterator]);
+			console.log(s.values());
+			console.log(s[Symbol.iterator]());
+			
+			console.log('values()')
+			for(let value of s.values()){
+				console.log(value);
+			}
+			console.log('Symbol.iterator()');
+			for(let value of s[Symbol.iterator]()){
+				console.log(value);
+			}
+			
+			// 集合转换为数组
+			console.log([...s]);
+			
+			// entries() 方法返回一个迭代器，可以按照插入顺序产生包含两个元素的数组
+			// 这两个元素是集合中每个值的重复出现
+			for(let value of m.entries()){
+				console.log(value);
+			}
+			
+			// 回调函数方式 forEach()
+			m.forEach((value,dupVal)=>{
+				console.log(value,dupVal);
+			})
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 如果对象原型链上的父类实现了Iterable接口，那这个对象也就实现了这个接口
+			class FooArray extends Array{}
+			let fooArr=new FooArray('foo','bar','baz');
+			for (let el of fooArr) {
+				console.log(el);
+			}
+			
+			
+			// 迭代器协议
+			let arr=['foo','bar']
+			// 迭代器工厂函数
+			console.log(arr[Symbol.iterator]());
+			let iter=arr[Symbol.iterator]();
+			console.log(iter);
+			// 执行迭代  value为undefined或done为true说明迭代完毕
+			console.log(iter.next());
+			console.log(iter.next());
+			console.log(iter.next());
+		</script>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 构造函数、原型对象、实例之间的关系
+
+			// 构造函数
+			const Person = function() {
+				this.name = '哈哈';
+			}
+			// 原型链
+			Person.prototype.age = 11;
+			Person.prototype.getName = function() {
+				return this.name
+			}
+			// 实例
+			const person1 = new Person()
+			const person2 = new Person()
+			// 构造函数通过prototype 指向原型对象
+			// Person.prototype
+
+			// 原型对象通过consructor 指向构造函数
+			console.log(Person.prototype.constructor === Person);
+
+			// 实例通过__ptoto__ 指向原型对象
+			console.log(person1.__proto__ === Person.prototype);
+
+			// 可以使用isPrototypeOf() 确定两个对象之间的关系
+			console.log(Person.prototype.isPrototypeOf(person1));
+
+
+			// instanceof 检查实例的原型链中是否包含指定构造函数的原型
+			console.log(person1 instanceof Person);
+			console.log(person1 instanceof Object);
+			console.log(Person.prototype instanceof Object);
+
+			// Object.getPrototypeOf()
+			console.log(Object.getPrototypeOf(person1) === Person.prototype);
+			console.log(Object.getPrototypeOf(person1).age);
+			
+			// constructor 存在于原型对象上，实例对象在本实例下找不到该对象会去原型对象上找，所以能访问到
+			console.log(person1.constructor===Person);
+			
+			// hasOwnProperty()方法确定某个属性是在实例上还是在原型对象上
+			person1.age=18
+			console.log(person1.hasOwnProperty('age'));
+			console.log(person1.age);
+			
+			delete person1.age
+			
+			console.log(person1.hasOwnProperty('age'));
+			console.log(person1.age);
+			
+			
+		</script>
+	</body>
+</html>

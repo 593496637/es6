@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let a = 3;
+			let b = 4;
+
+			function simpleTag(strings, ...expressions) {
+				console.log(strings);
+				for (let expression of expressions) {
+					console.log(expression);
+				}
+				return 'footbar';
+			}
+			let taggedResult = simpleTag `相加之和为${a}+${b}=${a+b}值`;
+			console.log(taggedResult);
+		</script>
+	</body>
+</html>
