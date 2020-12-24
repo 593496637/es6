@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			// 如果类构造函数执行之后没有返回this对象，则这个对象不会通过instanceof检测出跟类有关联
+			// 因为这个对象的原型指针并没有被修改
+			class Person {
+				constructor(override) {
+					this.foo='foo'
+					if (override) {
+						return {
+							bar: 'bar',
+						}
+					}
+				}
+			}
+
+			let p1 = new Person(),
+				p2 = new Person(true)
+				
+			console.log(p1);
+			console.log(p1 instanceof Person);
+			
+			console.log(p2);
+			console.log(p2 instanceof Person);
+		</script>
+	</body>
+</html>

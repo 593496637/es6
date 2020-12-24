@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var person = {
+			    name: "Nicholas",
+			    friends: ["shelby","Count","Van"]
+			}
+			
+			let person1=Object.create(person)
+			person1.name='芳芳'
+			person1.friends.push('小爱')
+			
+			let person2=Object.create(person)
+			person2.name='爱疯'
+			person2.friends.push('畅畅')
+			
+			console.log(person.friends);
+		</script>
+	</body>
+</html>

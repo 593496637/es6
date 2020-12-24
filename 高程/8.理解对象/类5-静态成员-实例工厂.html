@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 静态类方法非常适合作为实例工厂
+			class Person {
+				constructor(age) {
+					this.age = age
+				}
+
+				sayAge() {
+					console.log(this.age);
+				}
+
+				static create() {
+					return new Person(Math.floor(Math.random() * 100))
+				}
+			}
+			console.log(Person.create());
+		</script>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 类是JavaScript一等公民，可以像其他对象或函数引用一样把类作为参数传递
+			let classList = [
+				class {
+					constructor(id) {
+						this.id_ = id;
+						console.log(`instance ${this.id_}`);
+					}
+				}
+			]
+
+			function createInstance(classDefinition, id) {
+				return new classDefinition(id)
+			}
+
+			let foo = createInstance(classList[0], 1314)
+
+			// 类似立即调用函数。 立即实例化
+			let p = new class Foo {
+				constructor(x) {
+					console.log(x);
+				}
+			}('bar')
+			console.log(p);
+		</script>
+	</body>
+</html>

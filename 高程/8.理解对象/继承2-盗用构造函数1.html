@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 盗用构造函数   对象伪装    经典继承
+			function SuperType(){
+				this.colors=['blue','red']
+			}
+			
+			function SubType(){
+				// 继承SuperType
+				SuperType.call(this)   //或apply
+			}
+			
+			let listance1=new SubType()
+			listance1.colors.push('green')
+			console.log(listance1.colors);
+			
+			let listance2=new SubType()
+			console.log(listance2.colors);
+		</script>
+	</body>
+</html>

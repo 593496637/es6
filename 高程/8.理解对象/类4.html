@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 原型方法与访问器
+			// 为了视力健共享方法，类定义语法把类快中定义的方法作为原型方法
+
+			class Person {
+				constructor() {
+					this.local = () => console.log('instance');
+				}
+				local() {
+					console.log('prototype');
+				}
+			}
+
+			let p = new Person()
+			p.local()
+			Person.prototype.local()
+
+
+			// 类定义支持获取或设置访问器
+
+			class Foo {
+				set name(newName) {
+					this.name_ = newName + ' 加点料'
+				}
+				get name() {
+					return this.name_
+				}
+			}
+
+			let f = new Foo
+			f.name = '真帅'
+			console.log(f.name);
+		</script>
+	</body>
+</html>

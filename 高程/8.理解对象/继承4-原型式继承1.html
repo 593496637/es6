@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function object (o) {
+			    function F() {}
+			    F.prototype = o;
+			    return new F();
+			}
+			var person = {
+			    name: "Nicholas",
+			    friends: ["shelby","Count","Van"]
+			}
+			var person1 = object (person);
+			person1.name = "Gerg";
+			person1.friends.push("Job");
+			//此时，person1这个对象中并没有friends这个私有变量！
+			//所以 person1.friends -> person1.__proto__.friends; 
+			//或者说 person1.friends -> F.prototype.friends;
+			//注1，此时并没有F，F是私有变量，这么写只是为了方便看
+			//注2，此时的person1.friends只是个引用，真正指向了F.prototype.friends，即全局变量person.friends。   person1.friedns.push("Job")就是person.push("Job");
+			console.log(person1.name);  // Gerg应该没什么疑惑
+			console.log(person1.friends);//前两行push过了，打印出四个人名
+			
+			var person2 = object(person);
+			console.log(person2.name);//person2并没有私有变量name,所以打印出person2.__proto__.name，即F.prototype.name，即person.name
+			console.log(person2.friends);//person2并没有私有变量friends,所以打印出person2.__proto__.friends，即F.prototype.friends，即person.friends
+		</script>
+	</body>
+</html>

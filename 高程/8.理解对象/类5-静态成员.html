@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 每个类只能有一个静态成员
+			class Person {
+				constructor() {
+					//添加到this的所有内容都会存在于不同的实例上 
+					this.local = () => console.log('instance', this);
+				}
+				
+				// 定义在类的原型对象上
+				local() {
+					console.log('prototype', this);
+				}
+
+				// 定义在类本身上
+				static local() {
+					console.log('static', this);
+				}
+			}
+
+			let p = new Person()
+			p.local()
+			Person.prototype.local()
+			Person.local()
+		</script>
+	</body>
+</html>

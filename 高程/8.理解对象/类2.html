@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class Person {}
+			console.log(Person);
+
+			// 本质是一个函数
+			console.log(typeof Person);
+
+			// 类标签符有prototype属性
+			console.log(Person.prototype);
+			console.log(Person === Person.prototype.constructor);
+
+			// 与普通构造函数一样，instanceof操作符检查构造函数原型是否存在于实例的原型链中
+			let p = new Person()
+			console.log(p instanceof Person);
+		</script>
+	</body>
+</html>
