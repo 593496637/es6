@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let values = [1, 2, 3, 4]
+      function getSum() {
+        let sum = 0
+        for (let i = 0; i < arguments.length; i++) {
+          sum += arguments[i]
+        }
+        return sum
+      }
+
+      // es5 使用arguments 并 借助apply()方法
+      console.log(getSum.apply(null,values));
+
+      // es6 使用扩展操作符
+      console.log(getSum(...values));
+    </script>
+  </body>
+</html>

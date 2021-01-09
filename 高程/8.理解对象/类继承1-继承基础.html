@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class Vehicle {}
+			// 继承类
+			class Bus extends Vehicle {}
+			let b = new Bus()
+			console.log(b instanceof Vehicle);
+			console.log(b instanceof Bus);
+
+
+			// 继承普通构造函数
+			function Person() {}
+			class Engineer extends Person {}
+			let e = new Engineer()
+			console.log(e instanceof Person);
+			console.log(e instanceof Engineer);
+
+
+			// 类和原型上定义的方法都会带到派生类
+			class Animal {
+				identifyPrototype(id) {
+					console.log(id, this);
+				}
+
+				static identifyClass(id) {
+					console.log(id, this);
+				}
+			}
+
+			class Dog extends Animal {}
+			let a = new Animal()
+			let d = new Dog()
+
+			d.identifyPrototype('dog')
+			a.identifyPrototype('animal')
+
+			Dog.identifyClass('DogClass')
+			Animal.identifyClass('AnimalClass')
+			
+			
+			// 类表达式
+			// let Bar =class extends Foo{}
+		</script>
+	</body>
+</html>

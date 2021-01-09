@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 类
+			class Vehicle {
+				constructor(arg) {
+					this.hasEngine = arg
+				}
+				
+				static identify(){
+					console.log('vehicle');
+				}
+			}
+			
+			// 派生类
+			class Bus extends Vehicle{
+				// 原型
+				constructor(arg){
+					// 不要在super() 之前引用this，否则会抛出 ReferenceError
+					// super 只能在派生类构造函数和静态方法中使用
+					// 调用super() 会调用父类构造函数，并将返回的实例赋值给this
+					super(arg) //相当于 super.constructor()
+					
+					console.log(this instanceof Vehicle);
+					console.log(this);
+				}
+				
+				// 静态方法可以通过super调用继承的类上定义的静态方法 
+				// 静态方法
+				static identify(){
+					super.identify()
+				}
+			}
+			
+			let a=new Bus('😁😜')
+			console.log(a.hasEngine);
+			Bus.identify()
+		</script>
+	</body>
+</html>

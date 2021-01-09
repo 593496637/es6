@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 虽然累定义并不显示支持在原型或雷伤添加成员数据，单在类定义外部，可以手动添加
+			class Person{
+				sayName(){
+					console.log(`${Person.getting} ${this.name}`);
+				}
+			}
+			// 在类上定义数据成员
+			Person.getting='😁'
+			
+			// 在原型上定义数据成员
+			Person.prototype.name='🙃'
+			
+			let p=new Person()
+			p.sayName()
+			
+		</script>
+	</body>
+</html>

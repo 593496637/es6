@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class Person {
+
+				// 原型上定义生成器方法
+				* createNicknameIterator() {
+					yield 'a'
+					yield 'b'
+					yield 'c'
+				}
+
+				// 类上定义生成器方法
+				static * createJobIterator() {
+					yield 'aa'
+					yield 'bb'
+					yield 'cc'
+				}
+			}
+
+			let jobIter = Person.createJobIterator()
+			console.log(jobIter.next().value);
+			console.log(jobIter.next().value);
+			console.log(jobIter.next().value);
+
+			let p = new Person()
+			let nicknameIter = p.createNicknameIterator()
+			console.log(nicknameIter.next().value);
+			console.log(nicknameIter.next().value);
+			console.log(nicknameIter.next().value);
+
+			
+			// 因为支持生成器，所以可以通过添加一个默认的迭代器，把类实例变成可迭代对象
+			class Animal {
+				constructor() {
+					this.names = ['ee', 'ff', 'gg']
+				}
+
+				*[Symbol.iterator]() {
+					yield* this.names.entries()
+				}
+			}
+			
+			let dog=new Animal()
+			for(let [idx,name] of dog){
+				console.log(idx,name);
+			}
+			
+			// 也可以只返回迭代器实例
+			class Animal2 {
+				constructor() {
+					this.names = ['eee', 'fff', 'ggg']
+				}
+			
+				[Symbol.iterator]() {
+					return this.names.entries()
+				}
+			}
+			
+			let dog2=new Animal2()
+			for(let [idx,name] of dog2){
+				console.log(idx,name);
+			}
+			
+		</script>
+	</body>
+</html>

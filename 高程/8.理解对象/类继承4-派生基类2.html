@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 抽象基类
+      class Animal {
+        constructor() {
+          if (new.target === Animal) {
+            throw new Error('Animal 不能被实例化')
+          }
+          if (!this.foo) {
+            throw new Error('Inheriting class must define foo()')
+          }
+          console.log('success')
+        }
+      }
+
+      // 派生类
+      class Person extends Animal {
+        foo() {}
+      }
+      // 派生类
+      class Person2 extends Animal {}
+
+      new Person()
+      new Person2()
+		</script>
+	</body>
+</html>
