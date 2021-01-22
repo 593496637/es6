@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{name}}</div>
+    </div>
+    <script>
+      // 1. Object.defineProperty
+      const obj = {
+        name: '上来看个',
+        age: 121,
+      }
+
+      Object.keys(obj).forEach((key) => {
+        let value = obj[key]
+        Object.defineProperty(obj, key, {
+          set(newValue) {
+            value = newValue
+          },
+          get() {
+            return value
+          },
+        })
+      })
+
+      // 2. 发布订阅者模式
+      class Dep {
+        constructor() {
+          this.subs = []
+        }
+
+        addSub(wather){
+          this.subs.push(wather)
+        }
+      }
+      
+      class Watcher{
+        constructor(name){
+          this.name=name
+        }
+
+        update(){
+          console.log('update');
+        }
+      }
+      
+      const dep=new Dep()
+      const w1=new Watcher('爱爱丸')
+      dep.addSub(w1)
+      
+
+    </script>
+
+    <script src="./js/vue.min.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            name: '阿李师傅',
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

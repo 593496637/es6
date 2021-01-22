@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="ele">点击</div>
+    <script>
+      // 创建了一个闭包，即ele元素的事件处理程序，而这个处理程序又创建了一个循环引用
+      // 匿名函数引用着assignHandler() 的活动对象，组织力对ele的引用计数归零。也就是说，内存不会被回收
+
+      function assignHandler() {
+        let ele = document.getElementById('ele')
+        ele.onclick = () => console.log(ele)
+      }
+
+      // 闭包改为引用着一个保存着ele.id的变量id，消除了循环引用，不过还不足以解决问题
+      // 把ele设为null，这样就解除了这个dom对象的引用
+      function assignHandler2() {
+        let ele = document.getElementById('ele')
+        let id = ele.id
+        ele.onclick = () => console.log(id)
+        ele = null
+      }
+      assignHandler2()
+    </script>
+  </body>
+</html>
