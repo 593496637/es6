@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 串行化异步任务
+      let p1 = new Promise((resolve, reject) => {
+        console.log('p1')
+        setTimeout(resolve, 1000)
+      })
+      p1.then(
+        () =>
+          new Promise((resolve, reject) => {
+            console.log('p2')
+            setTimeout(resolve, 1000)
+          })
+      )
+        .then(
+          () =>
+            new Promise((resolve, reject) => {
+              console.log('p3')
+              setTimeout(resolve, 1000)
+            })
+        )
+        .then(
+          () =>
+            new Promise((resolve, reject) => {
+              console.log('p4')
+              setTimeout(resolve, 1000)
+            })
+        )
+
+      // 提取到工厂函数
+      function delayedResolve(str) {
+        return new Promise((resolve, reject) => {
+          console.log(str)
+          setTimeout(resolve, 1000)
+        })
+      }
+      delayedResolve('p1')
+        .then(() => delayedResolve('p2'))
+        .then(() => delayedResolve('p3'))
+        .then(() => delayedResolve('p4'))
+    </script>
+  </body>
+</html>

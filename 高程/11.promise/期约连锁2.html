@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let p = new Promise((resolve, reject) => {
+        console.log('inital promise rejects')
+        reject()
+      })
+      
+      // catch 返回 promise对象，所以回继续执行后面的then
+      p.catch(() => console.log('reject handler'))
+        .then(() => console.log('resolve handler'))
+        .finally(() => console.log('finally handler'))
+    </script>
+  </body>
+</html>
