@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 多次调用observer() 方法，可以复用MO对象并观察多个目标节点
+
+      let observer = new MutationObserver((mutationRecords) => {
+        console.log(mutationRecords.map((x) => x.target))
+      })
+
+      let childA = document.createElement('div')
+      let childB = document.createElement('span')
+
+      document.body.appendChild(childA)
+      document.body.appendChild(childB)
+
+      observer.observe(childA, { attributes: true })
+      observer.observe(childB, { attributes: true })
+
+      childA.setAttribute('foo', 'bar')
+      childB.setAttribute('foo', 'bar')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="dom1">
+      <span>aaa</span>
+      <p>bbb</p>
+    </div>
+    <script>
+      let dom = document.querySelector('#dom1')
+      console.log(dom.childNodes)
+      console.log(dom.childNodes.item(1))
+
+      // 类数组转换为数组
+      let arr = Array.prototype.slice.call(dom.childNodes, 0)
+      console.log(arr)
+    </script>
+  </body>
+</html>

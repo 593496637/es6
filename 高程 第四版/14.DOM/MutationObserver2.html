@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 传给回调函数到第二个参数:观察变化到MutationObserver到实例
+      let observer = new MutationObserver(
+        (mutationRecord, mutationObserver) => {
+          console.log(mutationRecord, mutationObserver)
+        }
+      )
+
+      observer.observe(document.body, { attributes: true })
+      document.body.className = 'foo'
+    </script>
+  </body>
+</html>

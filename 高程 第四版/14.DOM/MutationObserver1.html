@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style lang="">
+      .blueviolet {
+        background-color: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // MutationObserver 基本用法：实例通过调用MutationObserver 构造函数并传入一个回调函数来创建
+      // observe() 方法与dom关联起来，传递两个参数：要观察到DOM节点 / 一个MutationObserverInit对象
+
+      // mutationRecord 包含了每次变化到数组
+      let observer = new MutationObserver((mutationRecord) => {
+        console.log('<body> 属性被改变')
+        console.log(mutationRecord)
+      })
+      observer.observe(document.body, { attributes: true })
+      document.body.className = 'blueviolet'
+      document.body.setAttribute('foo', 'bar')
+
+      console.log('changed body class')
+
+      // 命名空间到类似变化
+      document.body.setAttributeNS('baz', 'bad', 'good')
+    </script>
+  </body>
+</html>

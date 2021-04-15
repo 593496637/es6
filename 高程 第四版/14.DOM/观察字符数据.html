@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 书中的错误点：https://www.ituring.com.cn/errata/bookerrata/2472?FixPrint=-1&Sort=accepted&My=False&page=11
+      let observer = new MutationObserver((mutationRecord) => {
+        console.log('<body> 属性被改变')
+        console.log(mutationRecord)
+      })
+
+      // 文本节点
+      document.body.firstChild.textContent = 'foo'
+      observer.observe(document.body.firstChild, {
+        characterDataOldValue: true,
+      })
+      // 赋值为相同的字符串
+      document.body.firstChild.textContent = 'foo'
+
+      // 新字符串
+      document.body.firstChild.textContent = 'bar'
+
+      // 通过节点设置函数赋值
+      document.body.firstChild.textContent = 'baz'
+    </script>
+  </body>
+</html>

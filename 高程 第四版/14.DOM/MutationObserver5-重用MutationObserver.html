@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // disconnect() 只要观察到元素不被垃圾回收，就会相应dom变化事件，从而被执行。
+      // 若要提前终止执行回调，可以调用 discontent()
+      // 同步执行disconnect() 后，不仅会停止伺候变化事件到回调，也会抛弃已经加入任务队列要异步执行到回调
+
+      let observer = new MutationObserver(
+        (mutationRecord, mutationObserver) => {
+          console.log(mutationRecord)
+          console.log('dom监听')
+        }
+      )
+
+      observer.observe(document.body, { attributes: true })
+      document.body.className = 'foo'
+      setTimeout(() => {
+        observer.disconnect()
+        // 不会被监听到
+        document.body.className = 'aaa'
+      }, 0)
+
+      // disconnect() 并不会结束它的生命，还可以重启这个观察者
+      setTimeout(() => {
+        observer.observe(document.body, { attributes: true })
+        // 这行会触发变化事件
+        document.body.setAttribute('bar', 'foo')
+      }, 0)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 期约合成起来，渐进的消费一个值，并返回一个结果
+      // Array.prototype.reduce() 写成更简洁的方式
+      function addTwo(x) {
+        return x + 2
+      }
+      function addThree(x) {
+        return x + 3
+      }
+      function addFive(x) {
+        return x + 5
+      }
+
+      function addTen(x) {
+        return [addTwo, addThree, addFive].reduce(
+          (promise, fn) => promise.then(fn),
+          Promise.resolve(x)
+        )
+      }
+
+      addTen(8).then(console.log)
+
+      let arr = [({ x: 2 }, { x: 22 }, { x: 42 })]
+      let max = arr.reduce((acc, cur) => Math.max(acc.x, cur.x))
+      console.log(max)
+    </script>
+  </body>
+</html>

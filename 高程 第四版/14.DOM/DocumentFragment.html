@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="myList"></ul>
+    <script>
+      // 文档片段的作用是充当其他要被添加到文档的节点的仓库
+      // 给ul添加3个列表项，通常需要渲染三次也没，这个方法可以避免多次渲染
+      // 等li全部添加到文档片段后，文档片段节点会一次性转移到<ul>元素
+      let fragment = document.createDocumentFragment()
+      let ul = document.getElementById('myList')
+
+      for (let i = 0; i < 3; i++) {
+        let li = document.createElement('li')
+        li.appendChild(document.createTextNode(`Item ${i + 1}`))
+        fragment.appendChild(li)
+      }
+
+      ul.appendChild(fragment)
+    </script>
+  </body>
+</html>

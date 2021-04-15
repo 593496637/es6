@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 期约合成起来，渐进的消费一个值，并返回一个结果
+      function addTwo(x) {
+        return x + 2
+      }
+      function addThree(x) {
+        return x + 3
+      }
+      function addFive(x) {
+        return x + 5
+      }
+
+      function addTen(x) {
+        return Promise.resolve(x).then(addTwo).then(addThree).then(addFive)
+      }
+
+      addTen(8).then(console.log)
+    </script>
+  </body>
+</html>
