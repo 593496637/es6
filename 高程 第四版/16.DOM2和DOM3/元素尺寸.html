@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style lang="">
+      #dom {
+        width: 100px;
+        height: 100px;
+        background: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dom"></div>
+    <script>
+      // 元素尺寸
+      // 1.偏移尺寸：offsetHeight  offsetLeft  offsetTop  offsetWidth
+      // offsetParent
+
+      // 2.客户端尺寸：clientWidth  clientHeight
+
+      //3.滚动尺寸：scrollHeight  scrollLeft  scrollTop  scrollWidth
+
+      // 4.确定元素尺寸
+      // getBoundingClientRect()  方法，返回一个DOMRect对象，包含6个属性：left,top,right,bottom,height,width
+      let dom = document.querySelector('#dom')
+      let rect = dom.getBoundingClientRect()
+      console.log(rect)
+    </script>
+  </body>
+</html>

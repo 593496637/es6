@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let EventUtil = {
+        // 添加事件监听
+        addHandler: (element, type, handler) => {
+          if (element.addEventListener) {
+            element.addEventListener(type, handler, false)
+          } else if (element.attachEvent) {
+            element.attachEvent(type, handler)
+          } else {
+            element['on' + type] = handler
+          }
+        },
+        // 获取event事件
+        getEvent: (event) => {
+          return event ? event : window.event
+        },
+        // 获取目标元素
+        getTarget: (event) => {
+          return event.target || event.srcElement
+        },
+        // 阻止默认事件
+        preventDefault: (event) => {
+          if (event.preventDefault) {
+            event.preventDefault()
+          } else {
+            event.returnValue = true
+          }
+        },
+        // 移除事件监听
+        removeHandler: (element, type, handler) => {
+          if (element.removeEventListener) {
+            element.removeEventListener(type, handler, false)
+          } else if (element.detachEvent) {
+            element.detachEvent(type, handler)
+          } else {
+            element['on' + type] = null
+          }
+        },
+        // 停止冒泡与停止事件捕获
+        stopPropagation: (event) => {
+          if (event.stopPropagation) {
+            event.stopPropagation()
+          } else {
+            event.cancelBubble = true
+          }
+        },
+      }
+    </script>
+  </body>
+</html>

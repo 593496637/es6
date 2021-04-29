@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="click me" onclick="console.log(event)" />
+    <!-- 或者 this.value -->
+    <!-- 动态创建的包装函数，作用域链被扩展了，在这个函数中，document和元素自身的成员都可以被当成局部变量来访问，是通过with来实现的 -->
+    <input type="button" value="click me" onclick="console.log(this.value)" />
+    <input type="button" value="click me" onclick="console.log(value)" />
+    <script></script>
+  </body>
+</html>

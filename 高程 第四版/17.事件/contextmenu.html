@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style lang="">
+      #myDiv {
+        width: 500px;
+        height: 500px;
+        background: rebeccapurple;
+      }
+      #myMenu {
+        position: absolute;
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myDiv">单击右键2</div>
+    <ul id="myMenu">
+      <li>俩个</li>
+      <li>师傅说过</li>
+      <li>阿瑟费故事</li>
+      <li>阿瑟</li>
+      <li>个沟沟壑壑</li>
+    </ul>
+    <script>
+      window.addEventListener('load', (event) => {
+        let div = document.getElementById('myDiv')
+        div.addEventListener('contextmenu', (event) => {
+          console.log(event)
+          event.preventDefault()
+          let menu = document.getElementById('myMenu')
+          menu.style.left = event.clientX + 'px'
+          menu.style.top = event.clientY + 'px'
+          menu.style.visibility = 'visible'
+        })
+        document.addEventListener('click', () => {
+          document.getElementById('myMenu').style.visibility = 'hidden'
+        })
+      })
+    </script>
+  </body>
+</html>

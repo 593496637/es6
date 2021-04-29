@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // load 事件
+      window.addEventListener('load', (event) => {
+        console.log('文档加载完毕')
+        let image = document.createElement('img')
+        image.addEventListener('load', function (event) {
+          console.log(event.target.src)
+        })
+        image.src = 'http://pic1.win4000.com/wallpaper/3/59914c6976581.jpg'
+
+        document.body.append(image)
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 4000px;
+      }
+      .occupy {
+        width: 100px;
+        height: 1000px;
+      }
+      #dom {
+        height: 300px;
+        width: 300px;
+        background-color: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="myScroll()">滚动</button>
+    <div class="occupy"></div>
+    <div id="dom"></div>
+    <script>
+      // 滚动到页面指定区域
+      let element = document.getElementById('dom')
+      function myScroll() {
+        console.log(element)
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        })
+      }
+    </script>
+  </body>
+</html>

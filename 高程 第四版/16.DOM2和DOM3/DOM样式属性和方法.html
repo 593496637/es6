@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="ele"></div>
+    <script>
+      // style 对象到属性和方法
+      let ele = document.getElementById('ele')
+
+      // cssText
+      ele.style.cssText = 'width:100px;height:100px;background:red'
+
+      // length 跟中括号或item() 一起配套使用到
+      // getPropertyValue  返回propertyName的字符串
+      let prop, value, i, len
+      for (i = 0, len = ele.style.length; i < len; i++) {
+        prop = ele.style.item(i)
+        value = ele.style.getPropertyValue(prop)
+        console.log(`${prop}:${value}`)
+      }
+    </script>
+  </body>
+</html>
