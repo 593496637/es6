@@ -9,6 +9,8 @@
     <script>
       window.addEventListener('hashchange', (event) => {
         console.log(`old url ${event.oldURL},new url ${event.newURL}`)
+
+        // 通过location获取散列值
         console.log(`current hash:${location.hash}`)
       })
     </script>
