@@ -16,7 +16,22 @@ function isFish(animal: Cat | Fish) {
   return false
 }
 
-
-interface Animal {
-  aa: number
+// 将一个父类断言为一个更加具体的子类
+class ApiError extends Error {
+  code: number = 0
 }
+class HttpError extends Error {
+  statusCode: number = 20
+}
+
+function isApiError(error: Error) {
+  if (typeof (error as ApiError) === 'number') {
+    return true
+  }
+  return false
+}
+
+
+
+
+export default {}
