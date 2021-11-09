@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // javascript现代教程案例
+
+    // 条件
+    // 1.是个对象
+    // 2.属性[Symbol.iterator]必须返回一个对象(迭代器)
+    // 3.该对象还必须有next() 方法
+    // 4.next()的返回值还必须为：{done:Boolean,value:any}
+    let range = {
+      from: 1,
+      to: 5
+    }
+    // 1.for...of 调用首先会调用这个
+    range[Symbol.iterator] = function () {
+      // 它返回迭代器对象
+      // 2.for...of仅与此迭代器一起工作，要求它提供下一个值
+      return {
+        current: this.from,
+        last: this.to,
+        // 3. next() 在for...of 的每一次循环中被调用
+        next() {
+          // 4. 它将返回 {done:Boolean,value:any}
+          if (this.current <= this.last) {
+            return {
+              done: false, value: this.current++
+            }
+          } else {
+            return {
+              done: true, value: undefined
+            }
+          }
+        }
+      }
+    }
+    for (const item of range) {
+      console.log(item);
+    }
+
+  </script>
+</body>
+
+</html>

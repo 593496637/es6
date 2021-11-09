@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const createIterator = (items) => {
+      const keys = Object.keys(items)
+      const len = keys.length
+      let pointer = 0
+      return {
+        next() {
+          const done = pointer >= len
+          const value = !done ? items[keys[pointer++]] : undefined
+          return {
+            done, value
+          }
+        }
+      }
+    }
+    const iter = createIterator(['a', 'b', 'c'])
+    console.log(iter.next());
+    console.log(iter.next());
+    console.log(iter.next());
+    console.log(iter.next());
+  </script>
+</body>
+
+</html>
