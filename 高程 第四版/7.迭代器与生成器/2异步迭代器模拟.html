@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 同步迭代器：next()=>{done,value}
+    // 异步迭代器：next()=>promise
+
+    const createAsyncIterator = function (items) {
+      const keys = Object.keys(items)
+      const len = keys.length
+      let current = 0
+      return {
+        [Symbol.iterator]() {
+          return this
+        },
+        next() {
+          const done = current >= len
+          const value = !done ? items[keys[current++]] : undefined
+          return Promise.resolve({ done, value })
+        }
+      }
+    }
+
+    const asyncIter = createAsyncIterator(['a', 'b', 'c'])
+    asyncIter.next().then(res => {
+      console.log(res);
+    })
+    asyncIter.next().then(res => {
+      console.log(res);
+    })
+    asyncIter.next().then(res => {
+      console.log(res);
+    })
+    asyncIter.next().then(res => {
+      console.log(res);
+    })
+
+    // 异步迭代器
+    // for...await...of
+  </script>
+</body>
+
+</html>
