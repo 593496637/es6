@@ -1,41 +1,77 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<script type="text/javascript">
-			let map=new Map();
-			// set
-			map.set('title','神人');
-			map.set('year',2019);
-			// get
-			console.log(map.get('title'))
-			// has
-			console.log(map.has('year'));
-			console.log(map);
-			// size
-			console.log(map.size);
-			// delete
-			console.log(map.delete('year'));
-			console.log(map);
-			// clear
-			console.log(map.clear());
-			console.log(map);
-			
-			
-			// 初始化map
-			let map2=new Map([['name','nico'],['year',21]]);
-			console.log(map2);
-			// foreach
-			map2.forEach((value,key,map)=>{
-				console.log(value+"==="+key);
-				console.log(map2===map);
-			})
-			
-			
-			
-		</script>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		let map = new Map();
+		// set
+		map.set('title', '神人');
+		map.set('year', 2019);
+		// get
+		console.log(map.get('title'))
+		// has
+		console.log(map.has('year'));
+		console.log(map);
+		// size
+		console.log(map.size);
+		// delete
+		console.log(map.delete('year'));
+		console.log(map);
+		// clear
+		console.log(map.clear());
+		console.log(map);
+
+
+		// 初始化map
+		let map2 = new Map([['name', 'nico'], ['year', 21]]);
+		console.log(map2);
+		// foreach
+		map2.forEach((value, key, map) => {
+			console.log(value + "===" + key);
+			console.log(map2 === map);
+		})
+
+		// Map迭代
+		// 遍历所有的键
+		for (const iterator of map2.keys()) {
+			console.log('key', iterator);
+		}
+		// 值
+		for (const iterator of map2.values()) {
+			console.log('value', iterator);
+		}
+		// 实体 [key,value]
+		for (const iterator of map2.entries()) {
+			console.log('entries', iterator);
+		}
+
+		// Object.entries:从对象创建Map(plain object)
+		let obj = {
+			name: 'john',
+			age: 20
+		}
+		let map3 = new Map(Object.entries(obj))
+		console.log(map3.get('name'));
+
+		// Object.fromEntries:从Map创建对象
+		let prices = Object.fromEntries([
+			['a', 1], ['b', 2]
+		])
+		console.log(prices);
+
+		// map.entries():返回一个可迭代的键值对
+		let map5 = new Map();
+		map.set('banana', 1);
+		map.set('orange', 2);
+		map.set('meat', 4);
+		let obj2 = Object.fromEntries(map.entries())
+		console.log(obj2);
+	</script>
+</body>
+
 </html>
