@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 打开控制台有两个匿名函数 , 一个是下面这个，另一个是最外层有一个大的匿名函数 anonymous
+    // (function () {
+    //   debugger
+    // })()
+
+    function go() {
+      console.log(this.a); //40
+      this.a = 30
+    }
+    go.prototype.a = 40
+    const _go = new go()
+    // 原型上的优先级比原型链的优先级高
+    console.log(_go.a);//30
+  </script>
+</body>
+
+</html>
