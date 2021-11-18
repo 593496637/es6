@@ -6,6 +6,13 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+
+			// 闭包就是一个函数，就是一个作用域
+			// 什么时候需要闭包解决问题？
+			// 当循环一个function的时候，循环的那个i不能被保存下来的时候，function中有一个事件，
+			// 我们需要通过这个事件去取这个i，我们需要在for循环中生成一个函数，这个函数是一个局部作用域，
+			// 我们管这个局部作用域叫做闭包
+
 			function init(){
 				var name="Mozilla";
 				function displayName(){
