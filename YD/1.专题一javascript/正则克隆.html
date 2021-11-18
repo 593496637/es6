@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 目标正则  是否深拷贝
+    function cloneReg(target, isDeep) {
+      const regFlag = /\w*$/
+      const result = new target.constructor(target.source, regFlag.exec(target))
+      if (isDeep) {
+        result.lastIndex = 0
+      } else {
+        result.lastIndex = target.lastIndex
+      }
+      return result
+    }
+
+    const regexp = /word/g
+    const reg2 = cloneReg(regexp, true)
+    console.log(reg2);
+
+
+  </script>
+</body>
+
+</html>
