@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    'use strict'
+    // 父类
+    function Car(color) {
+      this.color = color
+    }
+
+    // 静态属性
+    Car.myName = '美女'
+
+    // 原型链上的方法
+    Car.prototype.x = function () {
+      console.log('父类方法');
+    }
+
+    // 子类
+    function BMW(color) {
+      // 继承父类属性
+      Car.call(this, color)
+    }
+
+    // 1.可以实现原型链继承，但是这是引用传递，如果修改子类原型链上的方法，父类也会被修改
+    // BMW.prototype = Car.prototype   （不使用）
+    // 2.也可以实现原型链继承，但是Car会执行两边（上面一遍），
+    //   如果Car里面代码很复杂的话，代价太大 （不使用）
+    // BMW.prototype = new Car()
+
+    // 创建对象原型链的副本
+    const __proto = Object.create(Car.prototype)
+
+    // 但是这样constructor也可能被修改，所以使用 继承2 方案
+    __proto.constructor = BMW
+    BMW.prototype = __proto
+
+    const bmw = new BMW()
+    console.log(bmw);
+
+
+
+
+  </script>
+</body>
+
+</html>

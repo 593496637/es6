@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    'use strict'
+    // 父类
+    function Car(color) {
+      this.color = color
+    }
+
+    Car.myName = '么女女'
+    Car.other = '啊哈哈'
+
+    Car.prototype.x = function () {
+      console.log('父类方法');
+    }
+
+    // 子类
+    function BMW(color) {
+      Car.call(this, color)
+    }
+
+    BMW.prototype = Object.create(Car.prototype, {
+      constructor: {
+        value: BMW,
+        writeable: false
+      },
+      test: {
+        value: function () { }
+      }
+    })
+
+    // 构造函数的属性方法
+    const entries = Object.entries(Car)
+    for (let index = 0; index < entries.length; index++) {
+      const key = entries[index][0];
+      const value = entries[index][1];
+      BMW[key] = value
+    }
+
+    console.log(BMW.myName);
+
+
+    const bmw = new BMW()
+    console.log(bmw);
+
+
+  </script>
+</body>
+
+</html>
