@@ -10,6 +10,10 @@
 
 <body>
   <script>
+
+    // 柯里化又称部分求值，其含义是给函数分步传递参数，
+    // 每次传递参数后部分应用参数，并返回一个更具体的函数接受剩下的参数，
+    // 这中间可嵌套多层这样的接受部分参数函数，直至返回最后结果。
     function isType(type) {
       return function (obj) {
         return Object.prototype.toString.call(obj) === `[object ${type}]`
