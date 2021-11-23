@@ -1,0 +1,24 @@
+{
+  "name": "karma-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "unit:init": "karma init",
+    "unit:test": "karma start",
+    "ui:init": "backstop init",
+    "ui:test": "backstop test",
+    "e2e": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "backstopjs": "^5.3.7",
+    "karma": "^6.3.9",
+    "karma-coverage": "^2.0.3",
+    "karma-jasmine": "^4.0.1",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "selenium-webdriver": "^4.1.0"
+  },
+  "dependencies": {}
+}
