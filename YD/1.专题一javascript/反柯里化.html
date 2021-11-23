@@ -14,7 +14,7 @@
     // unCurrying是定义在Function的prototype
     // 上的方法，因此对所有的函数都可以使用此方法。调用时候：sayHiUnCurrying=sayHi.unCurrying()，所以unCurrying中的 this 指向的是 sayHi 函数; （一般原型方法中的 this 不是指向原型对象prototype，而是指向调用对象，在这里调用对象是另一个函数，在javascript中函数也是对象）
     // call.apply(that, arguments) 把 that 设置为 call 方法的上下文，然后将 arguments 传给 call方法，前文的例子，that 实际指向 sayHi，所以调用 sayHiUnCurrying(arg1, arg2, ...) 相当于 sayHi.call（arg1, arg2, ...);
-    // sayHi.call（arg1, arg2, ...), call 函数把 arg1 当做 sayHi的上下文，然后把 arg2,... 等剩下的参数传给sayHi，因此最后相当于 arg1.sayHi(arg2,...);
+    // sayHi.call（arg1, arg2, ...), call 函数把 arg1 当做 sayHi的上下文，然  后把 arg2,... 等剩下的参数传给sayHi，因此最后相当于 arg1.sayHi(arg2,...);
     // 因此，这相当于 sayHiUnCurrying(obj,args) 等于 obj.sayHi(args)。
     // 最后，我们反过来看，其实反柯里化相当于把原来 sayHi(args) 的形式，转换成了 sayHiUnCurrying(obj,args)，使得sayHi的使用范围泛化了。 更抽象地表达， unCurrying反柯里化，使得原来 x.y(z) 调用，可以转成 y(x',z) 形式的调用 。 假设x' 为x或者其他对象，这就扩大了函数的使用范围。
 
@@ -31,5 +31,5 @@
     console.log(sayHiUnCurrying({ value: 'world' }, ' 哈哈'));
   </script>
 </body>
-
+ 
 </html>
