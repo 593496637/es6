@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <script>
     // {}代表了一个代码块，不执行，+[] 后，[]变成
@@ -13,7 +15,18 @@
 
     // []+{}  [object Object]
 
-    
+    // toPrimitive 原始值
+    // ①对象的话，先找valueOf()  找不到再找toString()
+    // ②普通类型，直接valueOf() 
+    // ③NaN不等于NaN
+    // ④null<=0  true
+    // ⑤null==undefined  null不是对象
+    console.log([] == false);
+
+    // Object.create(null)  这样会创建一个干净的对象，因为null没有原型链
+
+
   </script>
 </body>
+
 </html>
