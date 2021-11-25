@@ -26,7 +26,30 @@
     // Object.create(null)  这样会创建一个干净的对象，因为null没有原型链
 
     // 内存查看
-     
+    // 打开控制台，查看memory
+    function test() {
+      const apple = 'red apple'
+      return function () {
+        debugger
+        eval('')
+      }
+    }
+    test()()
+
+
+    // 影响性能的因素
+    // 1.window.eval 对此法作用域不进行任何解绑
+    // 2.new Function  创建的所有函数都绑定到了全局的词法作用域中
+    // 3.with 比 eval 还严重  放弃了所有回收
+    // 4.try里catch延长了作用域链  变量能回收，e不回收  es2017新增无需写小括号中的e
+
+    try {
+      
+    } catch {
+      new Error('error')
+    }
+
+    // 如何消失一个闭包，外部的引用null里面分析是谁占用了变量
 
   </script>
 </body>
