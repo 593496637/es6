@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // 这是一棵树
+    var s = []
+    var arr = s
+    for (let index = 0; index < 3; index++) {
+      debugger
+      var pusher = {
+        value: 'item' + index
+      }, tmp
+      if (index !== 2) {
+        tmp = []
+        pusher.children = tmp
+      }
+      arr.push(pusher)
+      arr = tmp
+    }
+    console.log(s[0]);
+  </script>
+</body>
+
+</html>
