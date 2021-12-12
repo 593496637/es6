@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 当我们想要改变js默认值的时候，或者改变js默认行为等时候，
+    // 再或者想要拦截到js本来的属性类型该有的值的时候，可以用下面的方式
+    // 元编程第一例
+    let str = {
+      [Symbol.toPrimitive]: ((i) => () => ++i)(0)
+    }
+    if (str == 1 && str == 2 && str == 3) {
+      console.log('元编程');
+    }
+
+    // 可以修改iterator对象为一个生成器函数
+    // const arr = []
+    // arr[Symbol.iterator] = function* () { }
+
+    // hint是个类型
+    let obj = {
+      [Symbol.toPrimitive](hint) {
+        console.log('传递的类型：', hint);
+        switch (hint) {
+          case 'number':
+            return 123
+            break;
+          case 'string':
+            return 'str'
+            break;
+          case 'default':
+            return 'default'
+            break;
+          default:
+            throw new Error('')
+            break;
+        }
+      }
+    }
+    // 默认是个default
+    console.log(obj=='default');
+
+    console.log(2 * obj);
+    console.log(3 + obj);
+    console.log('test' + obj);
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js"></script>
+</head>
+
+<body>
+  <input type="text" oninput="search(this.value)">
+  <script>
+    const { Subject, from } = rxjs;
+    const { debounceTime, distinctUntilChanged, switchMap } = rxjs.operators;
+
+    const searchItems = new Subject();
+    searchItems.pipe(debounceTime(5000),
+      distinctUntilChanged(),
+      switchMap(val => from(getSuggestList(val)))
+    ).subscribe(ret => {
+      console.log(ret);
+    })
+
+    function search(val) {
+      searchItems.next(val)
+    }
+
+    function getSuggestList(val) {
+      console.log(val);
+      return new Promise(function (resolve) {
+        setTimeout(() => {
+          resolve([
+            {
+              id: 1,
+              name: '加扣扣'
+            },
+            {
+              id: 2,
+              name: '阿里瓦房'
+            }
+          ])
+        }, 1000);
+      })
+    }
+  </script>
+</body>
+
+</html>
