@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+  </script>
+  <script type="module" setup>
+    import { createApp, reactive, computed } from 'vue'
+    const app = createApp({
+      setup() {
+        const author = reactive({
+          name: 'John Doe',
+          books: [
+            'Vue 2 - Advanced Guide',
+            'Vue 3 - Basic Guide',
+            'Vue 4 - The Mystery'
+          ]
+        })
+ 
+        // 计算属性 ref
+        const publishedBooksMessage = computed(() => {
+          return author.books.length > 0 ? 'Yes' : 'No'
+        })
+
+
+        return { publishedBooksMessage }
+      }
+    })
+    app.mount('#app')
+  </script>
+  <div id="app">
+    {{ publishedBooksMessage }}
+  </div>
+</body>
+
+</html> 
