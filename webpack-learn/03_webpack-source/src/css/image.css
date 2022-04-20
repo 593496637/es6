@@ -1,0 +1,6 @@
+.bgDiv {
+  width: 200px;
+  height: 200px;
+  background-image: url("../img/girl.jpg");
+  background-size: contain;
+}
