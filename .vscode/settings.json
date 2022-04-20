@@ -3,5 +3,10 @@
   "cSpell.words": [
     "importmap",
     "mochawesome"
-  ]
+  ],
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 2
 }
