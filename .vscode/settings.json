@@ -8,5 +8,6 @@
   "editor.formatOnType": false,
   "prettier.jsxSingleQuote": true,
   "prettier.singleQuote": true,
-  "prettier.tabWidth": 2
+  "prettier.tabWidth": 2,
+  "eslint.format.enable": true
 }

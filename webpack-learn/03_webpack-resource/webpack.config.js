@@ -3,8 +3,11 @@ const path = require('path');
 module.exports = {
   entry: "./src/index.js",
   output: {
+    filename: 'bundle.js',
     path: path.resolve(__dirname, "./build"),
-    filename: 'bundle.js'
+    clean: true
+    // 第一种讲图片资源打包的方式
+    // assetModuleFilename: 'images/[name]_[hash:6][ext][query]'
   },
   module: {
     rules: [
@@ -70,10 +73,21 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 4 * 1024
+            maxSize: 100 * 1024
           }
+        },
+        // 第二种讲图片资源打包的方式
+        generator: {
+          filename: 'static/[name]_[hash:6][ext][query]'
         }
-      }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name]_[hash:6][ext][query]'
+        },
+      },
     ]
   },
 }

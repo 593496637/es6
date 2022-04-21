@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3346949 */
+  src: url('iconfont.woff2?t=1650512453627') format('woff2'),
+       url('iconfont.woff?t=1650512453627') format('woff'),
+       url('iconfont.ttf?t=1650512453627') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-a-maikefengluyinchangge:before {
+  content: "\e8da";
+}
+
+.icon-a-aixinxihuanxiaishoucang:before {
+  content: "\e8db";
+}
+
+.icon-feijihangbanxinxi:before {
+  content: "\e8dc";
+}
+
+.icon-a-jiangtaiyanjiangchuanshouxuexi:before {
+  content: "\e8dd";
+}
+
+.icon-a-shuzhishijiaoyu:before {
+  content: "\e8de";
+}
+
+.icon-a-zhixianghezibaoguan:before {
+  content: "\e8e0";
+}
+
+.icon-yidongduanyingxiao:before {
+  content: "\e8df";
+}
+
+.icon-a-yuechimimajiemijiesuo:before {
+  content: "\e8e1";
+}
+
+.icon-taiyangsan:before {
+  content: "\e8e2";
+}
+
+.icon-a-Storeshangdianshangpushangchengxiaomaibugouwu:before {
+  content: "\e8e3";
+}
+
+.icon-a-zhifupingzhengshouyinjizhifu:before {
+  content: "\e8e4";
+}
+
