@@ -23,3 +23,11 @@ _ **sass的使用**
 
 
 **tips:** webpack打包默认寻找当前文件夹下的 src/index.js
+
+
+**热更新**
+
+方式一：webpack --watch  等待文件变化并自动打包,一般不用
+方式二：npm install --save-dev webpack-dev-server
+webpack-dev-server原理是将打包后的文件放内存中，然后express直接读取内存
+以前webpack使用的是memory-fs，后来改用了memfs将资源放进内存中

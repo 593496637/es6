@@ -1,0 +1,1 @@
+console.log("%c这是devServer设置的查找目录名字","color:red");
