@@ -1,0 +1,22 @@
+{
+  "name": "09_vite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "serve": "vite serve",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "vue": "^3.2.33"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.1",
+    "less": "^4.1.2",
+    "postcss": "^8.4.13",
+    "postcss-preset-env": "^7.4.4",
+    "vite": "^2.9.6"
+  }
+}
