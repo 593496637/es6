@@ -10,5 +10,10 @@
   "prettier.jsxSingleQuote": true,
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
-  "eslint.format.enable": true
+  "eslint.format.enable": true,
+  "emmet.syntaxProfiles": {
+    "html": {
+      "inline_break": 2
+   }
+  }
 }
