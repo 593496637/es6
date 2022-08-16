@@ -1,0 +1,28 @@
+.box-border{
+  border:4px solid rebeccapurple;
+}
+
+
+.box{
+  width: 100px;
+  background-color: antiquewhite;
+  // 混入（多用）
+  // .box-border
+
+  // 继承(用的少)
+  &:extend(.box-border);
+}
+
+// 内置函数
+.box{
+  // color to 十六进制
+  color: color(red);
+  // 转为英寸
+  width: convert(300px,'in');
+}
+
+// 作用域
+@main-color:blue;
+.box{
+  border-color: @main-color;
+}

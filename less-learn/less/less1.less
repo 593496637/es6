@@ -1,12 +1,25 @@
+// 变量
 @color:red;
 
+
+.border-box(@border-width,@border-color){
+  border:@border-width solid @border-color;
+}
 .size-normal{
   font-size: 28px;
 }
-.box{
+.box-small{
   width: 100px;
   height: 100px;
+  .border-box(1px,@color);
+}
+.box{
+  // 混入、映射
+  width: .box-small()[width];
+  height: .box-small()[height];
   background-color: bisque;
   color: @color;
-  .size-normal()
+  // 混入
+  .size-normal();
+  .border-box(10px,blue);
 }
