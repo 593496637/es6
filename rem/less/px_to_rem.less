@@ -1,0 +1,10 @@
+.px_to_rem (@px, @rem:37.5) {
+  result: 1rem * (@px / @rem);
+}
+
+.box {
+  width: .px_to_rem(100) [result];
+  height: .px_to_rem(100) [result];
+  font-size: .px_to_rem(12) [result];
+  background-color: burlywood;
+}

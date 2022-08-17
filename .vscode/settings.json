@@ -15,5 +15,8 @@
     "html": {
       "inline_break": 2
    }
-  }
+  },
+  "cssrem.vw": true,
+  "cssrem.rootFontSize": 37.5,
+  "cssrem.vwDesign": 375
 }
