@@ -1,3 +1,9 @@
+/**
+ * 
+ * @param {object} obj 
+ * @param {number} target 
+ * @param {Function} callback 
+ */
 function animate(obj, target, callback) {
 	clearInterval(obj.timer);
 	obj.timer = setInterval(function() {
