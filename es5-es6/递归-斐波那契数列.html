@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 斐波那契数列
+    // 数列：1 1 2 3 5 8 13 21 34 55 ...
+    // 位置：0 1 2 3 4 5 6 7 8 9 ...
+    // 函数：f(n) = f(n-1) + f(n-2)
+    
+    // 1.斐波那契数列递归实现 
+    function fibonacci(n) {
+      if (n === 1 || n === 2) {
+        return 1;
+      }
+      return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    // 2.斐波那契数列循环实现
+    function fibonacci2(n) {
+      let a = 1, b = 1;
+      for (var i = 3; i <= n; i++) {
+        let c = a + b;
+        a = b;
+        b = c;
+      }
+      return b;
+    }
+
+    console.log(fibonacci(10)); // 55
+    console.log(fibonacci2(10)); // 55
+  </script>
+</body>
+</html>
