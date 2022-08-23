@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    const names = [1, 2, 3];
+    // 版本一
+    // function myForEach(fn){
+    //   for (let index = 0; index < names.length; index++) {
+    //     fn(names[index],index,names);
+    //   }
+    // } 
+
+    // myForEach(function(item,index,names){
+    //   console.log(item,index,names);
+    // })
+
+    // 版本二
+    // function myForEach2(fn,array){
+    //   for (let index = 0; index < array.length; index++) {
+    //     fn(array[index],index,array);
+    //   }
+    // } 
+
+    // myForEach2(function(item,index,array){
+    //   console.log(item,index,array);
+    // },names)
+
+
+
+    // 版本三
+    // names.myForEach3=function(fn,array){
+    //   for (let index = 0; index < array.length; index++) {
+    //     fn(array[index],index,array);
+    //   }
+    // } 
+    // names.myForEach3(function(item,index,array){
+    //   console.log(item,index,array);
+    // },names)
+
+
+    // 版本四
+    Array.prototype.myForEach4 = function (fn) {
+      for (let index = 0; index < this.length; index++) {
+        fn(this[index], index, this);
+      }
+    }
+
+    names.myForEach4(function (item, index, array) {
+      console.log(item, index, array);
+    })
+  </script>
+</body>
+
+</html>
