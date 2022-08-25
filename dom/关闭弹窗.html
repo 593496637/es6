@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 50px;
+      background-color: rebeccapurple;
+      color: red;
+      overflow: hidden;
+      transition: all 1s ease-out;
+    }
+
+    /* a元素样式不继承 */
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <span>hha</span>
+    <a href="javascript:void(0);">关闭</a>
+  </div>
+  <script>
+    const box = document.querySelector('.box')
+    const a = document.querySelector('a')
+    a.addEventListener('click', function (e) {
+      box.style.height = 0;
+    }); 
+    
+
+    // 监听动画结束并移除dom
+    box.addEventListener('transitionend', function (e) {
+      box.remove()
+    })
+
+    
+    // 监听动画结束并移除dom
+    // box.ontransitionend=function(){
+    //   box.remove()
+    // }
+  </script>
+</body>
+
+</html>
