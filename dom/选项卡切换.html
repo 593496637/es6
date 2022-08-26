@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul,
+    li {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    div,
+    img,
+    ul,
+    li {
+      padding: 0;
+      margin: 0;
+    }
+
+    .banner {
+      width: 604px;
+      height: 342px;
+      /* overflow: hidden; */
+    }
+
+    .banner-list {
+      height: 298px;
+      display: flex;
+    }
+
+
+    .nav {
+      display: flex;
+      background-color: #333;
+      line-height: 44px;
+    }
+
+    .nav>li {
+      flex: 1;
+      color: #fff;
+      text-align: center;
+    }
+
+    .nav>li>a {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .nav>li.active a {
+      background-color: #555;
+      color: orange;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="banner">
+    <ul class="banner-list">
+      <li class="item">
+        <a href="">
+          <img src="./img/banner/1.jpeg" alt="">
+        </a>
+      </li>
+      <li class="item">
+        <a href="">
+          <img src="./img/banner/2.jpeg" alt="">
+        </a>
+      </li>
+      <li class="item">
+        <a href="">
+          <img src="./img/banner/3.jpeg" alt="">
+        </a>
+      </li>
+      <li class="item">
+        <a href="">
+          <img src="./img/banner/4.jpeg" alt="">
+        </a>
+      </li>
+      <li class="item">
+        <a href="">
+          <img src="./img/banner/5.jpeg" alt="">
+        </a>
+      </li>
+    </ul>
+    <ul class="nav">
+      <li class="active"><a href="">啊士大夫</a></li>
+      <li><a href="">啊手动阀</a></li>
+      <li><a href="">的发射点</a></li>
+      <li><a href="">说到底是谁</a></li>
+      <li><a href="">打个广告</a></li>
+    </ul>
+  </div>
+  <script>
+    // 获取元素
+    let banner = document.querySelector('.banner');
+    let navEl = document.querySelector('.nav');
+    let activeEl = document.querySelector('.active')
+    let bannerListEl = document.querySelector('.banner-list')
+
+    let timerId = null
+
+    let currentIndex = 0
+    // 底部tab切换，同时切换轮播图
+    navEl.onmouseover = function (event) {
+      // 鼠标进入的元素
+      const itemEl = event.target.parentElement;
+      const index = Array.from(navEl.children).findIndex(item => item === itemEl)
+      currentIndex = index
+
+      switchBanner()
+
+    };
+    // 初始化定时器
+    startTimer()
+    // 监听banner事件
+    // 清除定时器
+    banner.onmouseenter = function (event) {
+      clearInterval(timerId)
+    }
+    // 添加定时器
+    banner.onmouseleave = function (event) {
+      startTimer()
+    }
+
+    // 切换轮播
+    function switchBanner() {
+      bannerListEl.style.transform = `translateX(${-604 * currentIndex}px)`
+      bannerListEl.style.transition = `all ease 1s`
+      // 移除之前的active
+      activeEl.classList.remove('active')
+      const currentEl = navEl.children[currentIndex]
+      currentEl.classList.add('active')
+      activeEl = currentEl
+    }
+
+    // 定时器
+    function startTimer() {
+      timerId = setInterval(function () {
+        currentIndex++
+        if (currentIndex >= bannerListEl.children.length) {
+          currentIndex = 0
+        }
+        switchBanner()
+      }, 3000)
+    }
+
+
+  </script>
+</body>
+
+</html>
