@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // 闭包
+    // 顶一个createAdder函数，当第一个参数可变，第二个参数基本不变的情况下，我们使用闭包来做
+
+    // 未使用闭包
+    function createAdder(num, count) {
+      return num + count
+    }
+
+    // 如果要想count比较固定时，count参数每次都得写
+    createAdder(10, 5)
+    createAdder(20, 5)
+    createAdder(30, 5)
+    createAdder(40, 5)
+
+    createAdder(10, 8)
+    createAdder(20, 8)
+    createAdder(30, 8)
+    createAdder(40, 8)
+
+
+
+    // 使用闭包
+    function createAdder2(num) {
+      function addr(count) {
+        return num + count
+      }
+      return addr
+    }
+
+    // 使用闭包后，count就不需要每次调用函数的时候都传
+    const addr5 = createAdder2(5)
+
+
+    addr5(10)
+    addr5(20)
+    addr5(30)
+    addr5(40)
+
+    const addr8 = createAdder2(8)
+    addr8(10)
+    addr5(20)
+    addr8(30)
+    addr8(40)
+
+    // 而且，addr5/addr8 返回值会被保存下来
+    console.log(addr5(10));
+    console.log(addr5(20));
+    console.log(addr8(10));
+    console.log(addr8(10));
+    console.log(addr5(30));
+
+
+    // 但是大量适合用闭包不释放内存的话，会造成内存泄漏，此时将不再使用的变量赋值为null可以释放内存
+    addr5 = null
+    addr8 = null
+  </script>
+</body>
+
+</html>

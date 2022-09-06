@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    function init(a,b){
+      console.log(arguments);
+      console.log(init.length); //2
+      
+      // 类数组对象arguments 转为 数组
+      // 1
+      const arr1=Array.from(arguments)
+
+      // 2
+      const arr2=[...arguments]
+
+      // 3
+      const arr3=Array.prototype.slice.call(arguments)
+      const arr4=[].slice.call(arguments)
+      const arr5=new Array().slice.call(arguments)
+    }
+    init(1,2,3)
+
+    console.log(((...args) => {}).length);
+    // 0, 剩余参数不计算在内
+  </script>
+</body>
+</html>
