@@ -18,6 +18,37 @@
     }
 
 
+    function composeFn(...fns) {
+
+      // 1.边界判断
+      const length = fns.length
+      if (!length) return
+      for (let i = 0; i < length; i++) {
+        const fn = fns[i]
+        if (typeof fn !== 'function') {
+          throw new Error(`index position "${i}" must be a function`)
+        }
+      }
+
+      // 2.返回的新函数
+      return function (...args) {
+        let result = fns[0].apply(this, args)
+        for (let index = 1; index < fns.length; index++) {
+          const fn = fns[index];
+          result = fn.apply(this, [result])
+        }
+        return result
+      }
+    }
+
+    // console.log 返回undefined，因此无需在下方单独打印
+    const fn = composeFn(double, pow, console.log)
+    fn(2)
+    fn(3)
+
+    // console.log(fn(2));
+    // console.log(fn(3));
+
   </script>
 </body>
 
