@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.{}的本质
+    const info={}
+    // 相当于
+    // const info = new Object()
+    console.log(info.__proto__ === Object.prototype);
+
+
+    // 2.原型连查找顺序
+    const obj={
+      name:'hello',
+      age:22
+    }
+
+    console.log(obj.message);
+    // 查找顺序
+    // 1.obj上面找
+    // 2.obj.__proto__上面找
+    // 3.obj.__proto__.__proto__ --> null  上面找 （undefined）
+  </script>
+</body>
+
+</html>
