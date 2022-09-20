@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Student(name,age){
+      this.name=name
+      this.age=age
+
+
+      // 方式一：new Student会创建很多遍下面的方法
+      // this.running=function(){
+      //   console.log('running');
+      // }
+      // this.eating=function(){
+      //   console.log('eating');
+      // }
+      // this.studying=function(){
+      //   console.log('studying');
+      // }
+    
+    }
+
+
+    // 方式二：当我们多个对象拥有共同的值时，我们可以将它放到构造函数对象的显式原型上
+    // 由构造函数创建出来的所有对象，new Student后创建的对象都会共享这些属性
+    Student.prototype.running=function(){
+      console.log('running');
+    }
+
+    Student.prototype.eating=function(){
+      console.log('eating');
+    }
+    
+    Student.prototype.studying=function(){
+      console.log('studying');
+    }
+
+    const stu1=new Student('小明',12)
+    const stu2=new Student('小红',13)
+    const stu3=new Student('小方',15)
+
+
+
+    // 隐式原型的作用
+    // 1.stu1的隐式原型是谁？Student.prototype对象
+    // 2.stu1.running查找：
+    //  * 现在自己身上查找，没有找到
+    //  * 再去原型上查找
+    stu1.running()
+    stu2.eating()
+    stu3.studying()
+
+  </script>
+</body>
+</html>
