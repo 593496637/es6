@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log(3),console.log(`${3.1415926.toFixed(2)}`)})();
