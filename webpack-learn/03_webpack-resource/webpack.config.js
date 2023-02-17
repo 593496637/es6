@@ -73,10 +73,11 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
+            // 100kb = 100 * 1024byte
             maxSize: 100 * 1024
           }
         },
-        // 第二种讲图片资源打包的方式
+        // 第二种将图片资源打包的方式
         generator: {
           filename: 'static/[name]_[hash:6][ext][query]'
         }
