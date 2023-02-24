@@ -99,9 +99,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      title: '啊哈哈哈'
+      title: '欧克欧克'
     }),
     new DefinePlugin({
+      // BASE_URL: "'./'" // 会被打包成字符串
       BASE_URL: JSON.stringify('./')
     }),
     new CopyPlugin({
