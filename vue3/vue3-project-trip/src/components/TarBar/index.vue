@@ -57,6 +57,7 @@ const itemClick = (index, item) => {
     }
     img {
       width: 32px;
+      height: 25px;
       margin-bottom: 2px;
     }
   }
