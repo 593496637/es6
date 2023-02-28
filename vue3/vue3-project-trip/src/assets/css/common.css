@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #ff6700;
+}
+
 body {
-  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
 }
