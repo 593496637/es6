@@ -1,22 +1,22 @@
 <template>
-  <div class="tab-bar">
-    <van-tabbar v-model="active">
+  <div class="container">
+    <ul class="tab-bar">
       <template v-for="(item, index) in tabbarData" :key="item.text">
-        <van-tabbar-item :to="item.path">
-          <span>{{ item.text }}</span>
-          <template #icon="props">
-            <div class="tab-bar-item">
-              <img
-                v-if="active === index"
-                :src="getAssetURL(item.iconActive)"
-                alt=""
-              />
-              <img v-else :src="getAssetURL(item.icon)" alt="" />
-            </div>
-          </template>
-        </van-tabbar-item>
+        <li
+          class="tab-bar-item"
+          :class="{ active: currentIndex === index }"
+          @click="itemClick(index, item)"
+        >
+          <img
+            v-if="currentIndex === index"
+            :src="getAssetURL(item.iconActive)"
+            alt=""
+          />
+          <img v-else :src="getAssetURL(item.icon)" alt="" />
+          {{ item.text }}
+        </li>
       </template>
-    </van-tabbar>
+    </ul>
   </div>
 </template>
 
@@ -24,15 +24,20 @@
 import tabbarData from '@/assets/data/tab-bar.js';
 import { getAssetURL } from '@/utils/load_assets.js';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const active = ref(0);
 
+const currentIndex = ref(0);
+const router=useRouter()
+
+const itemClick = (index, item) => {
+  currentIndex.value = index;
+  router.push(item.path);
+};
 </script>
 
 <style lang="scss" scoped>
 .tab-bar {
-  // 第一种修改样式的方法
-  // --van-tabbar-item-active-color: red;
   display: flex;
   position: fixed;
   left: 0;
@@ -40,11 +45,6 @@ const active = ref(0);
   bottom: 0;
   height: 49px;
   border-top: 1px solid #f3f3f3;
-
-  // 第二种修改样式的方法
-  :deep(.van-tabbar-item--active) {
-    color: var(--primary-color);
-  }
   .tab-bar-item {
     flex: 1;
     display: flex;

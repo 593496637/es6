@@ -1,6 +1,10 @@
 :root {
   --primary-color: #ff6700;
 }
+:root:root {
+  /* search图标颜色 */
+  --van-search-left-icon-color: var(--primary-color);
+}
 
 body {
   font-size: 14px;

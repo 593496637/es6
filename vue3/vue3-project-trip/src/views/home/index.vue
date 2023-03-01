@@ -1,9 +1,22 @@
 <template>
   <div class="container">
-    home
+    <nav-bar />
+    <div class="banner">
+      <img src="@/assets/img/home/banner.webp" alt="">
+    </div>
+    <search-box />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import NavBar from './components/NavBar.vue';
+import SearchBox from './components/SearchBox.vue';
+</script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.banner{
+  img{
+    width: 100%;
+  }
+}
+</style>

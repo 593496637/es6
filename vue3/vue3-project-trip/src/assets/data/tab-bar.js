@@ -20,7 +20,7 @@ const tabarData = [
   {
     text: '消息',
     icon: 'tabbar/tab_message.png',
-    iconActive: 'tabbar/tab_message_active.png',
+    iconActive: 'tabbar/tab_order_active.png',
     path: '/message',
   },
 ]
