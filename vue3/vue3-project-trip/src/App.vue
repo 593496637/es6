@@ -3,7 +3,6 @@ import TarBar from '@/components/TarBar/index.vue';
 
 import { useRoute } from 'vue-router';
 const router = useRoute();
-console.log(router);
 </script>
 
 <template>

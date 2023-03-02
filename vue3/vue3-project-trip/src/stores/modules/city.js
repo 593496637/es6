@@ -1,11 +1,20 @@
 import { defineStore } from "pinia";
 
+import { city } from '@/services';
 
-const useCityStore = defineStore({
+const useCityStore = defineStore('city', {
   state: () => ({
-    cities: []
+    cities: [],
+    currentCity: {
+      cityName: "上海"
+    }
   }),
-  actions: {},
+  actions: {
+    async fetchCities() {
+      const { data } = await city()
+      this.cities = data
+    }
+  },
 
 })
 
