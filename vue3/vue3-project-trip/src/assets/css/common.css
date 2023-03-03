@@ -1,5 +1,7 @@
 :root {
   --primary-color: #ff6700;
+  --line-color: #faf8f9;
+  --theme-linear-gradient: linear-gradient(90deg, #fa8c1d, #fcaf3f);
 }
 :root:root {
   /* search图标颜色 */
@@ -8,4 +10,8 @@
 
 body {
   font-size: 14px;
+}
+
+.bottom-gray-line {
+  border-bottom: 1px solid var(--line-color);
 }

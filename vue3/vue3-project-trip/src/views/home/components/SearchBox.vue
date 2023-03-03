@@ -35,17 +35,47 @@
       color="#ff6700"
       @confirm="onConfirm"
     />
+
+    <!-- 价格/人数选择 -->
+    <div class="section price-counter bottom-gray-line">
+      <div class="start">价格不限</div>
+      <div class="end">人数不限</div>
+    </div>
+    <!-- 关键字 -->
+    <div class="section keyword bottom-gray-line">关键字/位置/民宿名</div>
+    <!-- 热门建议 -->
+    <div class="section hot-suggests">
+      <template v-for="(item, index) in hotSuggestions" :key="index">
+        <div
+          class="item"
+          :style="{
+            color: item.tagText.color,
+            background: item.tagText.background.color,
+          }"
+        >
+          {{ item.tagText.text }}
+        </div>
+      </template>
+    </div>
+
+    <!-- 搜索按钮 -->
+    <div class="section search-btn">
+      <div class="btn" @click="searchBtnClick">开始搜索</div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import useCityStore from '@/stores/modules/city';
+import useHomeStore from '@/stores/modules/home';
 import { useRouter } from 'vue-router';
 import { formatDate } from '@/utils/format_date';
+import { storeToRefs } from 'pinia';
+
+const router = useRouter();
 
 const cityStore = useCityStore();
-const router = useRouter();
 
 // 获取当前位置
 const getPosition = () => {
@@ -86,6 +116,26 @@ const onConfirm = (values) => {
   stayCount.value = (end - start) / (24 * 60 * 60 * 1000);
   // 关闭日历
   showCalendar.value = false;
+};
+
+// 热门建议
+const homeStore = useHomeStore();
+homeStore.fetchHotSuggestions();
+const { hotSuggestions } = storeToRefs(homeStore);
+
+console.log(hotSuggestions.value);
+
+// 搜索按钮
+const searchBtnClick = () => {
+  router.push({
+    path: '/search',
+    query: {
+      cityId: cityStore.currentCity.id,
+      startDate: startDate.value,
+      endDate: endDate.value,
+      stayCount: stayCount.value,
+    },
+  });
 };
 </script>
 
@@ -161,6 +211,40 @@ const onConfirm = (values) => {
     text-align: center;
     font-size: 12px;
     color: #666;
+  }
+}
+
+.price-counter {
+  .start {
+    border-right: 1px solid var(--line-color);
+  }
+}
+
+.hot-suggests {
+  margin: 10px 0;
+  height: auto;
+
+  .item {
+    padding: 4px 8px;
+    margin: 4px;
+    border-radius: 14px;
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+.search-btn {
+  .btn {
+    width: 342px;
+    height: 38px;
+    max-height: 50px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 20px;
+    color: #fff;
+    background-image: var(--theme-linear-gradient);
   }
 }
 </style>

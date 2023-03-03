@@ -2,20 +2,23 @@
   <div class="container">
     <nav-bar />
     <div class="banner">
-      <img src="@/assets/img/home/banner.webp" alt="">
+      <img src="@/assets/img/home/banner.webp" alt="" />
     </div>
     <search-box />
+    <categories />
   </div>
 </template>
 
 <script setup>
 import NavBar from './components/NavBar.vue';
 import SearchBox from './components/SearchBox.vue';
+import Categories from './components/Categories.vue';
+
 </script>
 
 <style lang="scss" scoped>
-.banner{
-  img{
+.banner {
+  img {
     width: 100%;
   }
 }
