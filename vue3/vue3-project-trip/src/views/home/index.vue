@@ -6,6 +6,7 @@
     </div>
     <search-box />
     <categories />
+    <content />
   </div>
 </template>
 
@@ -13,6 +14,7 @@
 import NavBar from './components/NavBar.vue';
 import SearchBox from './components/SearchBox.vue';
 import Categories from './components/Categories.vue';
+import Content from './components/Content.vue';
 
 </script>
 

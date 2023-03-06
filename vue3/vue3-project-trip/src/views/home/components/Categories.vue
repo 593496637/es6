@@ -6,10 +6,8 @@
         v-for="category in categories"
         :key="category.id"
       >
-        <div class="category-img">
-          <img :src="category.imgUrl" alt="" />
-        </div>
-        <div class="category-name">{{ category.name }}</div>
+        <img :src="category.pictureUrl" alt="" />
+        <div class="category-name">{{ category.title }}</div>
       </div>
     </div>
   </div>
@@ -26,4 +24,31 @@ console.log(categories);
 console.log(categories.value);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+  padding: 0 10px;
+  .category-list {
+    display: flex;
+    overflow-x: auto;
+    margin-top: 10px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .category-item {
+      width: 70px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+      text-align: center;
+      img {
+        width: 32px;
+        height: 32px;
+      }
+      .category-name {
+        margin-top: 5px;
+        font-size: 12px;
+        color: #666;
+      }
+    }
+  }
+}
+</style>
