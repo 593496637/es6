@@ -10,3 +10,10 @@ export const categories = () => {
     url: '/home/categories'
   })
 }
+
+export const getHouseList = (params) => {
+  return request.get({
+    url: '/home/houselist',
+    params
+  })
+}

@@ -20,8 +20,6 @@ import { storeToRefs } from 'pinia';
 const homeStore = useHomeStore();
 homeStore.fetchCategories();
 const { categories } = storeToRefs(homeStore);
-console.log(categories);
-console.log(categories.value);
 </script>
 
 <style lang="scss" scoped>

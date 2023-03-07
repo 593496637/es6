@@ -123,7 +123,6 @@ const homeStore = useHomeStore();
 homeStore.fetchHotSuggestions();
 const { hotSuggestions } = storeToRefs(homeStore);
 
-console.log(hotSuggestions.value);
 
 // 搜索按钮
 const searchBtnClick = () => {
