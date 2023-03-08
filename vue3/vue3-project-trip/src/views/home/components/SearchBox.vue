@@ -66,17 +66,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import useCityStore from '@/stores/modules/city';
-import useHomeStore from '@/stores/modules/home';
-import { useRouter } from 'vue-router';
-import { formatDate } from '@/utils/format_date';
-import { storeToRefs } from 'pinia';
+import { ref } from "vue";
+import useCityStore from "@/stores/modules/city";
+import useHomeStore from "@/stores/modules/home";
+import useMainStore from "@/stores/modules/main";
+import { useRouter } from "vue-router";
+import { formatDate } from "@/utils/format_date";
+import { storeToRefs } from "pinia";
 
 const router = useRouter();
 
 const cityStore = useCityStore();
-
+const mainStore = useMainStore();
 // 获取当前位置
 const getPosition = () => {
   if (navigator.geolocation) {
@@ -89,13 +90,13 @@ const getPosition = () => {
       }
     );
   } else {
-    alert('浏览器不支持定位');
+    alert("浏览器不支持定位");
   }
 };
 
 // 跳转至选择城市页面
 const toCity = () => {
-  router.push('/city');
+  router.push("/city");
 };
 
 // 日期范围
@@ -114,6 +115,10 @@ const onConfirm = (values) => {
   startDate.value = formatDate(start);
   endDate.value = formatDate(end);
   stayCount.value = (end - start) / (24 * 60 * 60 * 1000);
+
+  // 设置mainStore中的日期范围
+  mainStore.startDate = start;
+  mainStore.endDate = end;
   // 关闭日历
   showCalendar.value = false;
 };
@@ -123,11 +128,10 @@ const homeStore = useHomeStore();
 homeStore.fetchHotSuggestions();
 const { hotSuggestions } = storeToRefs(homeStore);
 
-
 // 搜索按钮
 const searchBtnClick = () => {
   router.push({
-    path: '/search',
+    path: "/search",
     query: {
       cityId: cityStore.currentCity.id,
       startDate: startDate.value,

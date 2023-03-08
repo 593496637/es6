@@ -1,6 +1,6 @@
 <template>
   <div class="tab-bar">
-    <van-tabbar v-model="active">
+    <van-tabbar v-model="active" route>
       <template v-for="(item, index) in tabbarData" :key="item.text">
         <van-tabbar-item :to="item.path">
           <span>{{ item.text }}</span>
@@ -21,12 +21,21 @@
 </template>
 
 <script setup>
-import tabbarData from '@/assets/data/tab-bar.js';
-import { getAssetURL } from '@/utils/load_assets.js';
-import { ref } from 'vue';
+import tabbarData from "@/assets/data/tab-bar.js";
+import { getAssetURL } from "@/utils/load_assets.js";
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
 
+// 激活的tabbar
 const active = ref(0);
 
+// 获取当前路由
+const route = useRoute();
+watch(route, (newRoute) => {
+  const index = tabbarData.findIndex((item) => item.path === newRoute.path);
+  if (index === -1) return;
+  active.value = index;
+});
 </script>
 
 <style lang="scss" scoped>

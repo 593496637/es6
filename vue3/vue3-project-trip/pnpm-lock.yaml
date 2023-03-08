@@ -7,6 +7,7 @@ specifiers:
   normalize.css: ^8.0.1
   pinia: ^2.0.32
   sass: ^1.58.3
+  underscore: ^1.13.6
   unplugin-vue-components: ^0.24.0
   vant: ^4.0.11
   vite: ^4.1.4
@@ -19,6 +20,7 @@ dependencies:
   normalize.css: 8.0.1
   pinia: 2.0.32_vue@3.2.47
   sass: 1.58.3
+  underscore: 1.13.6
   vant: 4.0.11_vue@3.2.47
   vue: 3.2.47
   vue-router: 4.1.6_vue@3.2.47
@@ -1548,6 +1550,10 @@ packages:
       magic-string: 0.27.0
       unplugin: 1.1.0
     dev: true
+
+  /underscore/1.13.6:
+    resolution: {integrity: sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==}
+    dev: false
 
   /unimport/2.2.4:
     resolution: {integrity: sha512-qMgmeEGqqrrmEtm0dqxMG37J6xBtrriqxq9hILvDb+e6l2F0yTnJomLoCCp0eghLR7bYGeBsUU5Y0oyiUYhViw==}
