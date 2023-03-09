@@ -1,18 +1,24 @@
 <script setup>
+import { computed } from "vue";
 import TarBar from "@/components/TarBar/index.vue";
 import Loading from "@/components/Loading/index.vue";
 import { useRoute } from "vue-router";
-const router = useRoute();
+const route = useRoute();
+
+const keepAlive = computed(() => {
+  return route.meta.keepAlive;
+});
 </script>
 
 <template>
   <router-view v-slot="{ Component }">
     <keep-alive>
-      <component :is="Component" />
+      <component :is="Component" :key="route.fullPath" v-if="keepAlive"/>
     </keep-alive>
+    <component :is="Component" :key="route.fullPath" v-if="!keepAlive"/>
   </router-view>
-  <tar-bar v-show="!router.meta.isHiddenTabBar" />
-  <loading/>
+  <tar-bar v-show="!route.meta.isHiddenTabBar" />
+  <loading />
 </template>
 
 <style scoped></style>

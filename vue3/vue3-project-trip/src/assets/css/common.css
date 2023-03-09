@@ -3,9 +3,13 @@
   --line-color: #faf8f9;
   --theme-linear-gradient: linear-gradient(90deg, #fa8c1d, #fcaf3f);
 }
+
+/* vant样式覆盖 */
 :root:root {
   /* search图标颜色 */
   --van-search-left-icon-color: var(--primary-color);
+  --van-nav-bar-text-color: var(--primary-color);
+  --van-nav-bar-icon-color: var(--primary-color);
 }
 
 body {
