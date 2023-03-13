@@ -1,4 +1,4 @@
-import { ref, onActivated, onDeactivated } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { throttle } from 'underscore'
 
 // 方法一
@@ -25,7 +25,8 @@ import { throttle } from 'underscore'
 
 // 方法二
 // 用于监听滚动条是否到达底部
-export default function useScroll() {
+export default function useScroll(elRef) {
+  let el = window
   const isArrivedBottom = ref(false)
   // 定义响应式数据
   const scrollTop = ref(0)
@@ -34,22 +35,32 @@ export default function useScroll() {
   // 节流函数
   const scrollListenerHandler = throttle(() => {
     //获取滚动条滚动的距离
-    scrollTop.value = document.documentElement.scrollTop
-    clientHeight.value = document.documentElement.clientHeight
-    scrollHeight.value = document.documentElement.scrollHeight
+    if (el === window) {
+      scrollTop.value = document.documentElement.scrollTop
+      clientHeight.value = document.documentElement.clientHeight
+      scrollHeight.value = document.documentElement.scrollHeight
+    } else {
+      scrollTop.value = el.scrollTop
+      clientHeight.value = el.clientHeight
+      scrollHeight.value = el.scrollHeight
+    }
+
+    console.log('scrollTop.value', scrollTop.value);
     //判断是否到达底部
     if (scrollTop.value + clientHeight.value >= scrollHeight.value) {
       //到达底部
       isArrivedBottom.value = true
     }
   }, 100)
-  onActivated(() => {
-    window.addEventListener('scroll', scrollListenerHandler)
+  onMounted(() => {
+    if (elRef) el = elRef.value
+    el.addEventListener('scroll', scrollListenerHandler)
   })
 
-  onDeactivated(() => {
-    window.removeEventListener('scroll', scrollListenerHandler)
+  onUnmounted(() => {
+    el.removeEventListener('scroll', scrollListenerHandler)
   })
+
 
   return { isArrivedBottom, scrollTop, clientHeight, scrollHeight }
 }

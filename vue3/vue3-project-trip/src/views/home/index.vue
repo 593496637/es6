@@ -47,6 +47,7 @@ watch(isArrivedBottom, (newValue) => {
 const isShowSearchBar = computed(() => {
   return scrollTop.value > 400;
 });
+
 </script>
 
 <style lang="scss" scoped>
