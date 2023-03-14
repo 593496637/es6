@@ -121,6 +121,34 @@ const tabClick = (index) => {
     behavior: "smooth",
   });
 };
+
+// 滚动到一定位置，tabControl按钮高亮
+const currentIndex = computed(() => {
+  const scrollTop = document.documentElement.scrollTop;
+  const sectionTop = Object.values(sectionEls.value).map((item) => item.offsetTop);
+  for (let i = 0; i < sectionTop.length; i++) {
+    if (scrollTop < sectionTop[i]) {
+      return i - 1;
+    }
+  }
+  return sectionTop.length - 1;
+});
+
+// 监听滚动
+onMounted(() => {
+  document.documentElement.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const sectionTop = Object.values(sectionEls.value).map((item) => item.offsetTop);
+    for (let i = 0; i < sectionTop.length; i++) {
+      if (scrollTop < sectionTop[i]) {
+        return i - 1;
+      }
+    }
+    return sectionTop.length - 1;
+  });
+});
+
+
 </script>
 
 <style lang="scss" scoped>
