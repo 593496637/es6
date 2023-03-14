@@ -45,7 +45,6 @@ export default function useScroll(elRef) {
       scrollHeight.value = el.scrollHeight
     }
 
-    console.log('scrollTop.value', scrollTop.value);
     //判断是否到达底部
     if (scrollTop.value + clientHeight.value >= scrollHeight.value) {
       //到达底部

@@ -2,7 +2,7 @@
   <div class="detail-container" ref="detailRef">
     <TabControl
       class="tab-control"
-      :titles="names"
+      :titles="titles"
       v-if="showTabControl"
       @tab-item-click="tabClick"
     />
@@ -12,19 +12,35 @@
       left-arrow
       @click-left="onClickLeft"
     />
-    <div v-if="mainPart">
+    <div v-if="mainPart" v-memo="[mainPart]">
       <Swiper :data="mainPart.topModule.housePicture.housePics" />
-      <Infos :top-infos="mainPart.topModule" />
+      <Infos name="描述" :ref="getSectionRef" :top-infos="mainPart.topModule" />
       <Facility
+        name="设施"
+        :ref="getSectionRef"
         :house-facility="mainPart.dynamicModule.facilityModule.houseFacility"
       />
       <Landlord
+        name="房东"
+        :ref="getSectionRef"
         ref="landlordRef"
         :landlord="mainPart.dynamicModule.landlordModule"
       />
-      <Comment :comment="mainPart.dynamicModule.commentModule" />
-      <Notice :order-rules="mainPart.dynamicModule.rulesModule.orderRules" />
-      <Map :position="mainPart.dynamicModule.positionModule" />
+      <Comment
+        name="评论"
+        :ref="getSectionRef"
+        :comment="mainPart.dynamicModule.commentModule"
+      />
+      <Notice
+        name="须知"
+        :ref="getSectionRef"
+        :order-rules="mainPart.dynamicModule.rulesModule.orderRules"
+      />
+      <Map
+        name="地图"
+        :ref="getSectionRef"
+        :position="mainPart.dynamicModule.positionModule"
+      />
       <Intro :price-intro="mainPart.introductionModule" />
     </div>
     <div class="footer">
@@ -64,11 +80,10 @@ detail(id).then(({ data }) => {
 const onClickLeft = () => history.back();
 
 // tabControl
-const names = ["房屋详情", "房屋评价", "房屋问答", "房屋预定", "房屋推荐"];
 const detailRef = ref(null);
 const { scrollTop } = useScroll();
 const showTabControl = computed(() => {
-  return scrollTop.value > 500;
+  return scrollTop.value > 450;
 });
 
 // 滚动到对应的位置
@@ -77,11 +92,32 @@ const showTabControl = computed(() => {
 // 如果是document.documentElement, 那么就是整个页面的滚动
 
 // tabControl点击事件
-const landlordRef = ref(null);
+// const landlordRef = ref(null);
+// const tabClick = (index) => {
+//   document.documentElement.scrollTo({
+//     top: landlordRef.value.$el.offsetTop - 44,
+//     behavior: "smooth",
+//   });
+// };
+
+// 获取所有的ref
+const sectionEls = ref({});
+const titles = computed((item) => Object.keys(sectionEls.value));
+const getSectionRef = (ref) => {
+  if (!ref) return;
+  const name = ref.$el.getAttribute("name");
+  sectionEls.value[name] = ref.$el;
+};
+
+// tabControl点击事件
 const tabClick = (index) => {
-  console.log(landlordRef.value);
+  const key = Object.keys(sectionEls.value)[index];
+  let top = sectionEls.value[key].offsetTop;
+  if (index !== 0) {
+    top -= 44;
+  }
   document.documentElement.scrollTo({
-    top: landlordRef.value.$el,
+    top: top,
     behavior: "smooth",
   });
 };
