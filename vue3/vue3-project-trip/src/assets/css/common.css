@@ -12,6 +12,10 @@
   --van-nav-bar-icon-color: var(--primary-color);
 }
 
+html{
+  max-width: 500px;
+}
+
 body {
   font-size: 14px;
 }

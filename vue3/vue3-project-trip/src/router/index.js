@@ -25,14 +25,15 @@ const router = createRouter({
       path: "/order",
       component: () => import('@/views/order/index.vue'),
       meta: {
-        keepAlive: true
+        keepAlive: true,
       }
     },
     {
       path: "/message",
       component: () => import('@/views/message/index.vue'),
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        isHiddenTabBar: true
       }
     },
     {

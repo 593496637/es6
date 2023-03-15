@@ -1,6 +1,7 @@
 <template>
   <div class="detail-container" ref="detailRef">
     <TabControl
+      ref="tabControlRef"
       class="tab-control"
       :titles="titles"
       v-if="showTabControl"
@@ -51,7 +52,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, watch } from "vue";
 import { detail } from "@/services";
 import { useRoute } from "vue-router";
 import useScroll from "@/hooks/useScroll";
@@ -83,7 +84,7 @@ const onClickLeft = () => history.back();
 const detailRef = ref(null);
 const { scrollTop } = useScroll();
 const showTabControl = computed(() => {
-  return scrollTop.value > 450;
+  return scrollTop.value > 240;
 });
 
 // 滚动到对应的位置
@@ -110,45 +111,47 @@ const getSectionRef = (ref) => {
 };
 
 // tabControl点击事件
+// 是否是点击tabControl
+let isClick = false;
+// 当前距离
+let currentDistance = 0;
 const tabClick = (index) => {
   const key = Object.keys(sectionEls.value)[index];
   let top = sectionEls.value[key].offsetTop;
+  isClick = false;
   if (index !== 0) {
     top -= 44;
   }
+
+  isClick = true;
+  currentDistance = top;
   document.documentElement.scrollTo({
     top: top,
     behavior: "smooth",
   });
 };
 
-// 滚动到一定位置，tabControl按钮高亮
-const currentIndex = computed(() => {
-  const scrollTop = document.documentElement.scrollTop;
-  const sectionTop = Object.values(sectionEls.value).map((item) => item.offsetTop);
-  for (let i = 0; i < sectionTop.length; i++) {
-    if (scrollTop < sectionTop[i]) {
-      return i - 1;
-    }
+const tabControlRef = ref(null);
+// 页面滚动，tabControl按钮高亮
+const values = computed(() => Object.values(sectionEls.value));
+watch(scrollTop, (newVal) => {
+  // 当前距离和newVal相等，说明已经滚动到了对应的位置，并且将isClick设置为false
+  if (newVal === currentDistance) {
+    isClick = false;
   }
-  return sectionTop.length - 1;
-});
-
-// 监听滚动
-onMounted(() => {
-  document.documentElement.addEventListener("scroll", () => {
-    const scrollTop = document.documentElement.scrollTop;
-    const sectionTop = Object.values(sectionEls.value).map((item) => item.offsetTop);
-    for (let i = 0; i < sectionTop.length; i++) {
-      if (scrollTop < sectionTop[i]) {
-        return i - 1;
-      }
+  // 如果是点击tabControl，那么就不需要再次执行下面的代码
+  if (isClick) return;
+  const currentIndex = ref(0);
+  for (let i = 0; i < values.value.length; i++) {
+    const item = values.value[i];
+    if (item.offsetTop - 44 > newVal) {
+      currentIndex.value = i - 1;
+      break;
     }
-    return sectionTop.length - 1;
-  });
+    currentIndex.value = values.value.length - 1;
+  }
+  tabControlRef.value?.setCurrentIndex(currentIndex.value);
 });
-
-
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container">
+  <div class="home-container" ref="homeContainerRef">
     <nav-bar />
     <div class="banner">
       <img src="@/assets/img/home/banner.webp" alt="" />
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { watch, computed } from "vue";
+import { watch, computed, ref, onActivated } from "vue";
 import NavBar from "./components/NavBar.vue";
 import SearchBox from "./components/SearchBox.vue";
 import Categories from "./components/Categories.vue";
@@ -34,7 +34,8 @@ homeStore.fetchHouseList();
 // });
 
 // 第二种使用useScroll的方式
-const { isArrivedBottom, scrollTop } = useScroll();
+const homeContainerRef = ref(null);
+const { isArrivedBottom, scrollTop } = useScroll(homeContainerRef);
 watch(isArrivedBottom, (newValue) => {
   if (newValue) {
     homeStore.fetchHouseList().then(() => {
@@ -48,11 +49,20 @@ const isShowSearchBar = computed(() => {
   return scrollTop.value > 400;
 });
 
+// 该页面处于活动时，滚动到原来的位置
+onActivated(() => {
+  homeContainerRef.value.scrollTo({
+    top: scrollTop.value,
+  });
+});
 </script>
 
 <style lang="scss" scoped>
 .home-container {
+  height: 100vh;
+  overflow-y: auto;
   padding-bottom: 50px;
+  box-sizing: border-box;
 }
 .banner {
   img {
