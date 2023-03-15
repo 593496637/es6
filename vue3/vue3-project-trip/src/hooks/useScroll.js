@@ -46,7 +46,10 @@ export default function useScroll(elRef) {
     }
 
     //判断是否到达底部
-    if (scrollTop.value + clientHeight.value >= scrollHeight.value) {
+
+    // 由于滚动条滚动的距离是一个浮点数，所以这里需要做一个判断,<=1的目的是为了防止滚动条滚动的距离是一个浮点数
+    // 如果滚动条滚动的距离+可视区域的高度>=文档的高度，那么就说明滚动条已经到达底部了
+    if (scrollHeight.value - scrollTop.value - clientHeight.value <= 1) {
       //到达底部
       isArrivedBottom.value = true
     }

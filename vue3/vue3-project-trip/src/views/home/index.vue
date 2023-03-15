@@ -37,6 +37,7 @@ homeStore.fetchHouseList();
 const homeContainerRef = ref(null);
 const { isArrivedBottom, scrollTop } = useScroll(homeContainerRef);
 watch(isArrivedBottom, (newValue) => {
+  console.log(isArrivedBottom.value);
   if (newValue) {
     homeStore.fetchHouseList().then(() => {
       isArrivedBottom.value = false;
@@ -59,9 +60,8 @@ onActivated(() => {
 
 <style lang="scss" scoped>
 .home-container {
-  height: 100vh;
+  height: calc(100vh - 50px);
   overflow-y: auto;
-  padding-bottom: 50px;
   box-sizing: border-box;
 }
 .banner {

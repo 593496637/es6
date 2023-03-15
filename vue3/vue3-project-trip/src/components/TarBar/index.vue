@@ -27,7 +27,7 @@ import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 // 激活的tabbar
-const active = ref(0);
+const active = ref(-1);
 
 // 获取当前路由
 const route = useRoute();
