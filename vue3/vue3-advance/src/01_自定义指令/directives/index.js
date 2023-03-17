@@ -3,7 +3,7 @@ import directiveUnit from './unit'
 import directiveFormatTime from './formatTime'
 import directiveAnimate from './animate'
 
-export default function useDirectives(app) {
+export default function directives(app) {
   directiveFocus(app)
   directiveUnit(app)
   directiveFormatTime(app)
