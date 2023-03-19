@@ -13,7 +13,13 @@ import { createApp } from 'vue'
 // import App from './04_Render函数/02_render函数计数器实现.vue'
 // import App from './04_Render函数/04_setup语法糖.vue'
 
-import App from './05_JSX/App.vue'
+// import App from './05_JSX/01_jsx计数器.vue'
+// import App from './05_JSX/02_jsx计数器setup.vue'
+// import App from './05_JSX/03_jsx计数器setup语法糖.vue'
+
+// import App from './06_过渡动画/02_transition动画2.vue'
+// import App from './06_过渡动画/03_动画设置.vue'
+import App from './06_过渡动画/04_group的使用.vue'
 
 
 import directives from './01_自定义指令/directives'

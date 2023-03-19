@@ -16,8 +16,12 @@
     "lib": [
       "esnext",
       "dom"
-    ]
+    ],
+    "allowJs": true
   },
+  "include": [
+    "./src/**/*"
+  ],
   "exclude": [
     "node_modules",
     "dist"
