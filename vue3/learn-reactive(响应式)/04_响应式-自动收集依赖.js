@@ -19,6 +19,23 @@ const obj = {
 }
 
 
+// 依赖收集
+function watchReactive(fn) {
+  // 执行一次
+  fn()
+}
+
+// 定义一个WeakMap，用来存储每个对象的依赖收集器
+const depMap = new WeakMap()
+function getDep(target) {
+  let dep = depMap.get(target)
+  if (!dep) {
+    depMap.set(target, )
+  }
+  return dep
+}
+
+
 // 使用Object.defineProperty()监听属性变量
 Object.keys(obj).forEach(key => {
   let value = obj[key]
@@ -34,24 +51,16 @@ Object.keys(obj).forEach(key => {
 })
 
 
-// 设置一个专门执行响应式函数的一个函数
-const dep = new Depend()
-// 依赖收集
-function watchReactive(fn) {
-  dep.addReactiveFn(fn)
-  // 执行一次
-  fn()
-}
 
 watchReactive(function foo() {
-  console.log('name', obj.name)
-  console.log('age', obj.age);
+  console.log('foo', obj.name)
+  console.log('foo', obj.age);
   console.log('--------');
 })
 
 watchReactive(function bar() {
-  console.log('name', obj.name + '111')
-  console.log('age', obj.age + 1);
+  console.log('bar', obj.name + '111')
+  console.log('bar', obj.age + 1);
   console.log('--------');
 })
 

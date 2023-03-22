@@ -12,14 +12,14 @@ function watchReactive(fn) {
 }
 
 watchReactive(function foo() {
-  console.log('name', obj.name)
-  console.log('age', obj.age);
+  console.log('foo', obj.name)
+  console.log('foo', obj.age);
   console.log('--------');
 })
 
 watchReactive(function bar() {
-  console.log('name', obj.name + '111')
-  console.log('age', obj.age + 1);
+  console.log('bar', obj.name + '111')
+  console.log('bar', obj.age + 1);
   console.log('--------');
 })
 
