@@ -1,22 +1,18 @@
 
-// 一：dep对象的数据解构的管理
-// 1. 一个对象对应一个dep对象
-// 2. 同一个对象的不同属性对应不同的dep对象
-// 3. 同一个对象的同一个属性对应同一个dep对象
-// 4. 一个dep对象对应多个watcher对象
-// 5. 一个watcher对象对应一个dep对象
-// 6. 多个对象的map对象，会被存储在一个WeakMap中
-
-// 二：依赖收集：当执行get函数时，自动将当前函数添加到依赖收集器中
-
-
 class Depend {
   constructor() {
-    this.reactiveFns = []
+    this.reactiveFns = new Set() //Set的成员是唯一的，没有重复的值
   }
 
   addReactiveFn(fn) {
-    fn && this.reactiveFns.push(fn)
+    fn && this.reactiveFns.add(fn)
+  }
+
+  depend() {
+    // activeReactiveFn是自由变量，指的是在函数内部使用的，但是没有在函数内部定义的变量
+    if (activeReactiveFn) {
+      this.addReactiveFn(activeReactiveFn)
+    }
   }
 
   notify() {
@@ -24,11 +20,6 @@ class Depend {
   }
 }
 
-
-const obj = {
-  name: 'zhangsan',
-  age: 18
-}
 
 
 // 依赖收集
@@ -63,25 +54,41 @@ function getDepend(obj, key) {
 }
 
 
-// 使用Object.defineProperty()监听属性变量
-Object.keys(obj).forEach(key => {
-  let value = obj[key]
-  Object.defineProperty(obj, key, {
-    set(newValue) {
-      value = newValue
-      // 设置新值时，通知依赖收集器
-      const dep = getDepend(obj, key)
+function reactive(obj) {
+  // 使用Proxy监听属性变量
+  return new Proxy(obj, {
+    set(target, key, value, receiver) {
+      // 设置值
+      // target[key] = value
+      Reflect.set(target, key, value, receiver)
+      // 通知依赖收集器
+      const dep = getDepend(target, key)
       dep.notify()
     },
-    get() {
-      // 获取当前属性的依赖收集器
-      const dep = getDepend(obj, key)
-      // 将当前函数添加到依赖收集器中
-      dep.addReactiveFn(activeReactiveFn)
-      return value
+    get(target, key, receiver) {
+      const dep = getDepend(target, key)
+      dep.depend()
+      // return target[key]
+      return Reflect.get(target, key, receiver)
     }
   })
+}
+
+
+// 测试============================
+
+const obj = reactive({
+  name: 'zhangsan',
+  age: 18,
+  height: 180,
 })
+
+
+const user = reactive({
+  name: 'zhangsan',
+  age: 18,
+})
+
 
 
 
@@ -92,13 +99,29 @@ watchReactive(function foo() {
 })
 
 watchReactive(function bar() {
-  console.log('bar', obj.name)
   console.log('bar', obj.age);
   console.log('----------------');
 })
 
+watchReactive(function baz() {
+  console.log('baz', obj.height)
+  console.log('baz', obj.height)
+  console.log('--------');
+})
+
+
+watchReactive(function foo() {
+  console.log('user', user.name)
+  console.log('user', user.age);
+  console.log('--------');
+})
+
+
 // 修改数据
 console.log('########修改数据########');
 obj.name = 'lisi'
-obj.age = 20
-obj.age = 23
+// obj.age = 20
+obj.height = 190
+// obj.height = 200
+
+user.name = 'lisi'

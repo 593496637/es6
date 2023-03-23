@@ -1,22 +1,18 @@
 
-// 一：dep对象的数据解构的管理
-// 1. 一个对象对应一个dep对象
-// 2. 同一个对象的不同属性对应不同的dep对象
-// 3. 同一个对象的同一个属性对应同一个dep对象
-// 4. 一个dep对象对应多个watcher对象
-// 5. 一个watcher对象对应一个dep对象
-// 6. 多个对象的map对象，会被存储在一个WeakMap中
-
-// 二：依赖收集：当执行get函数时，自动将当前函数添加到依赖收集器中
-
-
 class Depend {
   constructor() {
-    this.reactiveFns = []
+    this.reactiveFns = new Set() //Set的成员是唯一的，没有重复的值
   }
 
   addReactiveFn(fn) {
-    fn && this.reactiveFns.push(fn)
+    fn && this.reactiveFns.add(fn)
+  }
+
+  depend() {
+    // activeReactiveFn是自由变量，指的是在函数内部使用的，但是没有在函数内部定义的变量
+    if (activeReactiveFn) {
+      this.addReactiveFn(activeReactiveFn)
+    }
   }
 
   notify() {
@@ -27,7 +23,8 @@ class Depend {
 
 const obj = {
   name: 'zhangsan',
-  age: 18
+  age: 18,
+  height: 180,
 }
 
 
@@ -77,13 +74,19 @@ Object.keys(obj).forEach(key => {
       // 获取当前属性的依赖收集器
       const dep = getDepend(obj, key)
       // 将当前函数添加到依赖收集器中
-      dep.addReactiveFn(activeReactiveFn)
+      // 方式一：直接添加
+      // dep.addReactiveFn(activeReactiveFn)
+      // 方式二：使用depend方法
+      dep.depend()
+
       return value
     }
   })
 })
 
 
+
+// 测试============================
 
 watchReactive(function foo() {
   console.log('foo', obj.name)
@@ -92,13 +95,20 @@ watchReactive(function foo() {
 })
 
 watchReactive(function bar() {
-  console.log('bar', obj.name)
   console.log('bar', obj.age);
   console.log('----------------');
 })
 
+watchReactive(function baz() {
+  console.log('baz', obj.height)
+  console.log('baz', obj.height)
+  console.log('--------');
+})
+
+
 // 修改数据
 console.log('########修改数据########');
-obj.name = 'lisi'
-obj.age = 20
-obj.age = 23
+// obj.name = 'lisi'
+// obj.age = 20
+obj.height = 190
+// obj.height = 200
