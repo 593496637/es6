@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react</title>
+  <!-- 引入react latest -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- 引入Babel -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <!-- 创建一个根元素 -->
+  <div id="root"></div>
+  <div id="app"></div>
+  <script type="text/babel">
+
+    // react18之前的写法
+    // ReactDOM.render(<h1>hello world</h1>)
+
+    // react18之后的写法
+    // 可以创建多个根元素
+    // ReactDOM.createRoot(根元素).render(要渲染的内容)
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<h1>hello root</h1>)
+    const app = ReactDOM.createRoot(document.querySelector('#app'))
+    app.render(<h1>hello app</h1>)
+  </script>
+</body>
+
+</html>

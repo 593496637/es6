@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          message: 'Hello World'
+        }
+
+        // 一：可以在构造函数中手动绑定this
+        // this.handleClick = this.handleClick.bind(this)
+      }
+
+
+      handleClick() {
+        this.setState({
+          message: 'Hello React'
+        })
+      }
+
+      render() {
+        return (
+          <div>
+            <h1>{this.state.message}</h1>
+            <button onClick={this.handleClick.bind(this)}>改变文本</button> {/* 二：可以在事件回调函数中手动绑定this */}
+          </div>
+        )
+      }
+    }
+
+
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+
+    root.render(<App />)
+  </script>
+
+</body>
+
+</html>

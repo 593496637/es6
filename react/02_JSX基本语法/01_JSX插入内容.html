@@ -1,0 +1,96 @@
+<!--
+ * @Author: 云清淡雅 593496637@qq.com
+ * @Date: 2023-03-24 16:03:25
+ * @LastEditors: 云清淡雅 593496637@qq.com
+ * @LastEditTime: 2023-03-24 16:49:13
+ * @FilePath: \react\02_JSX基本语法\01_认识JSX的语法.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          message: 'Hello World',
+          aaa: undefined,
+          bbb: null,
+          ccc: true,
+          ddd: {
+            name: 'Tom',
+            age: 18
+          },
+          firstName: 'Tom',
+          lastName: 'Jerry',
+          // 三个电影
+          movies: ['肖申克的救赎', '霸王别姬', '阿甘正传'],
+        }
+      }
+
+      render() {
+        const { message } = this.state
+        const { aaa, bbb, ccc, ddd } = this.state
+        const { firstName, lastName } = this.state
+        const fullName = firstName + ' ' + lastName
+
+        const { movies } = this.state
+        const liEls = movies.map((item, index) => <li key={index}>{item}</li>)
+
+        return (
+          <div>
+            {/*Number,String,Array直接显示出来*/}
+            <h1>{message}</h1>
+            {/*当为undefined，null，boolean类型不会显示*/}
+            {/* 如果想显示这些值：需要先转换为string类型*/}
+            <h1>{aaa + ''}</h1>
+            <h1>{bbb}</h1>
+            <h1>{ccc}</h1>
+            {/*object类型不能作为子元素进行显示*/}
+            <h1>{Object.keys(ddd)[0]}</h1>
+            {/*可以插入表达式*/}
+            <h1>{1 + 1}</h1>
+            {/*可以插入三元运算符*/}
+            <h1>{message === 'Hello World' ? 'YES' : 'NO'}</h1>
+            {/*计算属性*/}
+            <h1>{firstName}</h1>
+            <h1>{lastName}</h1>
+            <h1>{fullName}</h1>
+
+            {/*可以调用方法获取结果*/}
+            <ul>{liEls}</ul>
+            <ul>{movies.map((item, index) => <li key={index}>{item}</li>)}</ul>
+            <ul>{this.getMovies()}</ul>
+          </div>
+        )
+      }
+
+      getMovies() {
+        const { movies } = this.state
+        return movies.map((item, index) => <li key={index}>{item}</li>)
+      }
+    }
+
+    // 2.创建根容器,并渲染App组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+
+  </script>
+</body>
+
+</html>
