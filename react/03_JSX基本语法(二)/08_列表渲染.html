@@ -1,0 +1,73 @@
+<!--
+ * @Author: 云清淡雅 593496637@qq.com
+ * @Date: 2023-03-27 14:46:18
+ * @LastEditors: 云清淡雅 593496637@qq.com
+ * @LastEditTime: 2023-03-27 14:58:12
+ * @FilePath: \react\03_JSX基本语法(二)\08_列表渲染.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          students: [{
+            id: 1,
+            name: '张三'
+          }, {
+            id: 2,
+            name: '李四'
+          }, {
+            id: 3,
+            name: '王五'
+          }]
+        }
+      }
+
+      render() {
+        const { students } = this.state
+        return (
+          <div>
+            <ul>
+              {
+                // 过滤出id小于3的数据,并且只取第一条数据,最后遍历渲染
+                students.filter(item => item.id < 3).slice(0, 1).map((item, index) => {
+                  return (
+                    <li key={index}>
+                      <div>id:{item.id}</div>
+                      <div>name:{item.name}</div>
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+        )
+      }
+    }
+
+    // 2.创建根容器,并渲染App组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+
+  </script>
+</body>
+
+</html>

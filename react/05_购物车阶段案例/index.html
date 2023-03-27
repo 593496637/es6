@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.min.js"></script>
+  <script src="./data.js"></script>
+  <style>
+    /* 表格样式 */
+    table {
+      border-collapse: collapse;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    /* 单元格样式 */
+    thead {
+      background-color: #efefef;
+    }
+
+    tr {
+      height: 50px;
+    }
+    th{
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    td {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    /*  底部操作区域：包含全选按钮、删除按钮、总价样式*/
+    div {
+      margin-top: 10px;
+    }
+
+    .delete-btn {
+      margin: 0 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          books: books
+        }
+      }
+
+      render() {
+        const { books } = this.state
+        return (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>序号</th>
+                  <th>书名</th>
+                  <th>出版日期</th>
+                  <th>价格</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  books.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{item.id}</td>
+                        <td>{item.title}</td>
+                        <td>{item.year}</td>
+                        <td>{item.price}</td>
+                        <td><button>删除</button></td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+            {/*底部操作区域：包含全选按钮、删除按钮、总价*/}
+            <div>
+              <label>
+                <input type="checkbox" />
+                全选
+              </label>
+              <button className="delete-btn">删除</button>
+              <span>总价：0</span>
+            </div >
+          </div>
+        )
+      }
+    }
+
+    // 2.创建根容器,并渲染App组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!--
+ * @Author: 云清淡雅 593496637@qq.com
+ * @Date: 2023-03-27 14:33:35
+ * @LastEditors: 云清淡雅 593496637@qq.com
+ * @LastEditTime: 2023-03-27 14:40:10
+ * @FilePath: \react\03_JSX基本语法(二)\07_JSX条件渲染-案例.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          message: 'Hello World',
+          isShow: true
+        }
+      }
+
+      showHandle = () => {
+        this.setState({
+          isShow: !this.state.isShow
+        })
+      }
+
+
+      render() {
+        const { message, isShow } = this.state
+        // let element = null
+        // if (isShow) {
+        //   element = <h2>React</h2>
+        // } else {
+        //   element = <h2>Vue</h2>
+        // }
+        return (
+          <div>
+            <button onClick={this.showHandle}>切换</button>
+            {isShow && <h1>{message}</h1>}
+            {/* 元素显示隐藏：不删除元素 */}
+            <h1 style={{ display: isShow ? 'inherit' : 'none' }}>{message}</h1>
+          </div>
+        )
+      }
+    }
+
+    // 2.创建根容器,并渲染App组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+
+  </script>
+</body>
+
+</html>

@@ -1,9 +1,9 @@
 <!--
  * @Author: 云清淡雅 593496637@qq.com
- * @Date: 2023-03-24 16:56:46
+ * @Date: 2023-03-27 12:53:11
  * @LastEditors: 云清淡雅 593496637@qq.com
- * @LastEditTime: 2023-03-24 17:05:06
- * @FilePath: \react\02_JSX基本语法\02_JSX绑定属性.html
+ * @LastEditTime: 2023-03-27 13:52:43
+ * @FilePath: \react\03_JSX基本语法(二)\03_JSX事件绑定-案例.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <!DOCTYPE html>
@@ -18,12 +18,8 @@
   <script src="../lib/react-dom.js"></script>
   <script src="../lib/babel.min.js"></script>
   <style>
-    .image-100 {
-      width: 100%;
-    }
-
-    .image-80 {
-      width: 80%;
+    .active {
+      color: red;
     }
   </style>
 </head>
@@ -37,19 +33,31 @@
       constructor() {
         super()
         this.state = {
-          message: 'Hello World',
-          img: 'https://img.win3000.com/m00/57/ec/25b4a778dbe357556581b9fd74d1af40.jpg',
-          bigImg: true
+          movies: ['大话西游', '西游记', '三国演义', '水浒传'],
+          currentIndex: 0
         }
       }
 
+      // 点击事件
+      handleClick(index) {
+        this.setState({
+          currentIndex: index
+        })
+      }
+
       render() {
-        const { message, img, bigImg } = this.state
+        const { message, currentIndex } = this.state
+
+        const liELs = this.state.movies.map((item, index) => {
+          const active = currentIndex === index ? 'active' : ''
+          return <li key={index} className={active} onClick={() => { this.handleClick(index) }}>{item}</li>
+        })
+
         return (
           <div>
-            <h1>{message}</h1>
-            <a href="baidu.com" title={message}>百度</a>
-            <img src={img} className={`image ${bigImg?'image-100':'image-80'}`} />
+            <ul>
+              {liELs}
+            </ul>
           </div>
         )
       }

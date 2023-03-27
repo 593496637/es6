@@ -1,0 +1,75 @@
+<!--
+ * @Author: 云清淡雅 593496637@qq.com
+ * @Date: 2023-03-27 15:04:22
+ * @LastEditors: 云清淡雅 593496637@qq.com
+ * @LastEditTime: 2023-03-27 16:12:51
+ * @FilePath: \react\04_JSX本质和原理\01_JSX转换过程.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+      }
+
+      render() {
+        const element = React.createElement(
+          "div",
+          null,
+  /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "header"
+            },
+            "Header"
+          ),
+  /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "content"
+            },
+    /*#__PURE__*/ React.createElement("h2", null, "Banner"),
+    /*#__PURE__*/ React.createElement(
+              "ul",
+              null,
+      /*#__PURE__*/ React.createElement("li", null, "1"),
+      /*#__PURE__*/ React.createElement("li", null, "2"),
+      /*#__PURE__*/ React.createElement("li", null, "3")
+            )
+          ),
+  /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "footer"
+            },
+            "Footer"
+          )
+        )
+        return element
+      }
+    }
+
+    // 2.创建根容器,并渲染App组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(React.createElement(App, null))
+
+  </script>
+</body>
+
+</html>

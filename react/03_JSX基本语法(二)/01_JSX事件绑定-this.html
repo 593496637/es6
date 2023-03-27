@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    /*
+      this的四种绑定规则：
+        1.默认绑定：独立运行foo()
+        2.隐式绑定：被一个对象执行obj.foo()->obj
+        3.显示绑定：call/apply/bind/ foo.call('aaa')指向包装类型 String('aaa')
+        4.new绑定：new Foo() -> 创建一个新对象，并且赋值给this
+    */
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      // class field 类字段
+      name = "Tom"
+      constructor() {
+        super()
+        this.state = {
+          message: 'Hello World',
+          count: 0
+        }
+        this.decrement = this.decrement.bind(this)
+      }
+
+      // 事件处理函数
+      handleClick = () => {
+        console.log('点击了按钮')
+      }
+      // 计数器
+      increment() {
+        this.setState({
+          count: this.state.count + 1
+        })
+      }
+
+      // class field 类字段
+      decrement = () => {
+        this.setState({
+          count: this.state.count - 1
+        })
+      }
+
+      // 点击
+      handleClick2(param) {
+        console.log('点击了按钮', this, param)
+      }
+
+
+
+      render() {
+        const { message, count } = this.state
+        return (
+          <div>
+            <h1>{message}</h1>
+            <button onClick={this.handleClick.bind(this)}>点击</button>
+            <h1>{count}</h1>
+            <button onClick={this.increment.bind(this)}>增加</button>
+            <button onClick={this.decrement}>减少</button>
+            <button onClick={this.handleClick2}>点击</button>
+            <button onClick={() => { this.handleClick2(2) }}>点击</button>
+          </div>
+        )
+      }
+    }
+
+    // 2.创建根容器,并渲染App组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+
+  </script>
+</body>
+
+</html>
