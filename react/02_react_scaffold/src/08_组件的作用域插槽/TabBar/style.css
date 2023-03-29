@@ -1,0 +1,37 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+/* TabBar样式 */
+.tab-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* TabBar中的每一个tab */
+.tab-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 12px;
+  flex: 1;
+  height: 100%;
+}
+
+/* TabBar中的每一个tab的激活状态 */
+.tab-bar-item.active {
+  color: #fff;
+  background-color: #666;
+}
+
+

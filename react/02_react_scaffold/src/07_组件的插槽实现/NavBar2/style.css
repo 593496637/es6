@@ -1,0 +1,28 @@
+/* nav-bar */
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  height: 44px;
+  background-color: #108ee9;
+  color: #fff;
+  margin-top: 10px;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  width: 80px;
+  background-color: rebeccapurple;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  width: 80px;
+  background-color: rebeccapurple;
+}
+.nav-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  background-color: brown;
+}
