@@ -13,8 +13,10 @@ import ReactDOM from 'react-dom/client'
 // import App from './12_render函数的优化/App2'
 // import App from './13_数据不可变的力量/App'
 // import App from './14_ref获取DOM操作/01_ref获取类组件的实例'
-import App from './15_受控和非受控组件/App'
-
+// import App from './15_受控和非受控组件/App'
+// import App from './15_受控和非受控组件/02_自己提交的form表单'
+// import App from './16_React高阶组件/02_高阶组件应用_props增强'
+import App from './16_React高阶组件/App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(<App />)

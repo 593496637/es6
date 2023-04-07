@@ -19,10 +19,10 @@ export class App extends Component {
     return (
       <div>
         <h2>App</h2>
-        {/* 第二部：通过ThemeContext中的Provider中的value属性为后代提供数据 */}
+        {/* 第二步：通过ThemeContext中的Provider中的value属性为后代提供数据 */}
         <UserContext.Provider value={{ background: '#fff' }}>
           <ThemeContext.Provider value={{ color: 'red', fontSize: '20px' }}>
-            <Home {...info} />
+            <Home {...info} /> 
           </ThemeContext.Provider>
         </UserContext.Provider>
       </div>
