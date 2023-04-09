@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import withRenderTime from './hoc/with_render_time'
+import withRenderTime from './../hoc/with_render_time'
 
 export class Detail extends PureComponent {
   render() {

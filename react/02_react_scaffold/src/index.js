@@ -16,7 +16,11 @@ import ReactDOM from 'react-dom/client'
 // import App from './15_受控和非受控组件/App'
 // import App from './15_受控和非受控组件/02_自己提交的form表单'
 // import App from './16_React高阶组件/02_高阶组件应用_props增强'
-import App from './16_React高阶组件/App'
+// import App from './16_React高阶组件/05_高阶组件应用-生命周期'
+// import App from './17_React的Portal/App'
+// import App from './18_React的fragment/App'
+import App from './19_React的严格模式/App'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(<App />)
