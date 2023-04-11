@@ -1,17 +1,14 @@
 import React, { PureComponent } from "react";
-import { button } from "./style";
+import { AppWrapper, AppTitle } from "./style";
 
 export class App extends PureComponent {
   render() {
     return (
-      <div>
-        {/* 文章 */}
-        <article>
-          <h2>React CSS in JS</h2>
-          <p>React CSS in JS</p>
-          <button className={button}></button>
-        </article>
-      </div>
+      <AppWrapper>
+        <h1>React App</h1>
+        <AppTitle color='red'>hello</AppTitle>
+        <span className="app-logo"></span>
+      </AppWrapper>
     );
   }
 }

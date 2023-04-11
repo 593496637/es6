@@ -1,11 +1,29 @@
 import styled from 'styled-components';
 
-const Button = styled.button`
-  background-color: blue;
-  color: white;
-  font-size: 16px;
-  padding: 10px 20px;
-  border-radius: 5px;
+export const AppWrapper = styled.div`
+  text-align: center;
+  .app-logo {
+    animation: App-logo-spin infinite 2s linear;
+    width: 80px;
+    height: 80px;
+    background-color: red;
+    display: inline-block;
+  }
+
+  @keyframes App-logo-spin {
+    from { transform: rotate(0deg);}
+    to { transform: rotate(360deg);}
+  }
+
+  .app-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+  }
 `;
 
-export { Button };
+export const AppTitle = styled.h2`
+  font-size: 1.5em;
+  color: blue;
+`;
