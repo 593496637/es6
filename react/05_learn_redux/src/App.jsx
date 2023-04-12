@@ -24,7 +24,8 @@ export class App extends PureComponent {
     const { counter } = this.state;
     return (
       <div>
-        <h2>counter:{counter}</h2>
+        <h2>app</h2>
+        <h4>counter:{counter}</h4>
         <Home></Home>
         <Profile></Profile>
       </div>
