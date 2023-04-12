@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
 import { AppWrapper, AppTitle } from "./style";
+import Home from "./home";
 
 export class App extends PureComponent {
   render() {
     return (
-      <AppWrapper>
+      <AppWrapper primaryColor="green">
         <h1>React App</h1>
-        <AppTitle color='red'>hello</AppTitle>
+        <AppTitle>hello</AppTitle>
         <span className="app-logo"></span>
+        <Home />
       </AppWrapper>
     );
   }

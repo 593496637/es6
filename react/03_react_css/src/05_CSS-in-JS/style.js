@@ -1,12 +1,21 @@
 import styled from 'styled-components';
+import { primaryColor, secondaryColor, tertiaryColor, largeFontSize } from './style/variables'
 
-export const AppWrapper = styled.div`
+// 语法：styled.标签名`样式`，标签名可以是任意的html标签
+export const AppWrapper = styled.div.attrs(
+  props => ({
+    // 设置默认值:没有默认值，使用传进来的参数
+    primaryColor: props.primaryColor || '#61dafb',
+    width: props.fontSize || '50px',
+    height: props.fontSize || '50px',
+  })
+)`
   text-align: center;
   .app-logo {
     animation: App-logo-spin infinite 2s linear;
-    width: 80px;
-    height: 80px;
-    background-color: red;
+    width: ${props => props.width};
+    height: ${props => props.height};
+    background-color: ${props => props.primaryColor};
     display: inline-block;
   }
 
@@ -24,6 +33,11 @@ export const AppWrapper = styled.div`
 `;
 
 export const AppTitle = styled.h2`
-  font-size: 1.5em;
-  color: blue;
+  font-size: ${largeFontSize};
+  /* 设置默认值:没有默认值，使用传进来的参数 */
+  color: ${props => props.color ? props.color : primaryColor}; 
+  &:hover {
+    color: ${secondaryColor};
+    background-color: ${tertiaryColor};
+  }
 `;
