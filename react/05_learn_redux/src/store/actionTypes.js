@@ -1,2 +1,4 @@
 export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
+export const GET_BANNER_LIST = 'GET_BANNER_LIST'
+export const GET_RECOMMEND_LIST = 'GET_RECOMMEND_LIST'
