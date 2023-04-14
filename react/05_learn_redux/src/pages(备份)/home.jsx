@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import store from '../store'
-import { increment, decrement } from '../store/counter';
+import { increment, decrement } from '../store/actionCreators';
 import '../style.css'
 
 
@@ -8,13 +8,13 @@ export class home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      counter: store.getState().counter.counter,
+      counter: store.getState().counter,
     };
   }
 
   componentDidMount() {
     store.subscribe(() => {
-      const state = store.getState().counter;
+      const state = store.getState();
       this.setState({
         counter: state.counter,
       });

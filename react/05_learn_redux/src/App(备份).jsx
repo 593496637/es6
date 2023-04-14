@@ -10,7 +10,7 @@ export class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      counter: store.getState().counter.counter,
+      counter: store.getState().counter,
     };
   }
 
@@ -18,7 +18,7 @@ export class App extends PureComponent {
     store.subscribe(() => {
       const state = store.getState();
       this.setState({
-        counter: state.counter.counter,
+        counter: state.counter,
       });
     });
   }

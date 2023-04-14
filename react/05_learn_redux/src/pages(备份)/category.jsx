@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { getBannerListAsync } from "../store/home";
+import { getBannerListAsync } from "../store/actionCreators";
 
 export class category extends PureComponent {
   componentDidMount() {
@@ -18,7 +18,7 @@ export class category extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  counter: state.counter.counter,
+  counter: state.counter,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { increment, decrement } from "../store/counter";
+import { increment, decrement } from "../store/actionCreators";
 import "../style.css";
 
 export class About extends PureComponent {
@@ -42,9 +42,9 @@ export class About extends PureComponent {
 // mapStateToProps是一个函数，它的作用是将redux中的数据映射到组件的props中
 const mapStateToProps = (state) => {
   return {
-    counter: state.counter.counter,
-    bannerList: state.home.bannerList,
-    recommendList: state.home.recommendList,
+    counter: state.counter,
+    bannerList: state.bannerList,
+    recommendList: state.recommendList,
   };
 };
 
