@@ -1,0 +1,11 @@
+.pages {
+  display: flex;
+  flex-direction: column;
+}
+
+.pages > div {
+  flex: 1;
+  border: 1px solid rgb(190, 143, 143);
+  padding: 10px;
+  margin-top: 20px;
+}
