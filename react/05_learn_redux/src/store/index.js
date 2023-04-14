@@ -14,6 +14,16 @@ const reducer = combineReducers({
   home: homeReducer
 })
 
+
+// combineReducers原理：本质上是一个函数，接收一个对象作为参数，返回一个函数，这个函数接收一个state和一个action作为参数，返回一个新的state
+// const reducer = (state = {}, action) => {
+//   return {
+//     counter: counterReducer(state.counter, action),
+//     home: homeReducer(state.home, action)
+//   }
+// }
+
+
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 export default store;
