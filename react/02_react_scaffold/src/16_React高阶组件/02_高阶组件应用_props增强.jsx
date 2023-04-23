@@ -1,7 +1,9 @@
-import React, { PureComponent } from "react";
-import enhancedProps from "./hoc/enhanced_props";
-import About from "./pages/About";
+import React, { PureComponent } from 'react';
+import enhancedProps from './hoc/enhanced_props';
+// 类组件：About
+import About from './pages/About';
 
+// 函数式组件：Home、Profile
 const Home = enhancedProps((props) => {
   console.log(props);
   return (
