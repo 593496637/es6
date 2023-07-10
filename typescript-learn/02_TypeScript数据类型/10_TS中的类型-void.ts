@@ -19,12 +19,26 @@ function parseLyric(lyric: string): LyricInfo[] {
   return lyricArr;
 }
 
-
-
 // 函数类型
 type FnType = () => void;
 const foo: FnType = () => {
   console.log('foo');
 };
+
+// 举例：涉及到函数的类型问题，后面还会细讲
+// 1.定义要求传入的函数的类型
+type FnType2 = (...args: any[]) => void;
+
+// 2.定义一个函数，要求传入的参数是一个函数
+function foo2(fn: FnType2) {
+  setTimeout(() => {
+    fn('he', 20);
+  }, 1000);
+}
+
+// 3.调用foo2函数，传入一个函数
+foo2((name, age) => {
+  console.log(name, age);
+});
 
 export {};
