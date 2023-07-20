@@ -8,6 +8,7 @@ class Person {
 }
 
 const person = new Person('jack', 18);
+console.log(person.name);
 // 无法为“name”赋值，因为它是只读属性
 // person.name = 'rose';
 
