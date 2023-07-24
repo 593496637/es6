@@ -1,33 +1,33 @@
 // 枚举类型
 enum Direction {
-  Up,
-  Down,
-  Left,
-  Right,
+  UP,
+  DOWN,
+  LEFT,
+  RIGHT,
 }
 
-const d1: Direction = Direction.Up;
+const d1: Direction = Direction.UP;
 console.log(typeof d1, d1); // number 0
 
 
 // 监听键盘事件
 function turnDirection(direction: Direction) {
   switch (direction) {
-    case Direction.Up:
+    case Direction.UP:
       console.log('向上');
       break;
-    case Direction.Down:
+    case Direction.DOWN:
       console.log('向下');
       break;
-    case Direction.Left:
+    case Direction.LEFT:
       console.log('向左');
       break;
-    case Direction.Right:
+    case Direction.RIGHT:
       console.log('向右');
       break;
-    default:
-      const foo: never = direction;
   }
 }
 
-turnDirection(Direction.Up);
+turnDirection(Direction.UP);
+
+export {};
