@@ -23,3 +23,5 @@ getName(new Person('小明'));
 getName(new Student('小红'));
 
 const person: Person = new Student('小红');
+
+export {}
