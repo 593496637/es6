@@ -55,7 +55,7 @@ old/
 *-notrack/
 no-track/
 build/
-build/
+dist/
 combo/
 reference/
 jscoverage_lib/
