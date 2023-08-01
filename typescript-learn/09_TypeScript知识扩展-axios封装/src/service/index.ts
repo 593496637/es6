@@ -1,7 +1,8 @@
+import { BASE_URL, TIME_OUT } from './config';
 import Request from './request';
 const request = new Request({
-  baseURL: 'https://httpbin.org',
-  timeout: 5000,
+	baseURL: BASE_URL,
+	timeout: TIME_OUT,
 });
 
 export default request;
