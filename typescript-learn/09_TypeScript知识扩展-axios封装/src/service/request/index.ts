@@ -1,19 +1,16 @@
+// 目前使用的是1.2.0版本，如果使用最新的1.4.0，则类型AxiosRequestConfig会提示错误
+
 import axios from 'axios';
-import type { AxiosInstance, AxiosRequestConfig } from 'axios';
-
-
-// 针对AxiosRequestConfig接口进行扩展
-interface RequestConfig extends AxiosRequestConfig {
-  interceptors?: Interceptors;
-} 
-
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { RequestConfig } from './type';
 
 class Request {
   instance: AxiosInstance;
   // request示例=》axios实例
-  constructor(config: AxiosRequestConfig) {
+  constructor(config: RequestConfig) {
     this.instance = axios.create(config);
-
+    
+    // 全局拦截器
     // 请求拦截器
     this.instance.interceptors.request.use(
       (config) => {
@@ -40,9 +37,20 @@ class Request {
         return err;
       }
     );
+      
+    
+    // 局部拦截器
+    this.instance.interceptors.request.use(
+      config.interceptors?.requestInterceptor,
+      config.interceptors?.requestInterceptorCatch
+    );
+    this.instance.interceptors.response.use(
+      config.interceptors?.responseInterceptor,
+      config.interceptors?.responseInterceptorCatch
+    );
   }
 
-  request(config: AxiosRequestConfig) {
+  request(config: RequestConfig) {
     return this.instance.request(config);
   }
 
