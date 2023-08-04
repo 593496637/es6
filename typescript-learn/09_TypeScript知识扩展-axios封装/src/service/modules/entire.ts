@@ -1,18 +1,21 @@
 import { request2 } from "..";
 
-request2
-  .request({
-    url: "/entire/list",
-    method: "GET",
-    params: {
-      offset: 0,
-      size: 4,
-    },
-  })
-  .then((res) => {
-    console.log(res.data);
-  });
+// 包含：全局拦截器、局部拦截器
+// request2
+//   .request({
+//     url: "/entire/list",
+//     method: "GET",
+//     params: {
+//       offset: 0,
+//       size: 4,
+//     },
+//   })
+//   .then((res) => {
+//     console.log(res);
+//   });
 
+
+// 包含：全局拦截器、局部拦截器、精细化拦截器
 request2
   .request({
     url: "/home/highscore",
@@ -28,5 +31,5 @@ request2
     },
   })
   .then((res) => {
-    console.log(res.data);
+    console.log(res);
   });
