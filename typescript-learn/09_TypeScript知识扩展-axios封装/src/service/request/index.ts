@@ -1,6 +1,5 @@
 // 目前使用的是1.2.0版本，如果使用最新的1.4.0，则类型AxiosRequestConfig会提示错误
 
-
 /**
  * 
   config: 每次请求的配置
@@ -10,9 +9,8 @@
   resolve: 返回修改后的res
  */
 
-
 import axios from "axios";
-import type { AxiosInstance } from "axios";
+import type { AxiosInstance, AxiosResponse } from "axios";
 import type { RequestConfig } from "./type";
 
 class Request {
@@ -60,16 +58,16 @@ class Request {
     );
   }
 
-  request(config: RequestConfig) {
+  request<T>(config: RequestConfig<T>) {
     // 精细化拦截器
     // 请求拦截器
     if (config.interceptors?.requestInterceptor) {
       config = config.interceptors.requestInterceptor(config);
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise<T>((resolve, reject) => {
       this.instance
-        .request(config)
+        .request<any, T>(config)
         .then((res) => {
           // 响应拦截器
           if (config.interceptors?.responseInterceptor) {
@@ -84,9 +82,21 @@ class Request {
     });
   }
 
-  get() {}
+  get<T = any>(config: RequestConfig<T>) {
+    return this.request<T>({ ...config, method: "GET" });
+  }
 
-  post() {}
+  post<T = any>(config: RequestConfig<T>) {
+    return this.request<T>({ ...config, method: "POST" });
+  }
+
+  delete<T = any>(config: RequestConfig<T>) {
+    return this.request<T>({ ...config, method: "DELETE" });
+  }
+
+  patch<T = any>(config: RequestConfig<T>) {
+    return this.request<T>({ ...config, method: "PATCH" });
+  }
 }
 
 export default Request;

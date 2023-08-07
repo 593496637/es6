@@ -1,13 +1,13 @@
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from "axios";
 
 // 针对AxiosRequestConfig接口进行扩展
-export interface Interceptors {
+export interface Interceptors<T = AxiosResponse> {
   requestInterceptor?: (config: AxiosRequestConfig) => AxiosRequestConfig;
   requestInterceptorCatch?: (error: any) => any;
-  responseInterceptor?: (config: AxiosResponse) => AxiosResponse;
+  responseInterceptor?: (res: T) => T;
   responseInterceptorCatch?: (error: any) => any;
 }
 
-export interface RequestConfig extends AxiosRequestConfig {
-  interceptors?: Interceptors;
+export interface RequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
+  interceptors?: Interceptors<T>;
 }
