@@ -3,14 +3,12 @@ interface IPerson {
   age?: number;
 }
 
-// IPerson变成必选的
-type IPersonReadonly = Readonly<IPerson>;
+// Record: 构造一个类型，其属性名的类型为 K，属性值的类型为 T
+// Record的内部定义，接收两个泛型参数；Record后面的泛型就是对象键和值的类型
+// 作用 :义一个对象的 key 和 value 类型
 
-// 类型体操：实现Required
-type MYReadonly<T> = {
-  readonly [P in keyof T]: T[P];
-};
 
-type IPersonRequired2 = MYReadonly<IPerson>;
+
+
 
 export {};
