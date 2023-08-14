@@ -1,4 +1,4 @@
-import request from "..";
+import request from '..';
 
 interface IHomeData {
   data: any;
@@ -9,8 +9,8 @@ interface IHomeData {
 // 包含：全局拦截器
 request
   .request<IHomeData>({
-    url: "/home/multidata",
-    method: "GET",
+    url: '/home/multidata',
+    method: 'GET',
   })
   .then((res) => {
     console.log(res);

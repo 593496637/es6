@@ -1,47 +1,23 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    app
+    <router-link to="/login">登录</router-link>
+    <router-link to="/main">首页</router-link>
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script setup lang="ts">
+interface IPerson {
+  name: string
+  age: number
+}
+const person: IPerson = {
+  name: 'jack',
+  age: 18
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+const { name, age } = person
+console.log(name, age)
+</script>
+<style scoped></style>
