@@ -1,21 +1,12 @@
 <template>
   <div class="login">
-    <h2>login</h2>
-    <el-row class="mb-4">
-      <el-button>Default</el-button>
-      <el-button type="primary">Primary</el-button>
-      <el-button type="success">Success</el-button>
-      <el-button type="info">Info</el-button>
-      <el-button type="warning">Warning</el-button>
-      <el-button type="danger">Danger</el-button>
-      <el-button type="danger">Danger</el-button>
-    </el-row>
+    <login-panel />
   </div>
 </template>
 
 <script setup lang="ts">
 import request from '@/service'
-
+import LoginPanel from './components/LoginPanel.vue'
 request
   .get({
     url: '/home/multidata'
@@ -27,8 +18,15 @@ request
 console.log(import.meta.env)
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .login {
-  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: url('@/assets/images/login-bg.svg');
 }
 </style>
