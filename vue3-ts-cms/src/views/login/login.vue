@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import request from '@/service'
+import { request2 } from '@/service'
 import LoginPanel from './components/LoginPanel.vue'
-request
+request2
   .get({
     url: '/home/multidata'
   })

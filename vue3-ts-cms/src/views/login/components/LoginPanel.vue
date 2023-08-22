@@ -11,7 +11,7 @@
           <template #label>
             <div class="label">
               <el-icon><UserFilled /></el-icon>
-              <span class="text">帐号登录</span>
+              <span class="text">账号登录</span>
             </div>
           </template>
           <panel-account ref="accountRef" />
@@ -48,6 +48,13 @@ import { ref } from 'vue'
 
 let activeName = ref('account')
 let isRemPwd = ref(false)
+const accountRef = ref<InstanceType<typeof PanelAccount>>()
+
+const handleLoginBtnClick = function () {
+  if (activeName.value === 'account') {
+    accountRef.value?.loginAction()
+  }
+}
 </script>
 
 <style lang="less" scoped>

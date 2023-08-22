@@ -5,8 +5,9 @@ const request = new Request({
   timeout: TIME_OUT
 })
 
+// http://www.codercba.com:1888/airbnb/api
 export const request2 = new Request({
-  baseURL: 'http://www.codercba.com:1888/airbnb/api',
+  baseURL: import.meta.env.VITE_URL2,
   timeout: 8000,
 
   // 请求拦截器
