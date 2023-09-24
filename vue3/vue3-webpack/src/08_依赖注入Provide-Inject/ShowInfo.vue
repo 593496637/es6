@@ -15,6 +15,9 @@ export default {
   setup() {
     const name = inject('name');
     const age = inject('age');
+    
+    console.log(name.value, age.value);
+
     // 没有height的时候，可以给个默认值
     const height = inject('height', 170);
 
