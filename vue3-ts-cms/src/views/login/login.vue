@@ -1,13 +1,13 @@
 <template>
   <div class="login">
-    <h2>login</h2>
+    <login-panel />
   </div>
 </template>
 
 <script setup lang="ts">
-import request from '@/service'
-
-request
+import { request2 } from '@/service'
+import LoginPanel from './components/LoginPanel.vue'
+request2
   .get({
     url: '/home/multidata'
   })
@@ -18,8 +18,15 @@ request
 console.log(import.meta.env)
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .login {
-  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: url('@/assets/images/login-bg.svg');
 }
 </style>

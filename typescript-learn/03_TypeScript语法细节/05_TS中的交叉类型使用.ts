@@ -20,4 +20,12 @@ const person: IPerson = {
   age: 18,
 };
 
+// 写一个工具函数，用来转换true和false
+const toBoolean = (value: number | boolean): boolean => {
+  return !!value;
+};
+const result = toBoolean(1);
+const result2 = toBoolean(true);
+console.log(result, result2);
+
 export {};

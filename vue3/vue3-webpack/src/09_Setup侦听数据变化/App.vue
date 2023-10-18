@@ -21,14 +21,18 @@ export default {
       console.log(newValue, oldValue);
     });
 
+    // 修改message
+    message.value = 'hello vue3';
+
     const counter = ref(0);
     const name = ref('安安');
 
+    // watchEffect：依赖变化时，自动执行回调函数
     // 1.默认执行一次
     // 2.在执行过程中自动收集依赖(依赖哪些响应式依赖)
     const stopWatch = watchEffect(() => {
       console.log(counter.value, name.value);
-      
+
       // 判断counter.value>=10 停止监听
       if (counter.value >= 10) {
         stopWatch();

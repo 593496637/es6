@@ -30,7 +30,9 @@ export default {
 
     // unref:当不确定别人传给我们的值是否是ref值的时候，可以用unref来获取这个值的value
     const rValue = ref('hi');
+    // unref作用：如果是ref值，就获取value，如果不是ref值，就返回原值
     console.log(unref(rValue));
+    console.log(unref(height));
 
     return {
       info,
