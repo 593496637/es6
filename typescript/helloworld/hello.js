@@ -6,10 +6,6 @@ function sayHello(person) {
         throw new Error('person is not a string');
     }
 }
-var a;
-(function (a) {
-    a[a["b"] = 1] = "b";
-})(a || (a = {}));
 ;
-var user = 'Tom';
+const user = 'Tom';
 console.log(sayHello(user));
