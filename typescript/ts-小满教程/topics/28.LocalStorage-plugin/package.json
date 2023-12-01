@@ -1,0 +1,22 @@
+{
+  "name": "local_storage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "browser": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rollup": "^4.6.1",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.3.2"
+  }
+}
