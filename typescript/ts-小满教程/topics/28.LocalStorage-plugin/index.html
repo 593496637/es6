@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+
+    <!-- 测试用例 -->
+    <script type="module">
+      import { Storage } from './dist/index.js';
+      const ls = new Storage();
+      const date = new Date().getTime() + 5000;
+      ls.set('a', 11, date);
+
+      setInterval(() => {
+        console.log(ls.get('a'));
+      }, 500);
+    </script>
+  </head>
+  <body></body>
 </html>

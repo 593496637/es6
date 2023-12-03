@@ -1,10 +1,14 @@
 // 打包localstorage插件
 import typescript from 'rollup-plugin-typescript2';
+import path from 'path'
+import { fileURLToPath } from 'url';
+const metaUrl = fileURLToPath(import.meta.url)
+const dirName = path.dirname(metaUrl)
 
 export default {
   input: 'src/index.ts',
   output: {
-    file: 'dist/localstorage.js',
+    file: path.resolve(dirName, './dist/index.js'),
   },
 
   plugins: [typescript()],
