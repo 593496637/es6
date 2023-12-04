@@ -18,5 +18,6 @@
   },
   "cssrem.vw": true,
   "cssrem.rootFontSize": 37.5,
-  "cssrem.vwDesign": 375
+  "cssrem.vwDesign": 375,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
