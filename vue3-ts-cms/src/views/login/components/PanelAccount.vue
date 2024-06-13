@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage } from 'element-plus'
 import type { FormRules, ElForm } from 'element-plus'
 import { ref, reactive } from 'vue'
 import { login } from '@/service/login'

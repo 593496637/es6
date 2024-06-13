@@ -3,7 +3,8 @@
   "cSpell.words": [
     "importmap",
     "memfs",
-    "mochawesome"
+    "mochawesome",
+    "unplugin"
   ],
   "editor.formatOnPaste": false,
   "editor.formatOnType": false,
