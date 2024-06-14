@@ -21,13 +21,13 @@
 <script setup lang="ts">
 import type { FormRules, ElForm } from 'element-plus'
 import { ref, reactive } from 'vue'
-import { login } from '@/service/login'
-// import { userLoginStore } from '@/store/login'
+import type { IAccount } from '@/types'
+import userLoginStore from '@/store/login'
 
 // 定义账号的数据
-let account = reactive({
-  name: '',
-  password: ''
+let account = reactive<IAccount>({
+  name: 'coderwhy',
+  password: '123456'
 })
 const accountRules: FormRules = {
   name: [
@@ -49,6 +49,7 @@ const accountRules: FormRules = {
 }
 
 // 执行账号的登录逻辑
+const loginStore = userLoginStore()
 const formRef = ref<InstanceType<typeof ElForm>>()
 function loginAction() {
   formRef.value?.validate((valid) => {
@@ -56,12 +57,7 @@ function loginAction() {
       // 获取用户输入的账号和密码
       const { name, password } = account
       // 发送登录请求
-      login({
-        name,
-        password
-      }).then((result) => {
-        console.log(result)
-      })
+      loginStore.loginAction({ name, password })
     } else {
       console.log('失败')
       ElMessage('啊啊啊摔')

@@ -4,6 +4,8 @@
     "importmap",
     "memfs",
     "mochawesome",
+    "multidata",
+    "pinia",
     "unplugin"
   ],
   "editor.formatOnPaste": false,
