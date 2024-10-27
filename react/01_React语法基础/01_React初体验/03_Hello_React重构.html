@@ -28,6 +28,9 @@
 
 
       handleClick() {
+        // setState内部做了两件事：
+        // 1. 修改state
+        // 2. 调用render方法
         this.setState({
           message: 'Hello React'
         })
