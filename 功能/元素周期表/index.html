@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>带颜色分类的元素周期表（修复版）</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 5px;
+            text-align: center;
+            width: 50px;
+            height: 50px;
+        }
+        .element {
+            transition: opacity 0.3s;
+        }
+        .element:hover {
+            opacity: 0.8;
+        }
+        .number {
+            font-size: 10px;
+            color: #333;
+        }
+        .symbol {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .name {
+            font-size: 10px;
+        }
+        .empty {
+            background-color: #fff;
+            border: none;
+        }
+        /* 元素分类颜色 */
+        .alkali-metal { background-color: #ff9999; }        /* 碱金属 - 浅红 */
+        .alkaline-earth { background-color: #ffcc99; }     /* 碱土金属 - 浅橙 */
+        .transition-metal { background-color: #99ccff; }   /* 过渡金属 - 浅蓝 */
+        .lanthanide { background-color: #ccffcc; }         /* 镧系 - 浅绿 */
+        .actinide { background-color: #ccff99; }           /* 锕系 - 浅黄绿 */
+        .post-transition { background-color: #ccccff; }    /* 后过渡金属 - 浅紫 */
+        .metalloid { background-color: #99ffcc; }          /* 类金属 - 青绿 */
+        .nonmetal { background-color: #ffff99; }           /* 非金属 - 浅黄 */
+        .halogen { background-color: #ff99cc; }            /* 卤素 - 浅粉 */
+        .noble-gas { background-color: #99ffff; }          /* 惰性气体 - 浅青 */
+        
+        /* 添加新的样式 */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 10px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .highlight {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .fade {
+            opacity: 0.3;
+        }
+        
+        .search-container {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 300px;
+        }
+        
+        #elementSearch {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 添加搜索框 -->
+    <div class="search-container">
+        <input type="text" id="elementSearch" placeholder="搜索元素（中文名/符号/编号）">
+    </div>
+    
+    <!-- 添加图例 -->
+    <div class="legend">
+        <div class="legend-item" data-type="alkali-metal">
+            <div class="legend-color alkali-metal"></div>
+            <span>碱金属</span>
+        </div>
+        <div class="legend-item" data-type="alkaline-earth">
+            <div class="legend-color alkaline-earth"></div>
+            <span>碱土金属</span>
+        </div>
+        <!-- ... 其他图例项 ... -->
+    </div>
+    
+    <table>
+        <!-- 第一周期 -->
+        <tr>
+            <td class="element nonmetal">
+                <div class="number">1</div>
+                <div class="symbol">H</div>
+                <div class="name">氢</div>
+            </td>
+            <td class="empty" colspan="16"></td>
+            <td class="element noble-gas">
+                <div class="number">2</div>
+                <div class="symbol">He</div>
+                <div class="name">氦</div>
+            </td>
+        </tr>
+        <!-- 第二周期 -->
+        <tr>
+            <td class="element alkali-metal">
+                <div class="number">3</div>
+                <div class="symbol">Li</div>
+                <div class="name">锂</div>
+            </td>
+            <td class="element alkaline-earth">
+                <div class="number">4</div>
+                <div class="symbol">Be</div>
+                <div class="name">铍</div>
+            </td>
+            <td class="empty" colspan="10"></td>
+            <td class="element metalloid">
+                <div class="number">5</div>
+                <div class="symbol">B</div>
+                <div class="name">硼</div>
+            </td>
+            <td class="element nonmetal">
+                <div class="number">6</div>
+                <div class="symbol">C</div>
+                <div class="name">碳</div>
+            </td>
+            <td class="element nonmetal">
+                <div class="number">7</div>
+                <div class="symbol">N</div>
+                <div class="name">氮</div>
+            </td>
+            <td class="element nonmetal">
+                <div class="number">8</div>
+                <div class="symbol">O</div>
+                <div class="name">氧</div>
+            </td>
+            <td class="element halogen">
+                <div class="number">9</div>
+                <div class="symbol">F</div>
+                <div class="name">氟</div>
+            </td>
+            <td class="element noble-gas">
+                <div class="number">10</div>
+                <div class="symbol">Ne</div>
+                <div class="name">氖</div>
+            </td>
+        </tr>
+        <!-- 第三周期 -->
+        <tr>
+            <td class="element alkali-metal">
+                <div class="number">11</div>
+                <div class="symbol">Na</div>
+                <div class="name">钠</div>
+            </td>
+            <td class="element alkaline-earth">
+                <div class="number">12</div>
+                <div class="symbol">Mg</div>
+                <div class="name">镁</div>
+            </td>
+            <td class="empty" colspan="10"></td>
+            <td class="element post-transition">
+                <div class="number">13</div>
+                <div class="symbol">Al</div>
+                <div class="name">铝</div>
+            </td>
+            <td class="element metalloid">
+                <div class="number">14</div>
+                <div class="symbol">Si</div>
+                <div class="name">硅</div>
+            </td>
+            <td class="element nonmetal">
+                <div class="number">15</div>
+                <div class="symbol">P</div>
+                <div class="name">磷</div>
+            </td>
+            <td class="element nonmetal">
+                <div class="number">16</div>
+                <div class="symbol">S</div>
+                <div class="name">硫</div>
+            </td>
+            <td class="element halogen">
+                <div class="number">17</div>
+                <div class="symbol">Cl</div>
+                <div class="name">氯</div>
+            </td>
+            <td class="element noble-gas">
+                <div class="number">18</div>
+                <div class="symbol">Ar</div>
+                <div class="name">氩</div>
+            </td>
+        </tr>
+        <!-- 第四周期 -->
+        <tr>
+            <td class="element alkali-metal">
+                <div class="number">19</div>
+                <div class="symbol">K</div>
+                <div class="name">钾</div>
+            </td>
+            <td class="element alkaline-earth">
+                <div class="number">20</div>
+                <div class="symbol">Ca</div>
+                <div class="name">钙</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">21</div>
+                <div class="symbol">Sc</div>
+                <div class="name">钪</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">22</div>
+                <div class="symbol">Ti</div>
+                <div class="name">钛</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">23</div>
+                <div class="symbol">V</div>
+                <div class="name">钒</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">24</div>
+                <div class="symbol">Cr</div>
+                <div class="name">铬</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">25</div>
+                <div class="symbol">Mn</div>
+                <div class="name">锰</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">26</div>
+                <div class="symbol">Fe</div>
+                <div class="name">铁</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">27</div>
+                <div class="symbol">Co</div>
+                <div class="name">钴</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">28</div>
+                <div class="symbol">Ni</div>
+                <div class="name">镍</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">29</div>
+                <div class="symbol">Cu</div>
+                <div class="name">铜</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">30</div>
+                <div class="symbol">Zn</div>
+                <div class="name">锌</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">31</div>
+                <div class="symbol">Ga</div>
+                <div class="name">镓</div>
+            </td>
+            <td class="element metalloid">
+                <div class="number">32</div>
+                <div class="symbol">Ge</div>
+                <div class="name">锗</div>
+            </td>
+            <td class="element metalloid">
+                <div class="number">33</div>
+                <div class="symbol">As</div>
+                <div class="name">砷</div>
+            </td>
+            <td class="element nonmetal">
+                <div class="number">34</div>
+                <div class="symbol">Se</div>
+                <div class="name">硒</div>
+            </td>
+            <td class="element halogen">
+                <div class="number">35</div>
+                <div class="symbol">Br</div>
+                <div class="name">溴</div>
+            </td>
+            <td class="element noble-gas">
+                <div class="number">36</div>
+                <div class="symbol">Kr</div>
+                <div class="name">氪</div>
+            </td>
+        </tr>
+        <!-- 第五周期 -->
+        <tr>
+            <td class="element alkali-metal">
+                <div class="number">37</div>
+                <div class="symbol">Rb</div>
+                <div class="name">铷</div>
+            </td>
+            <td class="element alkaline-earth">
+                <div class="number">38</div>
+                <div class="symbol">Sr</div>
+                <div class="name">锶</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">39</div>
+                <div class="symbol">Y</div>
+                <div class="name">钇</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">40</div>
+                <div class="symbol">Zr</div>
+                <div class="name">锆</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">41</div>
+                <div class="symbol">Nb</div>
+                <div class="name">铌</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">42</div>
+                <div class="symbol">Mo</div>
+                <div class="name">钼</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">43</div>
+                <div class="symbol">Tc</div>
+                <div class="name">锝</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">44</div>
+                <div class="symbol">Ru</div>
+                <div class="name">钌</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">45</div>
+                <div class="symbol">Rh</div>
+                <div class="name">铑</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">46</div>
+                <div class="symbol">Pd</div>
+                <div class="name">钯</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">47</div>
+                <div class="symbol">Ag</div>
+                <div class="name">银</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">48</div>
+                <div class="symbol">Cd</div>
+                <div class="name">镉</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">49</div>
+                <div class="symbol">In</div>
+                <div class="name">铟</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">50</div>
+                <div class="symbol">Sn</div>
+                <div class="name">锡</div>
+            </td>
+            <td class="element metalloid">
+                <div class="number">51</div>
+                <div class="symbol">Sb</div>
+                <div class="name">锑</div>
+            </td>
+            <td class="element metalloid">
+                <div class="number">52</div>
+                <div class="symbol">Te</div>
+                <div class="name">碲</div>
+            </td>
+            <td class="element halogen">
+                <div class="number">53</div>
+                <div class="symbol">I</div>
+                <div class="name">碘</div>
+            </td>
+            <td class="element noble-gas">
+                <div class="number">54</div>
+                <div class="symbol">Xe</div>
+                <div class="name">氙</div>
+            </td>
+        </tr>
+        <!-- 第六周期 -->
+        <tr>
+            <td class="element alkali-metal">
+                <div class="number">55</div>
+                <div class="symbol">Cs</div>
+                <div class="name">铯</div>
+            </td>
+            <td class="element alkaline-earth">
+                <div class="number">56</div>
+                <div class="symbol">Ba</div>
+                <div class="name">钡</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">57</div>
+                <div class="symbol">La</div>
+                <div class="name">镧</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">72</div>
+                <div class="symbol">Hf</div>
+                <div class="name">铪</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">73</div>
+                <div class="symbol">Ta</div>
+                <div class="name">钽</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">74</div>
+                <div class="symbol">W</div>
+                <div class="name">钨</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">75</div>
+                <div class="symbol">Re</div>
+                <div class="name">铼</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">76</div>
+                <div class="symbol">Os</div>
+                <div class="name">锇</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">77</div>
+                <div class="symbol">Ir</div>
+                <div class="name">铱</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">78</div>
+                <div class="symbol">Pt</div>
+                <div class="name">铂</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">79</div>
+                <div class="symbol">Au</div>
+                <div class="name">金</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">80</div>
+                <div class="symbol">Hg</div>
+                <div class="name">汞</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">81</div>
+                <div class="symbol">Tl</div>
+                <div class="name">铊</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">82</div>
+                <div class="symbol">Pb</div>
+                <div class="name">铅</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">83</div>
+                <div class="symbol">Bi</div>
+                <div class="name">铋</div>
+            </td>
+            <td class="element metalloid">
+                <div class="number">84</div>
+                <div class="symbol">Po</div>
+                <div class="name">钋</div>
+            </td>
+            <td class="element halogen">
+                <div class="number">85</div>
+                <div class="symbol">At</div>
+                <div class="name">砹</div>
+            </td>
+            <td class="element noble-gas">
+                <div class="number">86</div>
+                <div class="symbol">Rn</div>
+                <div class="name">氡</div>
+            </td>
+        </tr>
+        <!-- 第七周期 -->
+        <tr>
+            <td class="element alkali-metal">
+                <div class="number">87</div>
+                <div class="symbol">Fr</div>
+                <div class="name">钫</div>
+            </td>
+            <td class="element alkaline-earth">
+                <div class="number">88</div>
+                <div class="symbol">Ra</div>
+                <div class="name">镭</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">89</div>
+                <div class="symbol">Ac</div>
+                <div class="name">锕</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">104</div>
+                <div class="symbol">Rf</div>
+                <div class="name">𬬻</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">105</div>
+                <div class="symbol">Db</div>
+                <div class="name">𬭊</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">106</div>
+                <div class="symbol">Sg</div>
+                <div class="name">𬭳</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">107</div>
+                <div class="symbol">Bh</div>
+                <div class="name">𬭛</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">108</div>
+                <div class="symbol">Hs</div>
+                <div class="name">𬭶</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">109</div>
+                <div class="symbol">Mt</div>
+                <div class="name">䥑</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">110</div>
+                <div class="symbol">Ds</div>
+                <div class="name">𫟼</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">111</div>
+                <div class="symbol">Rg</div>
+                <div class="name">𬬭</div>
+            </td>
+            <td class="element transition-metal">
+                <div class="number">112</div>
+                <div class="symbol">Cn</div>
+                <div class="name">鿔</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">113</div>
+                <div class="symbol">Nh</div>
+                <div class="name">鿭</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">114</div>
+                <div class="symbol">Fl</div>
+                <div class="name">𫟷</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">115</div>
+                <div class="symbol">Mc</div>
+                <div class="name">镆</div>
+            </td>
+            <td class="element post-transition">
+                <div class="number">116</div>
+                <div class="symbol">Lv</div>
+                <div class="name">𫓪</div>
+            </td>
+            <td class="element halogen">
+                <div class="number">117</div>
+                <div class="symbol">Ts</div>
+                <div class="name">鿬</div>
+            </td>
+            <td class="element noble-gas">
+                <div class="number">118</div>
+                <div class="symbol">Og</div>
+                <div class="name">鿫</div>
+            </td>
+        </tr>
+        <!-- 镧系 -->
+        <tr>
+            <td class="empty" colspan="2"></td>
+            <td class="element lanthanide">
+                <div class="number">58</div>
+                <div class="symbol">Ce</div>
+                <div class="name">铈</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">59</div>
+                <div class="symbol">Pr</div>
+                <div class="name">镨</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">60</div>
+                <div class="symbol">Nd</div>
+                <div class="name">钕</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">61</div>
+                <div class="symbol">Pm</div>
+                <div class="name">钷</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">62</div>
+                <div class="symbol">Sm</div>
+                <div class="name">钐</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">63</div>
+                <div class="symbol">Eu</div>
+                <div class="name">铕</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">64</div>
+                <div class="symbol">Gd</div>
+                <div class="name">钆</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">65</div>
+                <div class="symbol">Tb</div>
+                <div class="name">铽</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">66</div>
+                <div class="symbol">Dy</div>
+                <div class="name">镝</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">67</div>
+                <div class="symbol">Ho</div>
+                <div class="name">钬</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">68</div>
+                <div class="symbol">Er</div>
+                <div class="name">铒</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">69</div>
+                <div class="symbol">Tm</div>
+                <div class="name">铥</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">70</div>
+                <div class="symbol">Yb</div>
+                <div class="name">镱</div>
+            </td>
+            <td class="element lanthanide">
+                <div class="number">71</div>
+                <div class="symbol">Lu</div>
+                <div class="name">镥</div>
+            </td>
+            <td class="empty" colspan="2"></td>
+        </tr>
+        <!-- 锕系 -->
+        <tr>
+            <td class="empty" colspan="2"></td>
+            <td class="element actinide">
+                <div class="number">90</div>
+                <div class="symbol">Th</div>
+                <div class="name">钍</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">91</div>
+                <div class="symbol">Pa</div>
+                <div class="name">镤</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">92</div>
+                <div class="symbol">U</div>
+                <div class="name">铀</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">93</div>
+                <div class="symbol">Np</div>
+                <div class="name">镎</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">94</div>
+                <div class="symbol">Pu</div>
+                <div class="name">钚</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">95</div>
+                <div class="symbol">Am</div>
+                <div class="name">镅</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">96</div>
+                <div class="symbol">Cm</div>
+                <div class="name">锔</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">97</div>
+                <div class="symbol">Bk</div>
+                <div class="name">锫</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">98</div>
+                <div class="symbol">Cf</div>
+                <div class="name">锎</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">99</div>
+                <div class="symbol">Es</div>
+                <div class="name">锿</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">100</div>
+                <div class="symbol">Fm</div>
+                <div class="name">镄</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">101</div>
+                <div class="symbol">Md</div>
+                <div class="name">钔</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">102</div>
+                <div class="symbol">No</div>
+                <div class="name">锘</div>
+            </td>
+            <td class="element actinide">
+                <div class="number">103</div>
+                <div class="symbol">Lr</div>
+                <div class="name">铹</div>
+            </td>
+            <td class="empty" colspan="2"></td>
+        </tr>
+    </table>
+    
+    <script>
+        // 搜索功能
+        const searchInput = document.getElementById('elementSearch');
+        const elements = document.querySelectorAll('.element');
+        
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            elements.forEach(element => {
+                const number = element.querySelector('.number').textContent;
+                const symbol = element.querySelector('.symbol').textContent.toLowerCase();
+                const name = element.querySelector('.name').textContent.toLowerCase();
+                
+                if (number.includes(searchTerm) || 
+                    symbol.includes(searchTerm) || 
+                    name.includes(searchTerm)) {
+                    element.classList.add('highlight');
+                    element.classList.remove('fade');
+                } else {
+                    element.classList.remove('highlight');
+                    element.classList.add('fade');
+                }
+                
+                if (searchTerm === '') {
+                    element.classList.remove('highlight', 'fade');
+                }
+            });
+        });
+        
+        // 图例交互
+        const legendItems = document.querySelectorAll('.legend-item');
+        
+        legendItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const type = this.dataset.type;
+                const targetElements = document.querySelectorAll(`.${type}`);
+                
+                elements.forEach(el => el.classList.add('fade'));
+                targetElements.forEach(el => {
+                    el.classList.remove('fade');
+                    el.classList.add('highlight');
+                });
+                
+                // 再次点击取消高亮
+                if (this.classList.contains('active')) {
+                    elements.forEach(el => el.classList.remove('fade', 'highlight'));
+                    this.classList.remove('active');
+                } else {
+                    legendItems.forEach(li => li.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
