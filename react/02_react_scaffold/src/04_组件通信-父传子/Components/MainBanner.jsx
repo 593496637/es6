@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class MainBanner extends Component {
   // 可不写
@@ -12,12 +12,17 @@ export class MainBanner extends Component {
     // 数组对象
     banners: [
       {
-        title: "banner1",
+        title: 'banner1',
       },
       {
-        title: "banner2",
+        title: 'banner2',
       },
     ],
+  };
+
+  // 类型检查
+  static propTypes = {
+    banners: PropTypes.array.isRequired,
   };
 
   render() {
@@ -28,7 +33,7 @@ export class MainBanner extends Component {
         <ul>
           {banners.map((item, index) => {
             return (
-              <li className="banner" key={index}>
+              <li className='banner' key={index}>
                 {item.title}
               </li>
             );
@@ -40,9 +45,9 @@ export class MainBanner extends Component {
 }
 
 // 类型检查
-MainBanner.propTypes = {
-  banners: PropTypes.array.isRequired,
-};
+// MainBanner.propTypes = {
+//   banners: PropTypes.array.isRequired,
+// };
 
 // 默认值
 // MainBanner.defaultProps = {

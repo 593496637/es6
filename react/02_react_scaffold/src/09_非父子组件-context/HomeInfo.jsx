@@ -11,7 +11,7 @@ export class HomeInfo extends Component {
     return (
       <div>
         <h2>HomeInfo</h2>
-        {/* 类组件：通过ThemeContext.Consumer获取到ThemeContext中的数据 */}
+        {/* 类组件：通过UserContext.Consumer获取到UserContext中的数据 */}
         <UserContext.Consumer>
           {
             value => {
