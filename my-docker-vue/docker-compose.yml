@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # 开发环境
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+        - VITE_APP_ENV=${VITE_APP_ENV}
+    container_name: vue3-vite-dev
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env
+    command: pnpm dev
+
+  # 预览环境
+  staging:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL:-https://staging-api.example.com/api}
+        - VITE_APP_ENV=${VITE_APP_ENV:-staging}
+    container_name: vue3-vite-staging
+    ports:
+      - "4173:80"
+    env_file:
+      - .env.staging
+
+  # 生产环境
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+        - VITE_APP_ENV=${VITE_APP_ENV}
+    container_name: vue3-vite-prod
+    ports:
+      - "3000:80"
+    env_file:
+      - .env.production
+    restart: always 
