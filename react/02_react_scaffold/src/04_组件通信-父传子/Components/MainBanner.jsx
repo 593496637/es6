@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class MainBanner extends Component {
-  // 可不写
+  // 可不写：如果没有需要初始化state，则不需要写，直接在render中使用this.props
   // constructor(props) {
   //   super(props);
   // }
 
   // 也可以把默认值放在这里
+  // 从es2022开始，可以使用static关键字定义静态属性，react可以自动读取
   static defaultProps = {
     // 数组对象
     banners: [

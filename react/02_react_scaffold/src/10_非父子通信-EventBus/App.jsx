@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import Home from "./Home";
-import eventBus from "./utils/event-bus";
+import React, { Component } from 'react';
+import Home from './Home';
+import eventBus from './utils/event-bus';
 
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "app",
+      name: 'app',
       age: 18,
     };
   }
 
   componentDidMount() {
-    eventBus.on("changePrev", (name, age) => {
+    eventBus.on('changePrev', (name, age) => {
       this.handlePrev(name, age);
     });
-    eventBus.on("changeNext", this.handleNext);
+    eventBus.on('changeNext', this.handleNext, this);
   }
 
   // 监听函数
@@ -28,8 +28,8 @@ export class App extends Component {
   };
 
   componentWillUnmount() {
-    eventBus.off("changePrev", this.handlePrev);
-    eventBus.off("changeNext", this.handleNext);
+    eventBus.off('changePrev', this.handlePrev);
+    eventBus.off('changeNext', this.handleNext);
   }
 
   render() {

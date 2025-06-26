@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Children from "./Children";
 export class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       count: 0,
     };
