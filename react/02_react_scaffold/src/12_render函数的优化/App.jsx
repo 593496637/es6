@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import Home from './Home';
+import Recommend from './Recommend';
 
 export class App extends Component {
   constructor(props) {
@@ -15,12 +17,14 @@ export class App extends Component {
   };
 
   render() {
-    console.log("值没变，但是重新渲染");
+    console.log('App render');
     return (
       <div>
         App
         <h2>{this.state.counter}</h2>
         <button onClick={this.setCounter}>修改值</button>
+        <Home />
+        <Recommend />
       </div>
     );
   }

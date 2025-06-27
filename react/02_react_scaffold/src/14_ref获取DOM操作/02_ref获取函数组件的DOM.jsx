@@ -1,4 +1,4 @@
-import React, { PureComponent, createRef, forwardRef } from "react";
+import React, { PureComponent, createRef, forwardRef } from 'react';
 
 // 通过ref获取组件实例
 
@@ -12,11 +12,17 @@ export class Dom01 extends PureComponent {
     super();
     this.helloWorldEl = createRef();
   }
+
+  getChildren = () => {
+    console.log(this.helloWorldEl.current);
+  };
+
   render() {
     return (
       <div>
         <h2>Dom01</h2>
         <HelloWorld ref={this.helloWorldEl} />
+        <button onClick={this.getChildren}>获取HelloWorld组件实例</button>
       </div>
     );
   }

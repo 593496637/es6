@@ -1,37 +1,44 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, createRef } from 'react';
 
 export class App2 extends PureComponent {
   constructor() {
     super();
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       remember: false,
       hobbies: [
         {
           id: 1,
-          name: "篮球",
+          name: '篮球',
           checked: false,
         },
         {
           id: 2,
-          name: "足球",
+          name: '足球',
           checked: false,
         },
         {
           id: 3,
-          name: "乒乓球",
+          name: '乒乓球',
           checked: false,
         },
       ],
       selectedOption: [],
+      // 非受控组件
+      inputValue: '',
     };
+
+    this.inputRef = createRef();
   }
 
   // 提交表单
   submitForm(e) {
     e.preventDefault();
+    // 获取state下所有数据
     console.log(this.state);
+    // 非受控组件数据
+    console.log(this.inputRef.current.value);
   }
 
   handleInputChange(e) {
@@ -92,33 +99,35 @@ export class App2 extends PureComponent {
     const { username, password, remember, hobbies } = this.state;
     return (
       <form onSubmit={(e) => this.submitForm(e)}>
+        {/* 受控组件 */}
+
         {/* 用户名 */}
-        <label htmlFor="username">
+        <label htmlFor='username'>
           用户名：
           <input
-            type="text"
-            name="username"
+            type='text'
+            name='username'
             value={username}
             onChange={(e) => this.handleInputChange(e)}
           />
         </label>
         {/* 密码 */}
-        <label htmlFor="password">
+        <label htmlFor='password'>
           密码：
           <input
-            type="password"
-            name="password"
+            type='password'
+            name='password'
             value={password}
             onChange={(e) => this.handleInputChange(e)}
           />
         </label>
         {/* checkbox */}
         <div>
-          <label htmlFor="remember">
+          <label htmlFor='remember'>
             <input
-              type="checkbox"
-              name="remember"
-              id="remember"
+              type='checkbox'
+              name='remember'
+              id='remember'
               checked={remember}
               onChange={(e) => this.checkboxChange(e)}
             />
@@ -133,7 +142,7 @@ export class App2 extends PureComponent {
             return (
               <label key={index} htmlFor={item.id}>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   name={item.id}
                   id={item.id}
                   checked={item.checked}
@@ -153,15 +162,26 @@ export class App2 extends PureComponent {
               value={this.state.selectedOption}
               onChange={(e) => this.handleSelectChange(e)}
             >
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value='option1'>Option 1</option>
+              <option value='option2'>Option 2</option>
+              <option value='option3'>Option 3</option>
             </select>
           </label>
         </div>
 
+        {/* 非受控组件:不推荐使用 */}
+        <label htmlFor='input'>
+          非受控组件：
+          <input
+            type='text'
+            defaultValue={this.state.inputValue}
+            ref={this.inputRef}
+            id='input'
+          />
+        </label>
+
         <div>
-          <button type="submit">提交</button>
+          <button type='submit'>提交</button>
         </div>
       </form>
     );
