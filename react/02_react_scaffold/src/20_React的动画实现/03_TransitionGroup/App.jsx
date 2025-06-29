@@ -1,14 +1,14 @@
-import React, { PureComponent, createRef } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { v4 } from "uuid";
-import "./style.css";
+import React, { PureComponent, createRef } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { v4 } from 'uuid';
+import './style.css';
 export class App extends PureComponent {
   state = {
     list: [
-      { id: v4(), name: "张三", nodeRef: createRef(null) },
-      { id: v4(), name: "李四", nodeRef: createRef(null) },
-      { id: v4(), name: "王五", nodeRef: createRef(null) },
-      { id: v4(), name: "赵六", nodeRef: createRef(null) },
+      { id: v4(), name: '张三', nodeRef: createRef(null) },
+      { id: v4(), name: '李四', nodeRef: createRef(null) },
+      { id: v4(), name: '王五', nodeRef: createRef(null) },
+      { id: v4(), name: '赵六', nodeRef: createRef(null) },
     ],
   };
 
@@ -16,15 +16,17 @@ export class App extends PureComponent {
     this.setState((prevState) => ({
       list: [
         ...prevState.list,
-        { id: v4(), name: "田七", nodeRef: createRef(null) },
+        { id: v4(), name: '田七', nodeRef: createRef(null) },
       ],
     }));
   };
 
   removeBook = (index) => {
-    this.setState((prevState) => ({
-      list: prevState.list.filter((item, i) => i !== index),
-    }));
+    this.setState((prevState) => {
+      const newList = [...prevState.list];
+      newList.splice(index, 1);
+      return { list: newList };
+    });
   };
 
   render() {
@@ -38,7 +40,7 @@ export class App extends PureComponent {
         >
           添加
         </button>
-        <TransitionGroup component="ul">
+        <TransitionGroup component='ul'>
           {list.map(({ id, name, nodeRef }, index) => (
             <CSSTransition
               key={id}
@@ -48,7 +50,7 @@ export class App extends PureComponent {
                 enter: 500,
                 exit: 500,
               }}
-              classNames="group"
+              classNames='group'
             >
               <li ref={nodeRef}>
                 {name}

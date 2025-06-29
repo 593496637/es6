@@ -1,5 +1,7 @@
 import React, { PureComponent } from "react";
 function withRenderTime(WrappedComponent) {
+
+  // 当返回的是一个class时，可以省略class后面的类名
   return class extends PureComponent {
     constructor(props) {
       super(props);

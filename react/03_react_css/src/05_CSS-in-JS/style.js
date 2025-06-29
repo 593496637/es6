@@ -6,8 +6,9 @@ export const AppWrapper = styled.div.attrs(
   props => ({
     // 设置默认值:没有默认值，使用传进来的参数
     primaryColor: props.primaryColor || '#61dafb',
-    width: props.fontSize || '50px',
-    height: props.fontSize || '50px',
+    width: props.width || '50px',
+    height: props.height || '50px',
+    color: props.color || 'red',
   })
 )`
   text-align: center;
@@ -15,7 +16,7 @@ export const AppWrapper = styled.div.attrs(
     animation: App-logo-spin infinite 2s linear;
     width: ${props => props.width};
     height: ${props => props.height};
-    background-color: ${props => props.primaryColor};
+    background-color: ${props => props.color};
     display: inline-block;
   }
 

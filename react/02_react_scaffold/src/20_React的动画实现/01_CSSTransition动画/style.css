@@ -4,11 +4,22 @@
 /* appear是初始化时显示动动画*/
 
 /* 进入动画 */
-.fade-appear,
+.fade-appear {
+  transform: translateX(-100px);
+  opacity: 0;
+}
+
+.fade-appear-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 1s linear;
+}
+
+/* enter */
+/* 切换到显示动画 */
 .fade-enter {
   opacity: 0;
 }
-.fade-appear-active,
 .fade-enter-active {
   opacity: 1;
   transition: opacity 1s linear;

@@ -6,9 +6,9 @@ export class Home extends PureComponent {
   // 但是在React 17中，它会被弃用，所以在React 17中，它会被调用两次
   // 一次是正常的，一次是严格模式下的，所以在React 17中，我们不要使用UNSAFE_componentWillMount
   // 在严格模式下，控制台会打印出警告信息
-  UNSAFE_componentWillMount() {
-    console.log('componentWillMount')
-  }
+  // UNSAFE_componentWillMount() {
+  //   console.log('componentWillMount')
+  // }
   render() {
     return (
       <div>Home</div>

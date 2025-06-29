@@ -18,6 +18,13 @@ export class App extends PureComponent {
       <div>
         <button onClick={() => this.setState({ isShow: !isShow })}>切换</button>
         {/* 动画 */}
+        {/* timeout: 动画持续时间, 作用是多长时间后移除active过程的类名 */}
+        {/* classNames: 动画类名 */}
+        {/* appear: 是否在初始化时显示动画 */}
+        {/* unmountOnExit: 是否在动画结束后卸载组件 */}
+        {/* onEnter: 动画开始时执行 */}
+        {/* onEntering: 动画进行时执行 */}
+        {/* onEntered: 动画结束时执行 */}
         <CSSTransition
           nodeRef={this.transitionRef}
           in={isShow}

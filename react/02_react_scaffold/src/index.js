@@ -1,4 +1,4 @@
-// import { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
 // import App from './01_类组件和函数组件/App_class'
@@ -20,18 +20,18 @@ import ReactDOM from 'react-dom/client';
 // import App from './14_ref获取DOM操作/02_ref获取函数组件的DOM';
 // import App from './15_受控和非受控组件/01_受控组件的基本使用'
 // import App from './15_受控和非受控组件/02_自己提交的form表单'
-import App from './16_React高阶组件/01_高阶组件的定义和作用'
+// import App from './16_React高阶组件/01_高阶组件的定义和作用'
 // import App from './16_React高阶组件/02_高阶组件应用_props增强'
-// import App from './16_React高阶组件/03_高阶组件应用_props增强'
-// import App from './16_React高阶组件/04_高阶组件应用_context'
+// import App from './16_React高阶组件/03_高阶组件应用_Context共享'
+// import App from './16_React高阶组件/04_高阶组件应用-登录鉴权'
 // import App from './16_React高阶组件/05_高阶组件应用-生命周期'
 // import App from './17_React的Portal/App'
 // import App from './18_React的fragment/App'
 // import App from './19_React的严格模式/App'
 // import App from './20_React的动画实现/01_CSSTransition动画/App'
 // import App from './20_React的动画实现/02_SwitchTransition/App'
-// import App from './20_React的动画实现/03_TransitionGroup/App'
+import App from './20_React的动画实现/03_TransitionGroup/App'
 // import App from './21_网易云首页/App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(<StrictMode><App /></StrictMode>);
