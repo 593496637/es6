@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import { thunk } from 'redux-thunk';
+// 去掉了applyMiddleware，因为使用的是自定义中间件
+import { createStore, compose, combineReducers } from 'redux';
+// import { thunk } from 'redux-thunk';
 import counterReducer from './counter';
 import homeReducer from './home';
 import userReducer from './user';
+import { logger, thunk, applyMiddleware } from './middleware';
 
 // 开发环境下使用 redux-devtools-extension
 // trace: true 会在控制台打印出 action 的来源
@@ -25,21 +27,12 @@ const reducer = combineReducers({
 //   }
 // }
 
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+// 使用redux-thunk中间件
+// const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+// 不使用redux-thunk中间件,而是使用自定义中间件,在这是还原没有中间件的代码，中间件使用的是自定义thunk函数
+const store = createStore(reducer, composeEnhancers());
 
-// log中间件：每次dispatch action时，都会打印出当前的state
-const logger = (store) => {
-  const next = store.dispatch;
-  function dispatchAndLog(action) {
-    console.log('当前派发的action', action);
-    next(action);
-    console.log('派发之后的结果', store.getState());
-  }
-
-  // monkey patching: 猴子补丁，修改store.dispatch方法，对整体流程进行拦截
-  store.dispatch = dispatchAndLog;
-};
-
-logger(store);
+// 调用中间件
+applyMiddleware(logger, thunk)(store);
 
 export default store;
