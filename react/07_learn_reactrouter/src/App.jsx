@@ -7,6 +7,7 @@ import HomeRecommend from './pages/HomeRecommend';
 import HomeRanking from './pages/HomeRanking';
 import Category from './pages/Category';
 import Order from './pages/Order';
+import HomeSongList from './pages/HomeSongList';
 import NotFound from './pages/NotFound';
 import './style.css';
 
@@ -45,8 +46,9 @@ export function App() {
           <Route path='/' element={<Navigate to='/home' />} />
           <Route path='/home' element={<Home />}>
             <Route path='/home' element={<Navigate to='/home/recommend' />} />
-            <Route path='recommend' element={<HomeRecommend />} />
-            <Route path='ranking' element={<HomeRanking />} />
+            <Route path='/home/recommend' element={<HomeRecommend />} />
+            <Route path='/home/ranking' element={<HomeRanking />} />
+            <Route path='/home/songList' element={<HomeSongList />} />
           </Route>
           <Route path='/about' element={<About />} />
           <Route path='/login' element={<Login />} />
