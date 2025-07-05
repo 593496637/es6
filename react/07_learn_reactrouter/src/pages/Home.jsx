@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import withRouter from '../hoc/widthRouter';
 
 export class Home extends PureComponent {
   constructor(props) {
@@ -8,7 +9,7 @@ export class Home extends PureComponent {
   }
 
   navigateTo(path) {
-    console.log(path);
+    this.props.router.navigate(path);
   }
 
   render() {
@@ -25,4 +26,4 @@ export class Home extends PureComponent {
   }
 }
 
-export default Home;
+export default withRouter(Home);

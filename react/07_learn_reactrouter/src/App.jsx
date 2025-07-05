@@ -1,15 +1,7 @@
 import React from 'react';
-import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
-import Home from './pages/Home';
-import About from './pages/About';
-import Login from './pages/Login';
-import HomeRecommend from './pages/HomeRecommend';
-import HomeRanking from './pages/HomeRanking';
-import Category from './pages/Category';
-import Order from './pages/Order';
-import HomeSongList from './pages/HomeSongList';
-import NotFound from './pages/NotFound';
+import { Link, useNavigate, useRoutes } from 'react-router-dom';
 import './style.css';
+import routes from './router';
 
 export function App() {
   const navigate = useNavigate();
@@ -37,25 +29,14 @@ export function App() {
         <Link to='/home'>首页</Link>
         <Link to='/about'>关于</Link>
         <Link to='/login'>登录</Link>
+        <Link to='/user?id=123&name=张三'>用户</Link>
+        <button onClick={() => navigateTo('/user?id=3&name=李四')}>用户</button>
         <button onClick={() => navigateTo('/category')}>分类</button>
         <button onClick={() => navigateTo('/order')}>订单</button>
       </div>
       <div>
         <h2>内容区域</h2>
-        <Routes>
-          <Route path='/' element={<Navigate to='/home' />} />
-          <Route path='/home' element={<Home />}>
-            <Route path='/home' element={<Navigate to='/home/recommend' />} />
-            <Route path='/home/recommend' element={<HomeRecommend />} />
-            <Route path='/home/ranking' element={<HomeRanking />} />
-            <Route path='/home/songList' element={<HomeSongList />} />
-          </Route>
-          <Route path='/about' element={<About />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/category' element={<Category />} />
-          <Route path='/order' element={<Order />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+        {useRoutes(routes)}
       </div>
     </>
   );

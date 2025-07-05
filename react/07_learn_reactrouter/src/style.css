@@ -6,3 +6,10 @@
 .nav-link .active {
   color: red;
 }
+
+/* 列表项 */
+.list-item {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
