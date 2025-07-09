@@ -1,12 +1,6 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 
 const App = memo(() => {
-  
-
-  useEffect(() => {
-    
-  });
-
   return (
     <div>App</div>
   )
