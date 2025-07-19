@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 // import { UserContext, ThemeContext } from './04_useContext的使用/context';
 import { UserContext, TokenContext } from './11_自定义hooks/context';
+import { Provider } from 'react-redux'
+import store from './12_redux中的hooks/store'
 // import App from './01_计数器实现对比/App';
 // import App from './02_useState的使用/App';
 // import App from './03_useEffect的使用/01_修改标题-class实现';
@@ -18,15 +20,23 @@ import { UserContext, TokenContext } from './11_自定义hooks/context';
 // import App from './10_useLayoutEffect的使用/01_layoutEffect和effect执行时机';
 // import App from './10_useLayoutEffect的使用/03_切换数字-useLayoutEffect';
 // import App from './11_自定义hooks/01_打印生命周期';
-import App from './11_自定义hooks/04_localStorage';
-
+// import App from './11_自定义hooks/04_localStorage';
+// import App from './12_redux中的hooks/01_App_connect';
+// import App from './12_redux中的hooks/02_App_hooks';
+// import App from './12_redux中的hooks/03_App_shallowEqual';
+// import App from './12_redux中的hooks/App';
+// import App from './13_useId的使用/App';
+// import App from './14_useTransition与useDeferredValue/01_useTransition';
+import App from './14_useTransition与useDeferredValue/02_useDeferredValue';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserContext.Provider value={{ name: '小明', age: 18 }}>
       <TokenContext.Provider value={{ token: '123456' }}>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </TokenContext.Provider>
     </UserContext.Provider>
   </React.StrictMode>
