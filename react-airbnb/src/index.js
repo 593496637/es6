@@ -6,6 +6,8 @@ import store from './store';
 import App from './App';
 import 'normalize.css';
 import '@assets/css/index.less';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme } from '@assets/theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +15,9 @@ root.render(
     <HashRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Provider store={store}>
-          <App />
+          <ThemeProvider theme={lightTheme}>
+            <App />
+          </ThemeProvider>
         </Provider>
       </Suspense>
     </HashRouter>
