@@ -1,8 +1,24 @@
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { HeaderRightWrapper } from "./style";
 import Icon from "@/icons/Icon";
 
 const HeaderRight = memo(() => {
+  const [showPanel, setShowPanel] = useState(false);
+
+  // 点击其他地方关闭面板
+  useEffect(() => {
+    const handleClickOther = () => {
+      setShowPanel(false);
+    };
+    document.addEventListener("click", handleClickOther, true);
+    return () => {
+      document.removeEventListener("click", handleClickOther, true);
+    };
+  }, []);
+
+  const handleShowPanel = () => {
+    setShowPanel(!showPanel);
+  };
   return (
     <HeaderRightWrapper>
       <div className="btns">
@@ -13,9 +29,22 @@ const HeaderRight = memo(() => {
         <div className="icon-wrapper">
           <Icon name="global" size={16} className="icon global" />
         </div>
-        <div className="icons-right">
+        <div className="icons-right" onClick={handleShowPanel}>
           <Icon name="menu" size={20} className="icon" />
           <Icon name="avatar" size={30} className="icon" />
+          {showPanel && (
+            <div className="panel">
+              <div className="panel-top panel-item">
+                <div className="item register">注册</div>
+                <div className="item login">登录</div>
+              </div>
+              <div className="panel-bottom panel-item">
+                <div className="item">出租房源</div>
+                <div className="item">成为房主</div>
+                <div className="item">帮助中心</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </HeaderRightWrapper>

@@ -52,6 +52,43 @@ export const HeaderRightWrapper = styled.div`
       padding: 0 10px;
       gap: 10px;
       ${props => props.theme.theme.boxShadow}
+      position: relative;
+      .panel{
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 200px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        font-size: 13px;
+        .panel-item{
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+          border-bottom: 1px solid #efefef;
+          text-align: left;
+          &:last-child{
+            border-bottom: none;
+          }
+          .item{
+            padding: 15px 20px;
+            width: 100%;
+            &:hover{
+              background-color: #f2f2f2;
+            }
+          }
+        }
+        .panel-top{
+         
+        }
+        .panel-bottom{
+          
+        }
+      }
     }
   }
 `;
