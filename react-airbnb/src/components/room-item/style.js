@@ -1,0 +1,46 @@
+import styled from "styled-components";
+
+export const RoomItemWrapper = styled.div`
+  width: 25%;
+  .inner {
+    width: 100%;
+    padding: 8px;
+    .cover {
+      position: relative;
+      width: 100%;
+      border-radius: 6px;
+      padding-top: 75%; // 4:3比例
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 3px;
+      }
+    }
+    .desc {
+      margin: 8px 0 4px;
+      font-size: 12px;
+      color: ${(props) => props.color};
+    }
+    .name {
+      font-size: 14px;
+      color: #333;
+    }
+    .price-info {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+      .price-info-price {
+        font-size: 12px;
+        color: var(--text-color-quaternary);
+      }
+      .price-info-unit {
+        font-size: 12px;
+        color: var(--text-color-quaternary);
+      }
+    }
+  }
+`;
