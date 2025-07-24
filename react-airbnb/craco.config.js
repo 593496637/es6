@@ -13,7 +13,6 @@ module.exports = {
       '@hooks': resolve('src/hooks'),
       '@styles': resolve('src/styles'),
       '@views': resolve('src/views'),
-      '@mui/styled-engine': '@mui/styled-engine-sc'
     },
   },
   plugins: [

@@ -42,5 +42,23 @@ export const RoomItemWrapper = styled.div`
         color: var(--text-color-quaternary);
       }
     }
+    .bottom {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+      .bottom-number {
+        font-size: 12px;
+        color: var(--text-color-quaternary);
+      }
+      .bottom-divider {
+        font-size: 12px;
+        margin: 0 2px;
+        color: var(--text-color-quaternary);
+      }
+      .bottom-text {
+        font-size: 12px;
+        color: var(--text-color-quaternary);
+      }
+    }
   }
 `;

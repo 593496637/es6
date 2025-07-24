@@ -1,11 +1,10 @@
-import React, { memo, useEffect } from "react";
-import Banner from "./components/home-banner";
-import { HomeWrapper } from "./style";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchGoodPriceInfoData } from "@/store/modules/home";
-import SectionHeader from "@/components/section-header";
-import RoomItem from "@/components/room-item";
-import { Button } from "@mui/material";
+import React, { memo, useEffect } from 'react';
+import Banner from './components/home-banner';
+import { HomeWrapper } from './style';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGoodPriceInfoData } from '@/store/modules/home';
+import SectionHeader from '@/components/section-header';
+import SectionRooms from '@/components/section-rooms';
 
 const Home = memo(() => {
   const goodPriceInfo = useSelector((state) => state.home.goodPriceInfo);
@@ -18,17 +17,9 @@ const Home = memo(() => {
   return (
     <HomeWrapper>
       <Banner />
-      <div className="content">
+      <div className='content'>
         <SectionHeader title={goodPriceInfo?.title} />
-        <ul className="room-list">
-          {goodPriceInfo?.list?.map((item) => {
-            return <RoomItem key={item.id} itemData={item} />;
-          })}
-        </ul>
-
-        <Button variant="text">Text</Button>
-        <Button variant="contained">Contained</Button>
-        <Button variant="outlined">Outlined</Button>
+        <SectionRooms roomList={goodPriceInfo?.list} />
       </div>
     </HomeWrapper>
   );
