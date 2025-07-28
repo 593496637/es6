@@ -1,5 +1,5 @@
-import React from "react";
-import icons from "./index";
+import React from 'react';
+import icons from './index';
 
 /**
  * 通用图标组件
@@ -13,7 +13,7 @@ import icons from "./index";
  */
 const Icon = ({
   name,
-  color = "currentColor",
+  color = 'currentColor',
   size = 16,
   width,
   height,

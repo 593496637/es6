@@ -14,3 +14,16 @@ export function getHighScoreInfoData() {
   })
 }
 
+// 获取折扣房源
+export function getDiscountInfoData() {
+  return request.get({
+    url: '/home/discount',
+  })
+}
+
+// 获取热门推荐房源
+export function getHotRecommendInfoData() {
+  return request.get({
+    url: '/home/hotRecommenddest',
+  })
+}
