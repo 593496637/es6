@@ -39,20 +39,28 @@ const ScrollView = memo((props) => {
     <ScrollViewWrapper>
       {/* 左侧按钮 */}
       {showLeft && (
-        <button className='scroll-left' onClick={() => onClickHandle(true)}>
+        <div
+          className='scroll-view scroll-left'
+          onClick={() => onClickHandle(true)}
+        >
           <Icon name='arrow-left' />
-        </button>
+        </div>
       )}
       {/* 右侧按钮 */}
       {showRight && (
-        <button className='scroll-right' onClick={() => onClickHandle(false)}>
+        <div
+          className='scroll-view scroll-right'
+          onClick={() => onClickHandle(false)}
+        >
           <Icon name='arrow-right' />
-        </button>
+        </div>
       )}
 
       {/* 内容 */}
-      <div className='scroll-content' ref={scrollContentRef}>
-        {props.children}
+      <div className='scroll-content-box'>
+        <div className='scroll-content' ref={scrollContentRef}>
+          {props.children}
+        </div>
       </div>
     </ScrollViewWrapper>
   );
