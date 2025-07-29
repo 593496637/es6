@@ -7,12 +7,18 @@ const HeaderRight = memo(() => {
 
   // 点击其他地方关闭面板
   useEffect(() => {
-    const handleClickOther = () => {
-      setShowPanel(false);
+    const handleClickOther = (event) => {
+      // 检查点击的目标是否在HeaderRight组件内部
+      const headerRight = event.currentTarget.querySelector('.icons-right');
+      if (headerRight && !headerRight.contains(event.target)) {
+        
+        setShowPanel(false);
+      }
     };
-    document.addEventListener("click", handleClickOther, true);
+    // 改为冒泡阶段监听，避免干扰其他组件的点击事件
+    document.addEventListener("click", handleClickOther, false);
     return () => {
-      document.removeEventListener("click", handleClickOther, true);
+      document.removeEventListener("click", handleClickOther, false);
     };
   }, []);
 

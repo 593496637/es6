@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router';
 import { Provider } from 'react-redux';
@@ -13,13 +13,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <HashRouter>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Provider store={store}>
-          <ThemeProvider theme={lightTheme}>
-            <App />
-          </ThemeProvider>
-        </Provider>
-      </Suspense>
+      {/* <Suspense fallback={<div>Loading...</div>}> */}
+      <Provider store={store}>
+        <ThemeProvider theme={lightTheme}>
+          <App />
+        </ThemeProvider>
+      </Provider>
+      {/* </Suspense> */}
     </HashRouter>
   </React.StrictMode>
 );
