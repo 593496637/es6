@@ -7,11 +7,16 @@ import SectionFooter from '@/components/section-footer';
 
 const HomeSectionV1 = memo((props) => {
   const { infoData, itemWidth = '25%' } = props;
+
+  const onMoreClick = () => {
+    console.log('onMoreClick');
+  };
+
   return (
     <HomeSectionV1Wrapper>
       <SectionHeader title={infoData?.title} subtitle={infoData?.subtitle} />
       <SectionRooms roomList={infoData?.list} itemWidth={itemWidth} />
-      <SectionFooter />
+      <SectionFooter onMoreClick={onMoreClick} />
     </HomeSectionV1Wrapper>
   );
 });

@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const RoomItemWrapper = styled.div`
   width: ${(props) => props.$itemWidth};
+  flex-shrink: 0;
   .inner {
     width: 100%;
     padding: 8px;
@@ -23,11 +24,18 @@ export const RoomItemWrapper = styled.div`
     .desc {
       margin: 8px 0 4px;
       font-size: 12px;
+      font-weight: 600;
       color: ${(props) => props.color};
     }
     .name {
       font-size: 14px;
       color: #333;
+      font-weight: 600;
+      /* 多行省略 */
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; /* 限制显示2行 */
     }
     .price-info {
       display: flex;
