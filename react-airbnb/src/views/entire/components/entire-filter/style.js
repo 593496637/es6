@@ -4,7 +4,7 @@ export const EntireFilterWrapper = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 1px solid #dce0e0;
-  padding: 4px 10px;
+  padding: 10px 20px;
   .item {
     padding: 6px 16px;
     border-radius: 4px;
