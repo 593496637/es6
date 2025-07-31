@@ -21,6 +21,75 @@ export const RoomItemWrapper = styled.div`
         border-radius: 3px;
       }
     }
+    .swiper {
+      position: relative;
+      &:hover {
+        .swiper-nav {
+          opacity: 1;
+        }
+        // 鼠标移入时按钮变小
+        .swiper-nav-left,
+        .swiper-nav-right {
+          width: 40px; /* 变小的宽度 */
+          background: linear-gradient(
+            to left,
+            transparent 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          );
+        }
+        .swiper-nav-right {
+          background: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.5) 100%
+          );
+        }
+      }
+      .swiper-nav {
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.3s ease;
+        .swiper-nav-item {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease; /* 平滑过渡大小变化 */
+        }
+        &-left {
+          left: 0;
+          width: 60px; /* 初始大一点的宽度 */
+          background: linear-gradient(
+            to left,
+            transparent 0%,
+            rgba(0, 0, 0, 0.3) 100%
+          );
+        }
+        &-right {
+          right: 0;
+          width: 60px; /* 初始大一点的宽度 */
+          background: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.3) 100%
+          );
+        }
+        .icon {
+          transition: transform 0.2s ease;
+        }
+        .swiper-nav-item:hover .icon {
+          transform: scale(1.2);
+        }
+      }
+    }
+
     .desc {
       margin: 8px 0 4px;
       font-size: 12px;

@@ -3,6 +3,7 @@ const initialState = {
   currentPage: 0,
   totalCount: 0,
   roomList: [],
+  isLoading: false,
 };
 
 function reducer(state = initialState, action) {
@@ -13,6 +14,8 @@ function reducer(state = initialState, action) {
       return { ...state, totalCount: action.totalCount };
     case actionTypes.CHANGE_ROOM_LIST:
       return { ...state, roomList: action.roomList };
+    case actionTypes.CHANGE_IS_LOADING:
+      return { ...state, isLoading: action.isLoading };
     default:
       return state;
   }
