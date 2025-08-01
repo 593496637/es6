@@ -4,15 +4,15 @@ import Indicator from '@/base-ui/indicator';
 
 const Demo = memo((props) => {
   const names = [
-    '111',
-    '222',
+    '111111',
+    '222222222',
     '333',
-    '444',
+    '444444',
     '555',
     '666',
-    '777',
+    '777555',
     '888',
-    '999',
+    '999aaa',
     '1000',
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -47,15 +47,14 @@ const Demo = memo((props) => {
           下一个
         </button>
       </div>
-      <Indicator currentIndex={currentIndex}>
-        {names.map((item, index) => {
-          return (
-            <button className='item' key={item}>
-              {item}
-            </button>
-          );
-        })}
-      </Indicator>
+      <div className='indicator-container'>
+        <Indicator currentIndex={currentIndex}>
+          {names.map((item, index) => {
+            return <button className='item' key={item}>{item}</button>;
+          })}
+        </Indicator>
+      </div>
+
     </DemoWrapper>
   );
 });

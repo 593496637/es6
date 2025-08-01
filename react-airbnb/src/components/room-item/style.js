@@ -11,6 +11,7 @@ export const RoomItemWrapper = styled.div`
       width: 100%;
       border-radius: 6px;
       padding-top: 75%; // 4:3比例
+      cursor: pointer;
       img {
         position: absolute;
         top: 0;
@@ -52,6 +53,7 @@ export const RoomItemWrapper = styled.div`
         height: 100%;
         opacity: 0;
         transition: all 0.3s ease;
+        cursor: pointer;
         .swiper-nav-item {
           position: absolute;
           top: 50%;
@@ -86,6 +88,35 @@ export const RoomItemWrapper = styled.div`
         }
         .swiper-nav-item:hover .icon {
           transform: scale(1.2);
+        }
+      }
+
+      /* indicator */
+      .swiper-indicator {
+        position: absolute;
+        z-index: 2;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 10px;
+        width: 30%;
+        .swiper-indicator-item {
+          width: 14.27%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #fff;
+            &.active {
+              width: 6px;
+              height: 6px;
+              background-color: red;
+            }
+          }
         }
       }
     }
