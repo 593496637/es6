@@ -22,6 +22,16 @@ export const DetailPicturesWrapper = styled.div`
       transition: filter 0.3s ease;
       filter: brightness(1) contrast(1);
       background-color: #efefef;
+      cursor: pointer;
+      overflow: hidden;
+      img {
+        transition: transform 0.3s ease;
+      }
+      &:hover {
+        img {
+          transform: scale(1.05);
+        }
+      }
     }
 
     /* 鼠标悬停效果 */

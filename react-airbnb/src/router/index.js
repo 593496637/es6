@@ -32,10 +32,10 @@ const routes = [
     path: '/demo',
     element: <Demo />,
   },
-  {
-    path: '*',
-    element: <Navigate to='/home' replace />,
-  },
+  // {
+  //   path: '*',
+  //   element: <Navigate to='/home' replace />,
+  // },
 ];
 
 export default routes;

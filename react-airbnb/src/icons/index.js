@@ -1,13 +1,20 @@
-import { lazy } from 'react';
+// 移除lazy懒加载，避免图标加载时触发Suspense导致双重Loading
+import { ReactComponent as ArrowLeftIcon } from './svgs/arrow-left.svg';
+import { ReactComponent as ArrowRightIcon } from './svgs/arrow-right.svg';
+import { ReactComponent as AvatarIcon } from './svgs/avatar.svg';
+import { ReactComponent as GlobalIcon } from './svgs/global.svg';
+import { ReactComponent as LogoIcon } from './svgs/logo.svg';
+import { ReactComponent as MenuIcon } from './svgs/menu.svg';
+import { ReactComponent as SearchIcon } from './svgs/search.svg';
 
 const icons = {
-  'arrow-left': lazy(() => import('./svgs/arrow-left.svg').then(m => ({ default: m.ReactComponent }))),
-  'arrow-right': lazy(() => import('./svgs/arrow-right.svg').then(m => ({ default: m.ReactComponent }))),
-  avatar: lazy(() => import('./svgs/avatar.svg').then(m => ({ default: m.ReactComponent }))),
-  global: lazy(() => import('./svgs/global.svg').then(m => ({ default: m.ReactComponent }))),
-  logo: lazy(() => import('./svgs/logo.svg').then(m => ({ default: m.ReactComponent }))),
-  menu: lazy(() => import('./svgs/menu.svg').then(m => ({ default: m.ReactComponent }))),
-  search: lazy(() => import('./svgs/search.svg').then(m => ({ default: m.ReactComponent }))),
+  'arrow-left': ArrowLeftIcon,
+  'arrow-right': ArrowRightIcon,
+  avatar: AvatarIcon,
+  global: GlobalIcon,
+  logo: LogoIcon,
+  menu: MenuIcon,
+  search: SearchIcon,
 };
 
 export default icons;

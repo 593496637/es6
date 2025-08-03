@@ -19,7 +19,9 @@ const DetailPictures = memo((props) => {
     <DetailPicturesWrapper>
       {/* 图片矩阵 */}
       <div className='pictures-container'>
-        <div className='pictures-left'>
+        <div className='pictures-left' onClick={() => {
+          setShowPictureBrowser(true);
+        }}>
           {/* 左侧大图 */}
           <img
             src={pictureUrls[0] || ''}
@@ -27,7 +29,9 @@ const DetailPictures = memo((props) => {
           />
         </div>
 
-        <div className='pictures-right'>
+        <div className='pictures-right' onClick={() => {
+          setShowPictureBrowser(true);
+        }}>
           {/* 右侧小图矩阵 */}
           {pictureUrls.slice(1, 5).map((item, index) => (
             <div className='pictures-right-item' key={index}>
@@ -36,15 +40,6 @@ const DetailPictures = memo((props) => {
           ))}
         </div>
       </div>
-
-      <button
-        className='picture-btn'
-        onClick={() => {
-          setShowPictureBrowser(true);
-        }}
-      >
-        打开图片
-      </button>
       {/* 图片浏览器 */}
       {showPictureBrowser && (
         <PictureBrowser
