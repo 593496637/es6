@@ -2,11 +2,14 @@
   "compile-hero.disable-compile-files-on-did-save-code": true,
   "cSpell.words": [
     "importmap",
+    "inorder",
     "longfor",
     "memfs",
     "mochawesome",
     "multidata",
     "pinia",
+    "postorder",
+    "preorder",
     "unplugin",
     "yideng"
   ],
