@@ -1,0 +1,26 @@
+{
+  "name": "tiny-pack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "tiny-pack": "bin/tinypack.js"
+  },
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "acorn": "^8.15.0",
+    "acorn-walk": "^8.3.4",
+    "magic-string": "^0.30.21",
+    "marked": "^17.0.0",
+    "shelljs": "^0.10.0",
+    "tapable": "^2.3.0"
+  }
+}
