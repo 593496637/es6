@@ -5,6 +5,9 @@ export default function App() {
   const playerHp = useGameStore((s) => s.playerHp);
   const playerHeal = useGameStore((s) => s.playerHeal);
   const playerHurt = useGameStore((s) => s.playerHurt);
+  const playerLoading = useGameStore((s) => s.playerLoading);
+  const playerError = useGameStore((s) => s.playerError);
+  const loadPlayerFromServer = useGameStore((s) => s.loadPlayerFromServer);
 
   const enemyHp = useGameStore((s) => s.enemyHp);
   const enemyAttack = useGameStore((s) => s.enemyAttack);
@@ -20,6 +23,12 @@ export default function App() {
         </h2>
         <button onClick={playerHurt}>受伤 -10</button>
         <button onClick={playerHeal}>治疗 +10</button>
+        <div style={{ marginTop: 12 }}>
+          <button onClick={loadPlayerFromServer} disabled={playerLoading}>
+            {playerLoading ? '异步加载中...' : '异步加载玩家数据'}
+          </button>
+          {playerError && <p style={{ color: 'red' }}>{playerError}</p>}
+        </div>
       </section>
 
       <section>
