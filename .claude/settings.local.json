@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(dir /s /b /a:d)",
+      "Bash(findstr:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: add React Query learning project with comprehensive documentation\n\n- Created complete React Query (TanStack Query v5) learning project\n- Implemented 4 progressive demos:\n  * Basic query with cache management (UsersList)\n  * Dependent queries with placeholderData (UserPosts)\n  * Optimistic updates with mutations (TodoPlayground)\n  * Infinite scrolling with pagination (InfinitePhotos)\n- Added detailed API reference documentation covering:\n  * useQuery parameters and return values\n  * useMutation lifecycle hooks and states\n  * useInfiniteQuery pagination features\n  * QueryClient methods for cache management\n- Included practical examples and best practices\n- Set up TypeScript, Vite, and React Query DevTools\n- Created mock APIs for hands-on practice\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
