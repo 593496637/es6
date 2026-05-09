@@ -1,4 +1,5 @@
-// src/app/playground/layout.tsx
+import Link from 'next/link';
+
 export default function PlaygroundLayout({
   children,
 }: {
@@ -7,7 +8,7 @@ export default function PlaygroundLayout({
   return (
     <div>
       <nav style={{ padding: '12px', borderBottom: '1px solid #eee' }}>
-        <a href='/playground'>← 练习导航</a>
+        <Link href='/playground'>← 练习导航</Link>
       </nav>
       <main style={{ padding: '24px' }}>{children}</main>
     </div>
