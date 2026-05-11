@@ -59,17 +59,17 @@ const chapters = [
       {
         href: '/playground/3-2-server-client',
         label: '3-2 Server vs Client 边界',
-        done: false,
+        done: true,
       },
       {
         href: '/playground/3-3-server-fetch',
         label: '3-3 服务端数据获取',
-        done: false,
+        done: true,
       },
       {
         href: '/playground/3-4-static-dynamic',
         label: '3-4 静态 vs 动态渲染',
-        done: false,
+        done: true,
       },
       {
         href: '/playground/3-5-isr',
