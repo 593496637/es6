@@ -1,4 +1,5 @@
-// src/app/playground/1-2-nested-layout/layout.tsx
+import Link from 'next/link';
+
 export default function NestedLayout({
   children,
 }: {
@@ -16,10 +17,10 @@ export default function NestedLayout({
         <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>章节目录</p>
         <ul style={{ listStyle: 'none', padding: 0, lineHeight: '2' }}>
           <li>
-            <a href='/playground/1-2-nested-layout'>介绍</a>
+            <Link href='/playground/1-2-nested-layout'>介绍</Link>
           </li>
           <li>
-            <a href='/playground/1-2-nested-layout/about'>关于</a>
+            <Link href='/playground/1-2-nested-layout/about'>关于</Link>
           </li>
         </ul>
       </aside>
