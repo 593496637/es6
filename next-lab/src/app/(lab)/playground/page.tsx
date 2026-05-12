@@ -74,14 +74,14 @@ const chapters = [
       {
         href: '/playground/3-5-isr',
         label: '3-5 ISR 增量静态再生成',
-        done: false,
+        done: true,
       },
       {
         href: '/playground/3-6-suspense-streaming',
         label: '3-6 Suspense & Streaming',
-        done: false,
+        done: true,
       },
-      { href: '/playground/3-7-cache', label: '3-7 缓存机制', done: false },
+      { href: '/playground/3-7-cache', label: '3-7 缓存机制', done: true },
     ],
   },
   {
