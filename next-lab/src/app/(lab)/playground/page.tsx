@@ -90,18 +90,18 @@ const chapters = [
       {
         href: '/playground/4-1-route-handlers',
         label: '4-1 Route Handlers',
-        done: false,
+        done: true,
       },
       {
         href: '/playground/4-2-server-actions',
         label: '4-2 Server Actions',
-        done: false,
+        done: true,
       },
-      { href: '/playground/4-3-proxy', label: '4-3 Proxy 代理', done: false },
+      { href: '/playground/4-3-proxy', label: '4-3 Proxy 代理', done: true },
       {
         href: '/playground/4-4-middleware',
         label: '4-4 Middleware',
-        done: false,
+        done: true,
       },
     ],
   },
