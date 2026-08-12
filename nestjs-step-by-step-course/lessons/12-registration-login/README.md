@@ -1,0 +1,75 @@
+# 第 12 课：注册、登录、密码哈希与 JWT
+
+## 学习目标
+
+- 区分认证与授权。
+- 理解密码哈希、通用登录错误和 JWT `sub` 的作用。
+- 确保密码原文和哈希都不会进入公开响应。
+
+本课分两轮阅读：第一轮只追注册链路，第二轮再追登录链路。最后比较两条链路共同调用的 token 响应方法。
+
+## 先把两个概念分开
+
+- 注册/登录：证明“你是谁”，称为 Authentication（认证）。
+- 能否访问某个项目：判断“你能做什么”，称为 Authorization（授权）。
+
+本课只完成认证并签发令牌，下一课才用 Guard 保护资源。
+
+## 注册链路
+
+```text
+RegisterDto -> bcrypt hash -> User.passwordHash -> JWT { sub: user.id }
+```
+
+密码永远不保存原文，响应也不能出现 `passwordHash`。JWT 里只放稳定的用户 ID；邮箱和昵称会变化，不应成为长期快照。
+
+## 登录链路
+
+1. 邮箱统一转小写后查询。
+2. bcrypt 比较输入与哈希。
+3. 成功后签发 JWT，失败统一说“邮箱或密码错误”。
+
+不存在的邮箱也会与固定 dummy hash 比较，降低通过耗时猜测账号是否存在的风险。
+
+## 运行
+
+```bash
+npm run lesson -- 12
+curl -X POST http://localhost:3000/auth/register \
+  -H 'Content-Type: application/json' \
+  -d '{"email":"student@example.com","displayName":"学习者","password":"LearnNest123!"}'
+```
+
+然后用同一邮箱密码请求 `POST /auth/login`。检查响应只有公开用户字段和 `accessToken`。
+
+## bcrypt 的 72 字节细节
+
+bcrypt 只处理前 72 个 UTF-8 字节，72 个汉字远超过 72 字节。因此 DTO 除字符长度外还使用 `MaxByteLength`，避免两个不同长密码因相同前缀而等价。
+
+## 课堂练习
+
+尝试重复注册、错误密码、不存在邮箱和超长中文密码，记录各自状态码，并确认响应不泄露密码哈希。
+
+## 常见错误
+
+- 加密和哈希概念混用：密码验证需要单向哈希，不需要可解密密文。
+- JWT 放入密码哈希、邮箱等不必要信息。
+- 不存在用户时立刻返回，产生明显的登录耗时差异。
+- 只限制 72 个字符，忽略 bcrypt 的 72 个 UTF-8 字节边界。
+
+## 自测题
+
+- 为什么数据库列设置 `select: false` 仍不能代替响应对象筛选？
+- 为什么 JWT 只放 `sub`？
+- dummy hash 解决什么侧信道问题？
+
+## 完成标准
+
+## 官方延伸阅读
+
+- [NestJS Authentication](https://docs.nestjs.com/security/authentication)
+
+- 数据库里没有明文密码。
+- 登录失败返回统一 401。
+- JWT payload 只包含 `sub`。
+- 你能清楚区分认证与授权。
