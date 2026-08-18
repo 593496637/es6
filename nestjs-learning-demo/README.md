@@ -25,6 +25,7 @@ npm run start:dev
 
 打开：
 
+- 可视化面板：<http://localhost:3000/>（登录/注册、项目、任务的最小前端，附带请求日志，方便零基础阶段直观看到接口效果）
 - API 入口：<http://localhost:3000/api>
 - Swagger（`.env` 中 `SWAGGER_ENABLED=true` 时）：<http://localhost:3000/api/docs>
 - 健康检查：<http://localhost:3000/api/health/ready>
@@ -66,7 +67,12 @@ src/
     ├── projects/           # 项目 CRUD 与所有权
     ├── tasks/              # 任务 CRUD、筛选和分页
     └── health/             # 存活与就绪检查
+public/
+├── index.html               # 可视化面板页面结构与样式
+└── app.js                   # 面板逻辑：登录态、请求封装、渲染
 ```
+
+`public/` 由 `app.setup.ts` 里的 `useStaticAssets()` 同源提供，纯教学用途，不是这门课的考核内容；看不看都不影响你理解后端本身。
 
 详细调用链见 [docs/architecture.md](./docs/architecture.md)，术语速查见 [docs/glossary.md](./docs/glossary.md)。
 

@@ -8,7 +8,7 @@
 
 ## 这节课解决什么问题
 
-学会 Controller 以后，最容易困惑的是 Middleware、Pipe、Interceptor、Filter 到底谁先谁后。本课只加入请求 ID 和耗时日志，用一次真实请求串起它们。
+学到这里，你已经见过 Controller、Pipe、Filter 好几个不同的东西了，最容易迷糊的就是——一个请求进来的时候，这些东西到底谁先执行、谁后执行？这一课不新增业务功能，专门帮你把这条顺序理清楚，顺带加入请求 ID 和耗时日志，用一次真实请求把它们串起来。
 
 ## 心智模型
 
@@ -19,14 +19,14 @@ Middleware -> Guard -> Interceptor(before) -> Pipe -> Controller -> Service
      +------ Interceptor(after) <- 正常响应 -------+
 ```
 
-本课还没有 Guard，它会在认证课出现。
+请求先经过 Middleware（最早，什么都还不知道，适合干"记一下这个请求几点几分进来的"这种通用的事），然后是 Interceptor 的"前半段"（能包住整个处理过程，记录开始时间），然后是 Pipe（检查和转换数据），然后才真正进到 Controller。如果一路顺利，处理完之后会经过 Interceptor 的"后半段"；如果中途出了没被处理的异常，会直接跳到 Filter，后面本该执行的步骤就不会再执行了。本课还没有 Guard，它会在认证那几课出现。
 
 ## 本课新增
 
-- Middleware：尽早生成并回写 `x-request-id`。
+- Middleware：尽早生成并回写 `x-request-id`，方便追踪一次请求。
 - Pipe：验证和转换输入。
 - Interceptor：包住处理过程，记录耗时。
-- Filter：发生异常时生成统一响应，并带同一个请求 ID。
+- Filter：发生异常时生成统一响应，并带上同一个请求 ID。
 
 ## 运行
 

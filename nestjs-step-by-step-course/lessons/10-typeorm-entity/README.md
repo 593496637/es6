@@ -8,7 +8,7 @@
 
 ## 这节课发生的关键变化
 
-上一课的数据只活在数组里，重启即丢失。本课把存取职责交给 Repository，并用 Entity 描述表结构。Controller 的 HTTP 合同基本不变，Service 的实现从数组换成数据库。
+前面几课数据一直存在内存数组里，重启就没了。这一课把存取的活儿交给数据库（用的是 SQLite，一个不需要单独装服务器、一个文件就能跑起来的数据库，很适合学习阶段用）。Controller 这边的 HTTP 接口基本不变，变的是 Service 内部怎么存数据。
 
 ## 对照上一课
 
@@ -19,10 +19,12 @@
 
 ## 本课新增
 
-- `Task` Entity：表名、列、主键和时间戳。
+要理解三个新东西的分工：
+
+- `Task` Entity：一个类，描述"这张表长什么样"——表名、有哪些列、主键、时间戳。
 - `TypeOrmModule.forRoot`：建立数据库连接。
-- `TypeOrmModule.forFeature`：向 TasksModule 提供 Task Repository。
-- `@InjectRepository(Task)`：通过依赖注入拿 Repository。
+- `TypeOrmModule.forFeature`：让 TasksModule 能用到 Task 这张表的 Repository。
+- `@InjectRepository(Task)`：通过依赖注入，把 Repository 交给需要它的类——Repository 才是真正帮你去数据库里查、存数据的东西，业务代码不用自己写 SQL，跟它要就行。
 
 ## 运行
 

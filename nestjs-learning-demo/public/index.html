@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TaskFlow 可视化面板</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-2: #1f232c;
+    --border: #2a2f3a;
+    --text: #e7e9ee;
+    --muted: #8a92a3;
+    --accent: #5b8cff;
+    --accent-2: #7c5bff;
+    --ok: #33c17a;
+    --warn: #e6b23a;
+    --err: #ef5a6f;
+    --radius: 10px;
+    font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  header h1 .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--muted);
+    display: inline-block;
+  }
+  header h1 .dot.ok { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  header h1 .dot.bad { background: var(--err); box-shadow: 0 0 8px var(--err); }
+  header .user-box { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); }
+  header button.link { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 13px; padding: 0; }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin: -6px 0 16px;
+    line-height: 1.6;
+  }
+
+  /* auth */
+  #auth-view { max-width: 380px; margin: 60px auto; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+  .tabs button {
+    flex: 1;
+    padding: 8px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .tabs button.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
+  input, select, textarea {
+    width: 100%;
+    padding: 9px 10px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 13px;
+  }
+  textarea { resize: vertical; min-height: 50px; font-family: inherit; }
+  button.primary {
+    margin-top: 16px;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .error-banner {
+    background: rgba(239, 90, 111, 0.12);
+    border: 1px solid rgba(239, 90, 111, 0.4);
+    color: #ff8b9a;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-top: 12px;
+    white-space: pre-wrap;
+  }
+
+  /* app view */
+  #app-view { display: none; }
+  .grid { display: grid; grid-template-columns: 320px 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .panel h2 { font-size: 14px; margin: 0 0 12px; color: var(--text); }
+  .panel h3 { font-size: 12px; color: var(--muted); margin: 16px 0 8px; font-weight: 500; }
+
+  .project-item, .task-item {
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .project-item:hover, .task-item:hover { border-color: var(--accent); }
+  .project-item.selected { border-color: var(--accent); background: rgba(91, 140, 255, 0.08); }
+  .project-item .name { font-size: 13px; font-weight: 600; }
+  .project-item .desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .project-item .del { float: right; color: var(--err); background: none; border: none; cursor: pointer; font-size: 12px; }
+
+  .task-item { display: flex; align-items: center; gap: 10px; cursor: default; }
+  .task-item .title { flex: 1; font-size: 13px; }
+  .task-item .title.done { text-decoration: line-through; color: var(--muted); }
+  .badge { font-size: 10px; padding: 2px 7px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); }
+  .badge.high { color: var(--err); border-color: var(--err); }
+  .badge.medium { color: var(--warn); border-color: var(--warn); }
+  .badge.low { color: var(--ok); border-color: var(--ok); }
+  .task-item select { width: auto; padding: 4px 6px; font-size: 11px; }
+  .task-item .del { background: none; border: none; color: var(--err); cursor: pointer; font-size: 14px; }
+
+  .empty { color: var(--muted); font-size: 12px; padding: 12px 0; text-align: center; }
+
+  .filter-row { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+  .filter-row button {
+    padding: 4px 10px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 20px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .filter-row button.active { color: white; background: var(--accent); border-color: var(--accent); }
+
+  /* request log */
+  #log-panel {
+    margin-top: 20px;
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 12px;
+    max-height: 220px;
+    overflow-y: auto;
+  }
+  #log-panel h2 { font-family: -apple-system, "Segoe UI", sans-serif; }
+  .log-line { padding: 3px 0; color: var(--muted); display: flex; gap: 8px; border-bottom: 1px dashed rgba(255,255,255,0.04); }
+  .log-line .method { color: var(--accent); width: 42px; flex-shrink: 0; }
+  .log-line .path { color: var(--text); flex: 1; }
+  .log-line .status { width: 34px; text-align: right; flex-shrink: 0; }
+  .log-line .status.ok2 { color: var(--ok); }
+  .log-line .status.bad { color: var(--err); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span class="dot" id="health-dot"></span> TaskFlow 可视化面板</h1>
+  <div class="user-box" id="user-box" style="display:none">
+    <span id="user-email"></span>
+    <button class="link" id="logout-btn">退出登录</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- 登录 / 注册 -->
+  <section id="auth-view">
+    <div class="card">
+      <div class="tabs">
+        <button id="tab-login" class="active">登录</button>
+        <button id="tab-register">注册</button>
+      </div>
+
+      <form id="login-form">
+        <label>邮箱</label>
+        <input type="email" id="login-email" required placeholder="student@example.com" />
+        <label>密码</label>
+        <input type="password" id="login-password" required placeholder="至少 8 位，含字母和数字" />
+        <button class="primary" type="submit">登录</button>
+      </form>
+
+      <form id="register-form" style="display:none">
+        <label>邮箱</label>
+        <input type="email" id="register-email" required placeholder="student@example.com" />
+        <label>昵称</label>
+        <input type="text" id="register-name" required placeholder="2~80 个字符" />
+        <label>密码</label>
+        <input type="password" id="register-password" required placeholder="8~72 位，至少一个字母和一个数字" />
+        <button class="primary" type="submit">注册并登录</button>
+      </form>
+
+      <div class="hint">
+        这个页面只是 <code>src/modules/auth</code> 对应接口的一层壳：登录成功后会拿到一个
+        JWT，之后每个请求都带着它去证明"你是谁"。可以打开浏览器 F12 的 Network 面板，
+        对照下面的"请求日志"看真实的 HTTP 往返。
+      </div>
+      <div class="error-banner" id="auth-error" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- 已登录后的主界面 -->
+  <section id="app-view">
+    <div class="grid">
+
+      <!-- 项目 -->
+      <div class="panel">
+        <h2>项目</h2>
+        <div id="project-list"></div>
+
+        <h3>新建项目</h3>
+        <form id="project-form">
+          <input type="text" id="project-name" placeholder="项目名称（2~100 字）" required />
+          <textarea id="project-desc" placeholder="描述（可选）"></textarea>
+          <button class="primary" type="submit">创建项目</button>
+        </form>
+      </div>
+
+      <!-- 任务 -->
+      <div class="panel">
+        <h2 id="tasks-title">任务</h2>
+        <div id="tasks-empty-hint" class="hint">先在左侧选择或创建一个项目，才能看到它下面的任务。</div>
+
+        <div id="tasks-body" style="display:none">
+          <div class="filter-row" id="status-filter">
+            <button data-status="" class="active">全部</button>
+            <button data-status="todo">待办</button>
+            <button data-status="in_progress">进行中</button>
+            <button data-status="done">已完成</button>
+          </div>
+
+          <div id="task-list"></div>
+
+          <h3>新建任务</h3>
+          <form id="task-form">
+            <input type="text" id="task-title" placeholder="标题（2~120 字）" required />
+            <textarea id="task-desc" placeholder="描述（可选）"></textarea>
+            <label style="margin-top:8px">优先级</label>
+            <select id="task-priority">
+              <option value="low">低</option>
+              <option value="medium" selected>中</option>
+              <option value="high">高</option>
+            </select>
+            <button class="primary" type="submit">创建任务</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="error-banner" id="app-error" style="display:none"></div>
+
+    <div id="log-panel">
+      <h2 style="margin:0 0 8px;font-size:13px;color:var(--muted)">请求日志（最近 20 条，方法 · 路径 · 状态码）</h2>
+      <div id="log-body"></div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/app.js"></script>
+
+</body>
+</html>

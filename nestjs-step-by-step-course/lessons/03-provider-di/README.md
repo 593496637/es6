@@ -8,17 +8,17 @@
 
 ## 上一课为什么不够好
 
-Controller 同时理解 HTTP 和项目数据。以后改成数据库或被其他入口复用时，会很难维护。
+上一课的问题是，Controller 一个类既要懂"这是个 HTTP 请求"，又要懂"项目数据该怎么存、怎么改"。这两件事混在一起，以后想把数据存到数据库、或者想让另一个入口复用这份逻辑，就会很难改。
 
 ## 本课核心
 
-新增 `ProjectsService`，用 `@Injectable()` 告诉 Nest 它可以由容器管理；Module 在 `providers` 注册；Controller 通过构造器声明依赖。
+这一课把"怎么处理项目数据"这件事挪到一个新类 `ProjectsService` 里：`@Injectable()` 告诉 Nest 这个类可以交给它管理，Module 在 `providers` 里登记一下，Controller 只需要在构造函数里声明"我需要一个 ProjectsService"就能用。
 
 ```text
 HTTP → AppController → ProjectsService → 内存数组
 ```
 
-这里的“注入”不是 Controller 自己 `new ProjectsService()`，而是容器创建并传入实例。
+关键的地方是：Controller 并不是自己 `new` 一个 Service 出来用的，而是 Nest 自动把已经准备好的实例递给它——这个自动递送的过程就叫"依赖注入"。好处是 Controller 完全不用关心 Service 是怎么造出来的，它只管用。
 
 ## 动手
 

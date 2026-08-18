@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nestjs-learning-demo",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:dev"],
+      "cwd": "nestjs-learning-demo",
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}

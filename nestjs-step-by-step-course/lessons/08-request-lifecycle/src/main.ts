@@ -14,8 +14,9 @@ async function bootstrap(): Promise<void> {
     }),
   );
   app.useGlobalFilters(new HttpExceptionFilter(app.get(HttpAdapterHost)));
-  await app.listen(Number(process.env.PORT ?? 3000));
-  console.log('第 08 课：http://localhost:3000/tasks');
+  const port = Number(process.env.PORT ?? 3000);
+  await app.listen(port);
+  console.log(`第 08 课：http://localhost:${port}/tasks`);
 }
 
 void bootstrap();

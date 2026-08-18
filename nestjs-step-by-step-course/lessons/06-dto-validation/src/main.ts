@@ -12,8 +12,9 @@ async function bootstrap(): Promise<void> {
       transform: true,
     }),
   );
-  await app.listen(Number(process.env.PORT ?? 3000));
-  console.log('第 06 课：http://localhost:3000/tasks');
+  const port = Number(process.env.PORT ?? 3000);
+  await app.listen(port);
+  console.log(`第 06 课：http://localhost:${port}/tasks`);
 }
 
 void bootstrap();

@@ -10,14 +10,16 @@
 
 ## 这节课只做两件事
 
-1. 项目拥有多个任务：`Project 1 -> N Task`。
-2. 关掉 `synchronize`，用 Migration 显式管理表结构。
+真实业务里，数据不是一张孤零零的表——一个项目下面有很多任务，这就是"一对多"的关系。这一课要做两件事：
+
+1. 让项目能拥有多个任务：`Project 1 -> N Task`。
+2. 关掉上一课那个自动改表的开关，改成用 Migration 正式管理表结构变化。
 
 ## 先理解关系
 
-Task 表保存 `projectId` 外键。代码中的 `ManyToOne`/`OneToMany` 描述对象导航，真正保证数据完整性的是数据库外键。
+Task 表里存了一个 `projectId` 字段指向它属于哪个项目，这就是外键。代码里写的 `ManyToOne`/`OneToMany` 只是方便你在代码里"从一个对象导航到另一个对象"，真正保证数据不会乱的，是数据库层面的外键约束。
 
-嵌套路由也表达归属：
+接口的路径也在表达这种归属关系：
 
 ```text
 POST /projects
@@ -26,13 +28,13 @@ POST /projects/:projectId/tasks
 GET  /projects/:projectId/tasks
 ```
 
-查询单个任务时同时使用 `{ id, projectId }`，避免从错误项目路径访问同一任务。
+查询单个任务的时候，要同时用 `{ id, projectId }` 两个条件一起查，这样即使有人拿着别的项目下的任务 ID，从错误的项目路径去访问，也查不到。
 
 ## 为什么需要 Migration
 
-Entity 是“现在想要的模型”，Migration 是“数据库如何从旧版本走到新版本”。后者可以审查、按顺序执行、回滚；生产环境不应让多个实例自由猜测并修改表结构。
+Entity 描述的是"现在这张表应该长什么样"，Migration 描述的是"数据库是怎么一步步从旧的样子变成现在这个样子的"。后者的好处是可以被审查、按顺序执行、也能按顺序撤销——线上要是同时跑着好几个实例，不能让大家各自猜测、各自去改表结构，那样会互相打架。
 
-本课为方便单进程练习设置 `migrationsRun: true`。生产课会把迁移从多实例启动流程中移出去。
+这一课为了方便你在单进程下练习，让程序启动时自动执行 Migration。到第 17 课部署那一课，会把这个自动执行的逻辑从多实例的启动流程里挪出去。
 
 ## 运行
 
@@ -74,10 +76,10 @@ curl -X POST http://localhost:3000/projects/项目UUID/tasks \
 
 ## 完成标准
 
-## 官方延伸阅读
-
-- [NestJS TypeORM integration](https://docs.nestjs.com/techniques/database)
-
 - 你能指出外键存在哪张表。
 - 删除 Project 时任务会级联删除。
 - 你能解释 Entity 和 Migration 不是同一个东西。
+
+## 官方延伸阅读
+
+- [NestJS TypeORM integration](https://docs.nestjs.com/techniques/database)

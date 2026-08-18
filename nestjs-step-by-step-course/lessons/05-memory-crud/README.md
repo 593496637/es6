@@ -8,17 +8,17 @@
 
 ## 为什么先不用数据库
 
-现在要理解的是一次业务用例怎样流动。若同时学习 SQL、Entity、Repository，注意力会被分散。
+这一课要做一个真正能创建、查询、修改、删除的任务列表——但暂时还是存在内存的一个数组里，程序一重启数据就没了。先不接数据库是故意的：如果这时候又要学 SQL、又要学怎么把数据存进数据库，你的注意力会被分散，搞不清楚"一次业务操作到底是怎么流转的"。
 
 ## 本课核心
 
-Task 有 `id/title/done`。Service 保存内存数组并实现 create、findAll、findOne、update、remove；Controller 将五种 REST 路由交给它。
+Task 有 `id/title/done` 三个字段。Service 保存一个内存数组，实现 create、findAll、findOne、update、remove 五个方法；Controller 把五种 REST 路由分别交给它处理。
 
 ```text
 POST /tasks → Controller → Service.create → 内存数组
 ```
 
-`ParseIntPipe` 将 URL 字符串变成 number；`NotFoundException` 让不存在的任务返回 404。
+这一课让你把这条流程走顺：Controller 收到请求 → 交给 Service → Service 操作数组 → 把结果传回去。`ParseIntPipe` 负责把 URL 里的字符串转成 number；`NotFoundException` 负责在查询一个不存在的任务时，主动抛出"没找到"的异常，而不是随便返回点什么。
 
 ## 动手
 

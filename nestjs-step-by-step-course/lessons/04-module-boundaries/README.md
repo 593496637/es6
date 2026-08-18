@@ -8,11 +8,11 @@
 
 ## 上一课为什么要继续拆
 
-根模块里塞着项目 Controller 和 Service。加入任务、用户后会变成杂物间。
+现在项目相关的 Controller 和 Service 都堆在根模块里，等你再加了任务、用户之后，根模块会变成一个什么都往里塞的杂物间。
 
 ## 本课核心
 
-把项目领域移动到 `src/projects`，由 `ProjectsModule` 声明自己的 Controller 和 Provider；根模块只负责组合。
+这一课把"项目"相关的东西搬进一个独立的 `ProjectsModule`：它自己声明"我有哪个 Controller、哪个 Service"，根模块只需要说"我要用 ProjectsModule 这个模块"就行，不用管它内部装了什么。
 
 ```text
 AppModule imports ProjectsModule
@@ -20,7 +20,7 @@ AppModule imports ProjectsModule
                  └─ ProjectsService
 ```
 
-类被放进文件夹不会自动生效，真正的边界是 Module 元数据。
+要注意的是：把文件挪到一个文件夹里，跟真正让 Nest 认出这是一个独立模块，是两码事——决定边界的是 Module 里那份"元数据"（也就是 `@Module()` 装饰器里写的那些配置），不是文件夹本身。
 
 ## 动手与比较
 

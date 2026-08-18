@@ -4,6 +4,7 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { json, urlencoded } from 'express';
 import helmet from 'helmet';
+import { join } from 'node:path';
 import { RequestIdMiddleware } from './common/middleware/request-id.middleware';
 
 /** 生产启动和 E2E 共用同一组 HTTP 边界配置，避免测试与真实应用漂移。 */
@@ -22,6 +23,8 @@ export function configureApp(app: NestExpressApplication): void {
     origin: corsOrigins.length > 0 ? corsOrigins : false,
     credentials: true,
   });
+  // 教学用可视化面板，与 API 同源提供，不需要额外的 CORS 配置。
+  app.useStaticAssets(join(__dirname, '..', 'public'));
   app.use(json());
   app.use(urlencoded({ extended: true }));
   app.setGlobalPrefix('api');

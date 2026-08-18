@@ -8,13 +8,13 @@
 
 ## 这节课解决什么问题
 
-上一课直接相信 `@Body()`，客户端即使传错类型或夹带额外字段，程序也很难尽早发现。本课只新增 DTO 和全局 `ValidationPipe`，让 HTTP 边界先检查数据。
+前面一直是"客户端发什么，程序就信什么"，这在真实场景里很危险——万一别人乱传数据类型，或者夹带了不该有的字段（比如偷偷传一个 `admin: true`）呢？这一课就是解决这个问题：先写一个"合同"（DTO），再打开一个全局的校验开关（ValidationPipe），让它在数据真正进到 Controller 之前先检查一遍。
 
 ## 本课新增
 
-- `CreateTaskDto` 描述创建任务允许的字段。
-- `UpdateTaskDto` 描述可选更新字段。
-- `ValidationPipe` 执行白名单、拒绝额外字段、类型转换。
+- `CreateTaskDto` 规定创建任务只能传哪些字段。
+- `UpdateTaskDto` 规定更新时哪些字段是可选的。
+- `ValidationPipe` 负责白名单过滤、拒绝多余字段、做类型转换。
 
 ## 先读代码
 
@@ -23,7 +23,7 @@
 3. `src/tasks/tasks.controller.ts`
 4. `src/main.ts`
 
-DTO 是“进入系统的数据合同”，Entity 是“数据库里的数据模型”，两者不要混为一谈。
+这里有个容易搞混的点：TypeScript 写的类型（比如 `{ name: string }`）只在你写代码的时候帮你检查，程序真正跑起来接收到的 JSON 是不是真符合这个类型，TypeScript 是不管的——运行时的检查，必须靠 DTO 加 ValidationPipe 来做。另外 DTO 和 Entity 也不是一回事：DTO 是"进入系统的数据合同"，Entity 是"数据库里的数据模型"，第 10 课你会正式见到 Entity，到时候再回头对比。
 
 ## 运行
 

@@ -2,6 +2,10 @@
 
 这套课程不是让你第一天面对完整项目。`lessons` 下每个目录都是一个可以独立阅读、独立运行的代码快照；后一课只增加一个主要概念。
 
+## 开始之前
+
+如果你还没用过 Nest CLI，不知道 `package.json`、`node_modules`、`tsconfig.json` 这些文件是干嘛的，先读 [第 00 课：认识 Nest CLI，和一个项目最初长什么样](docs/00-cli-and-project-anatomy.md)。第 01 课会直接给你三个写好的文件开始讲 Controller，不会再解释这些文件从哪来。
+
 ## 开始方式
 
 ```bash
@@ -83,6 +87,10 @@ nestjs-step-by-step-course/
 | 17   | 生产准备       | Helmet、CORS、限流、健康检查     |
 
 完整成品仍保存在相邻目录 `../nestjs-learning-demo`；学习期间不要提前照抄它。
+
+## 第 17 课之后：毕业项目
+
+17 课练习都在同一份 TaskFlow 代码上做小修改，只能证明"你能读懂它"，证明不了"你能不能独立搭一个新后端"。完成第 17 课后，去看 [capstone/README.md](capstone/README.md)：换一个陌生领域，从空文件夹开始，把这套架构自己重新组装一遍。组装不起来的地方，就是要回头补的地方。
 
 ## 卡住时怎样排查
 
